@@ -1,7 +1,8 @@
-package com.ingray.samagam
+package com.ingray.samagam.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ingray.samagam.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

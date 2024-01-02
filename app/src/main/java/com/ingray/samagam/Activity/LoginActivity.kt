@@ -1,4 +1,4 @@
-package com.ingray.samagam
+package com.ingray.samagam.Activity
 
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.ingray.samagam.R
 
 class LoginActivity : AppCompatActivity() {
     //Initalizing the variables
@@ -76,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         signup.setOnClickListener{
-            var intent = Intent(this,SignupActivity::class.java)
+            var intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
 
         }

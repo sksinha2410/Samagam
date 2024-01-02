@@ -1,4 +1,4 @@
-package com.ingray.samagam
+package com.ingray.samagam.Activity
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.ingray.samagam.R
 
 class SignupActivity : AppCompatActivity() {
     //Initialising all the variables
