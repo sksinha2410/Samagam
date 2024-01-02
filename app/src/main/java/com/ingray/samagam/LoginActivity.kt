@@ -34,23 +34,31 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun callOnClickListeners() {
-        signup.setOnClickListener{
-            var intent = Intent(this,SignupActivity::class.java)
-            startActivity(intent)
 
-        }
-        var b:Boolean = checkTheConditions()
-        if(b){
-            signin.setOnClickListener{
-                sEmail = email.text.toString()
-                sPass = password.text.toString()
+        signin.setOnClickListener{
+            sEmail = email.text.toString()
+            sPass = password.text.toString()
+            var b:Boolean = checkTheConditions()
+            if(b){
                 auth.signInWithEmailAndPassword(sEmail, sPass)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
 
                             if(auth.currentUser?.isEmailVerified == true){
                                 Log.d(TAG, "signInWithEmail:success")
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Success",
+                                    Toast.LENGTH_LONG
+                                )
+                                    .show()
                                 val user = auth.currentUser
+                            }else{
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Email not Verified",
+                                    Toast.LENGTH_LONG
+                                )
                             }
                         } else {
                             // If sign in fails, display a message to the user.
@@ -60,11 +68,17 @@ class LoginActivity : AppCompatActivity() {
                                 "Authentication failed.",
                                 Toast.LENGTH_SHORT,
                             ).show()
-//                    updateUI(null)
                         }
                     }
             }
         }
+
+        signup.setOnClickListener{
+            var intent = Intent(this,SignupActivity::class.java)
+            startActivity(intent)
+
+        }
+
     }
 
     private fun checkTheConditions():Boolean {
@@ -104,7 +118,11 @@ class LoginActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if (currentUser != null) {
-//            reload()
+            Toast.makeText(
+                applicationContext,
+                "Entered",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
