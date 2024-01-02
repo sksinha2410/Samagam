@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.Fragment_Home">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/home_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_pink"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/brand_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SAMAGAM"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/home_toolbar"
+            app:layout_constraintTop_toTopOf="@id/home_toolbar"
+            app:layout_constraintBottom_toBottomOf="@id/home_toolbar"
+            android:textSize="@dimen/_24ssp"
+            />
+
+
+
+        <TextView
+            android:id="@+id/home_sale_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "Clubs And Societies"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_toolbar"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_28sdp"
+            android:textSize="@dimen/_18ssp"
+            android:textColor="@color/brown"
+            />
+
+        <ProgressBar
+            android:id="@+id/sale_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:visibility="visible"
+            android:theme="@style/progressBar"
+            app:layout_constraintStart_toStartOf="@id/clubs_Recycler"
+            app:layout_constraintEnd_toEndOf="@id/clubs_Recycler"
+            app:layout_constraintTop_toTopOf="@id/clubs_Recycler"
+            app:layout_constraintBottom_toBottomOf="@id/clubs_Recycler"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/clubs_Recycler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_sale_title"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    
+
+</FrameLayout>

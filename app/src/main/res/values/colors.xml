@@ -2,4 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="platinum">#EDECED</color>
+    <color name="silver">#c3baba</color>
+    <color name="dark_grey">#9a8f97</color>
+    <color name="light_pink">#AD5B91</color>
+    <color name="dark_pink">#932A6E</color>
+    <color name="brown">#694a38</color>
+    <color name="splash_status_bar_color">#F7F4E1</color>
+    <color name="red">#A81010</color>
+    <color name="extra_light_pink">#DAB4CD</color>
 </resources>
