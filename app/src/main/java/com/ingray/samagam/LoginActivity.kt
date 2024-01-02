@@ -38,8 +38,9 @@ class LoginActivity : AppCompatActivity() {
             var intent = Intent(this,SignupActivity::class.java)
             startActivity(intent)
 
-            checkTheConditions()
-
+        }
+        var b:Boolean = checkTheConditions()
+        if(b){
             signin.setOnClickListener{
                 sEmail = email.text.toString()
                 sPass = password.text.toString()
@@ -63,12 +64,10 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
             }
-
-
         }
     }
 
-    private fun checkTheConditions() {
+    private fun checkTheConditions():Boolean {
         if (TextUtils.isEmpty(email.text.toString())) {
             Toast.makeText(
                 applicationContext,
@@ -76,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             )
                 .show()
-            return
+            return false
         }
 
         if (TextUtils.isEmpty(password.text.toString())) {
@@ -86,8 +85,9 @@ class LoginActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             )
                 .show()
-            return
+            return false
         }
+        return true
     }
 
     private fun callVariablesById() {
