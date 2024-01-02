@@ -13,23 +13,29 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class SignupActivity : AppCompatActivity() {
+    //Initialising all the variables
     private lateinit var email: EditText
     private lateinit var password: EditText
     private lateinit var signin: Button
     private lateinit var auth: FirebaseAuth
-    lateinit var sEmail:String
-    lateinit var sPass:String
+    private lateinit var sEmail:String
+    private lateinit var sPass:String
+
+
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        email = findViewById(R.id.etEmail)
-        password = findViewById(R.id.etPass)
-        signin= findViewById(R.id.btnSignin)
+        callVariablesByIds()
 
-        auth = Firebase.auth
+        setOnClickListeners()
 
+
+    }
+
+    private fun setOnClickListeners() {
         signin.setOnClickListener {
             sEmail = email.text.toString()
             sPass = password.text.toString()
@@ -53,5 +59,13 @@ class SignupActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun callVariablesByIds() {
+        email = findViewById(R.id.etEmail)
+        password = findViewById(R.id.etPass)
+        signin= findViewById(R.id.btnSignin)
+
+        auth = Firebase.auth
     }
 }
