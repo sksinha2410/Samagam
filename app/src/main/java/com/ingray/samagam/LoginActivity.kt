@@ -3,13 +3,14 @@ package com.ingray.samagam
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -36,6 +37,25 @@ class LoginActivity : AppCompatActivity() {
             var intent = Intent(this,SignupActivity::class.java)
             startActivity(intent)
         }
+        if (TextUtils.isEmpty(email.text.toString())) {
+            Toast.makeText(
+                applicationContext,
+                "Please enter email!!",
+                Toast.LENGTH_LONG
+            )
+                .show()
+            return
+        }
+
+        if (TextUtils.isEmpty(password.text.toString())) {
+            Toast.makeText(
+                applicationContext,
+                "Please enter password!!",
+                Toast.LENGTH_LONG
+            )
+                .show()
+            return
+        }
 
         signin.setOnClickListener{
             sEmail = email.text.toString()
@@ -43,10 +63,11 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(sEmail, sPass)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithEmail:success")
-                        val user = auth.currentUser
-//                    updateUI(user)
+
+                        if(auth.currentUser?.isEmailVerified == true){
+                            Log.d(TAG, "signInWithEmail:success")
+                            val user = auth.currentUser
+                        }
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.exception)
