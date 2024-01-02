@@ -71,6 +71,7 @@ class SignupActivity : AppCompatActivity() {
                                         LoginActivity::class.java
                                     )
                                     startActivity(intent)
+                                    finish()
                                 } else {
                                     Toast.makeText(
                                         applicationContext,
@@ -79,8 +80,6 @@ class SignupActivity : AppCompatActivity() {
                                     ).show()
                                 }
                             })
-
-//                    updateUI(user)
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
@@ -89,7 +88,7 @@ class SignupActivity : AppCompatActivity() {
                             "Authentication failed.",
                             Toast.LENGTH_SHORT,
                         ).show()
-//                    updateUI(null)
+
                     }
                 }
             }

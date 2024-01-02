@@ -28,7 +28,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
         callVariablesById()
+
         callOnClickListeners()
 
     }
@@ -109,7 +111,6 @@ class LoginActivity : AppCompatActivity() {
         password = findViewById(R.id.etPass)
         signup = findViewById(R.id.redSignup)
         signin= findViewById(R.id.btnSignin)
-
         auth = Firebase.auth
     }
 
