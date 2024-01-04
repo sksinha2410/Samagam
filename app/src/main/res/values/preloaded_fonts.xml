@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/londrina_outline</item>
+        <item>@font/londrina_sketch</item>
+        <item>@font/miltonian</item>
+        <item>@font/nosifer</item>
+    </array>
+</resources>
