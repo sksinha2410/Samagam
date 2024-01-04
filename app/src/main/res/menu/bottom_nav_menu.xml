@@ -3,17 +3,21 @@
 
     <item
         android:id="@+id/homeScreen"
+        android:icon="@drawable/supporter"
         android:title="Home"/>
 
     <item
         android:id="@+id/searchScreen"
-        android:title="Search"/>
+        android:icon="@drawable/event"
+        android:title="Live"/>
 
     <item
         android:id="@+id/favoriteScreen"
-        android:title="Favorites"/>
+        android:icon="@drawable/social"
+        android:title="Feed"/>
 
     <item
         android:id="@+id/cartScreen"
-        android:title="Cart"/>
+        android:icon="@drawable/profile"
+        android:title="Profile"/>
 </menu>

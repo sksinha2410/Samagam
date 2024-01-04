@@ -5,43 +5,108 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.SignupActivity">
+    tools:context=".Activity.SignupActivity"
+    android:background="@color/black">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="UselessParent"
+    android:layout_marginHorizontal="@dimen/_40ssp"
+    android:layout_marginTop="@dimen/_50sdp">
 
-    <EditText
-        android:id="@+id/etName"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Name" />
+        android:background="#303030"
+        app:cardCornerRadius="@dimen/_20ssp">
 
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="UselessParent"
+            android:background="#303030">
 
-    <EditText
-        android:id="@+id/etPass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="password"
-        android:inputType="textPassword" />
-    <EditText
-        android:id="@+id/etConfirmPass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Confirm password"
-        android:inputType="textPassword" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:text="SignUp"
+            android:textStyle="bold"
+            android:textColor="#C3A7FE"
+            android:textSize="@dimen/_40sdp" />
 
-    <Button
-        android:id="@+id/btnSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Signup" />
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10ssp"
+            android:layout_marginStart="@dimen/_15ssp"
+            android:layout_marginEnd="@dimen/_15ssp"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="text"
+            android:background="@drawable/input_box"/>
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10ssp"
+            android:layout_marginStart="@dimen/_15ssp"
+            android:layout_marginEnd="@dimen/_15ssp"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/input_box"/>
+
+        <EditText
+            android:id="@+id/etPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10ssp"
+            android:layout_marginStart="@dimen/_15ssp"
+            android:layout_marginEnd="@dimen/_15ssp"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:ems="10"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:background="@drawable/input_box"/>
+
+        <EditText
+            android:id="@+id/etConfirmPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10ssp"
+            android:layout_marginStart="@dimen/_15ssp"
+            android:layout_marginEnd="@dimen/_15ssp"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:ems="10"
+            android:hint="Confirm password"
+            android:inputType="textPassword"
+            android:background="@drawable/input_box"/>
+
+        <Button
+            android:id="@+id/btnSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_45sdp"
+            android:layout_marginTop="@dimen/_15ssp"
+            android:layout_marginEnd="@dimen/_45sdp"
+            android:layout_marginBottom="@dimen/_15ssp"
+            android:text="Signup"
+            />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
 
 </LinearLayout>
