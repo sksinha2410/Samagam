@@ -11,12 +11,12 @@ import com.google.firebase.ktx.Firebase
 import com.ingray.samagam.R
 
 class SplashScreenActivity : AppCompatActivity() {
-    private val SPLASH_TIME_OUT: Long = 3000
+    private val SPLASH_TIME_OUT: Long = 30000
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         Handler(Looper.getMainLooper()).postDelayed({
-            val mainIntent = Intent(this, MainActivity::class.java)
+            val mainIntent = Intent(this, LoginActivity::class.java)
             startActivity(mainIntent)
 
             // Close the splash activity to prevent going back to it on back press
@@ -33,10 +33,11 @@ class SplashScreenActivity : AppCompatActivity() {
             Toast.makeText(
                 applicationContext,
                 "Entered",
-                Toast.LENGTH_LONG
+                Toast.LENGTH_SHORT
             ).show()
             var intent:Intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }
