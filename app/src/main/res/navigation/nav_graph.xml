@@ -9,20 +9,12 @@
         android:id="@+id/fragment_Home"
         android:name="com.ingray.samagam.Fragments.Fragment_Home"
         android:label="fragment__home"
-        tools:layout="@layout/fragment__home" >
-        <action
-            android:id="@+id/action_fragment_Home_to_liveEventsFragment"
-            app:destination="@id/liveEventsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment__home" />
     <fragment
         android:id="@+id/liveEventsFragment"
         android:name="com.ingray.samagam.Fragments.LiveEventsFragment"
         android:label="fragment_live_events"
-        tools:layout="@layout/fragment_live_events" >
-        <action
-            android:id="@+id/action_liveEventsFragment_to_fragment_Home"
-            app:destination="@id/fragment_Home" />
-    </fragment>
+        tools:layout="@layout/fragment_live_events" />
     <fragment
         android:id="@+id/framentFeed"
         android:name="com.ingray.samagam.Fragments.FramentFeed"
