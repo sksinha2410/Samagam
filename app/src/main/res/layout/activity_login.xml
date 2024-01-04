@@ -37,17 +37,22 @@
                 android:textSize="45sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/etEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:ems="10"
-                android:background="@drawable/input_box"
-                android:hint="Email"
-                android:inputType="textEmailAddress" />
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/input_box"
+                    android:ems="10"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:textSize="22sp"
+                    android:paddingStart="23dp"
+                    android:paddingEnd="23dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"/>
 
             <EditText
                 android:id="@+id/etPass"
@@ -59,9 +64,15 @@
                 android:ems="10"
                 android:background="@drawable/input_box"
                 android:hint="Password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textSize="22sp"
+                android:paddingStart="23dp"
+                android:paddingEnd="23dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"/>
 
-            <Button
+
+                <Button
                 android:id="@+id/btnSignin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,24 +80,33 @@
                 android:gravity="center"
                 android:layout_marginStart="45dp"
                 android:layout_marginEnd="45dp"
+                    android:layout_marginBottom="50dp"
                 android:textSize="30sp"
                 android:text="Login" />
 
-            <TextView
-                android:id="@+id/redSignup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="50dp"
-                android:gravity="center"
-                android:textColor="#B296EE"
-                android:textSize="20sp"
-                android:text="Signup" />
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
 
     </LinearLayout>
 
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/redSignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="50dp"
+            android:gravity="center"
+            android:textColor="#B296EE"
+            android:textSize="20sp"
+            android:text="Signup" />
+
+    </RelativeLayout>
 
 </LinearLayout>
