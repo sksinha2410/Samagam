@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_Home">
+
+    <fragment
+        android:id="@+id/fragment_Home"
+        android:name="com.ingray.samagam.Fragments.Fragment_Home"
+        android:label="fragment__home"
+        tools:layout="@layout/fragment__home" >
+        <action
+            android:id="@+id/action_fragment_Home_to_liveEventsFragment"
+            app:destination="@id/liveEventsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/liveEventsFragment"
+        android:name="com.ingray.samagam.Fragments.LiveEventsFragment"
+        android:label="fragment_live_events"
+        tools:layout="@layout/fragment_live_events" >
+        <action
+            android:id="@+id/action_liveEventsFragment_to_fragment_Home"
+            app:destination="@id/fragment_Home" />
+    </fragment>
+    <fragment
+        android:id="@+id/framentFeed"
+        android:name="com.ingray.samagam.Fragments.FramentFeed"
+        android:label="fragment_frament_feed"
+        tools:layout="@layout/fragment_frament_feed" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.ingray.samagam.Fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
