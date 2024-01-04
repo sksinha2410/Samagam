@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.SplashScreenActivity">
+    tools:context=".Activity.SplashScreenActivity"
+    android:background="@color/black"
+    android:gravity="center">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="400sp"
+       android:background="@color/red"
+       android:layout_marginStart="40dp"
+       android:layout_marginEnd="40dp"
+       android:gravity="bottom">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="300sp"
+           android:layout_marginStart="7sp"
+           android:layout_marginEnd="65sp"
+           android:layout_marginBottom="7dp"
+           android:background="@color/white"
+           android:orientation="vertical"
+           android:gravity="bottom">
+           <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="SAMAGAM"
+           android:textSize="45dp"
+           android:textColor="@color/black"
+           android:textStyle="bold" />
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="SAMAGAM"
+               android:textSize="45dp"
+               android:textColor="@color/black"
+               android:textStyle="bold"
+               />
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="SAMAGAM"
+               android:textSize="45dp"
+               android:textColor="@color/black"
+               android:textStyle="bold"
+               />
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="SAMAGAM"
+               android:textSize="45dp"
+               android:textColor="@color/black"
+               android:textStyle="bold"
+               />
+       </LinearLayout>
+
+   </LinearLayout>
+
+</LinearLayout>
