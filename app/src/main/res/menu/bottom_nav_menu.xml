@@ -7,17 +7,17 @@
         android:title="Home"/>
 
     <item
-        android:id="@+id/searchScreen"
+        android:id="@+id/events"
         android:icon="@drawable/event"
         android:title="Live"/>
 
     <item
-        android:id="@+id/favoriteScreen"
+        android:id="@+id/feed"
         android:icon="@drawable/social"
         android:title="Feed"/>
 
     <item
-        android:id="@+id/cartScreen"
+        android:id="@+id/profile"
         android:icon="@drawable/profile"
         android:title="Profile"/>
 </menu>

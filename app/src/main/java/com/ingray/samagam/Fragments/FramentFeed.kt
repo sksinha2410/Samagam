@@ -14,7 +14,8 @@ class FramentFeed : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_frament_feed, container, false)
+        var view = inflater.inflate(R.layout.fragment_frament_feed, container, false)
+        return view
     }
 
     

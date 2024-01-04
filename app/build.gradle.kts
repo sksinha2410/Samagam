@@ -48,6 +48,8 @@ dependencies {
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.google.firebase:firebase-storage:20.3.0")
     implementation ("com.firebaseui:firebase-ui-database:8.0.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
