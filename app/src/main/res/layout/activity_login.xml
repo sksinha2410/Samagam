@@ -27,15 +27,16 @@
                 android:background="#303030"
                 android:gravity="center"
                 android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="30dp"
-                android:text="Login"
-                android:textColor="#C3A7FE"
-                android:textSize="45sp"
-                android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="Login"
+                    android:textColor="#C3A7FE"
+                    android:textSize="45sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/etEmail"
