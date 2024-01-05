@@ -11,7 +11,7 @@
 
    <LinearLayout
        android:layout_width="match_parent"
-       android:layout_height="300sp"
+       android:layout_height="275sp"
        android:background="@drawable/splashscreen_background"
        android:layout_marginStart="40dp"
        android:layout_marginEnd="40dp"
@@ -23,11 +23,11 @@
 
        <LinearLayout
            android:layout_width="match_parent"
-           android:layout_height="200sp"
-           android:layout_marginStart="7sp"
+           android:layout_height="195sp"
+           android:layout_marginStart="5sp"
            android:layout_marginEnd="45sp"
-           android:layout_marginBottom="7dp"
-           android:background="@color/white"
+           android:layout_marginBottom="5sp"
+           android:background="@drawable/splashscreen_blackcurve"
            android:orientation="vertical"
            android:gravity="bottom">
            <TextView
@@ -35,7 +35,7 @@
            android:layout_height="wrap_content"
            android:text="SAMAGAM"
            android:textSize="50sp"
-           android:textColor="@color/black"
+           android:textColor="#1BFFFFFF"
            android:textStyle="bold"
               />
            <TextView
@@ -43,7 +43,7 @@
                android:layout_height="wrap_content"
                android:text="SAMAGAM"
                android:textSize="50sp"
-               android:textColor="@color/black"
+               android:textColor="#4BFFFFFF"
                android:textStyle="bold"
                android:layout_marginTop="-24dp"
 
@@ -53,7 +53,7 @@
                android:layout_height="wrap_content"
                android:text="SAMAGAM"
                android:textSize="50sp"
-               android:textColor="@color/black"
+               android:textColor="#9CFFFFFF"
                android:textStyle="bold"
                android:layout_marginTop="-26dp"
                />
@@ -62,7 +62,7 @@
                android:layout_height="wrap_content"
                android:text="SAMAGAM"
                android:textSize="50sp"
-               android:textColor="@color/black"
+               android:textColor="@color/white"
                android:textStyle="bold"
                android:layout_marginTop="-26dp"
 
