@@ -35,7 +35,6 @@
            android:layout_height="wrap_content"
            android:text="SAMAGAM"
            android:textSize="50sp"
-
            android:textColor="@color/black"
            android:textStyle="bold"
               />
