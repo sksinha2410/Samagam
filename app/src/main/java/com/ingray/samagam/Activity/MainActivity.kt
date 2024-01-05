@@ -4,7 +4,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ingray.samagam.Fragments.Fragment_Home
 import com.ingray.samagam.Fragments.FramentFeed
 import com.ingray.samagam.Fragments.LiveEventsFragment
@@ -12,49 +19,25 @@ import com.ingray.samagam.Fragments.ProfileFragment
 import com.ingray.samagam.R
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var bottomNav:BottomNavigationView
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var navController:NavController
+    private lateinit var toolbar:Toolbar
 
-    private val itemList: MutableList<Any> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        toolbar = findViewById(R.id.toolbar)
 
-        val firstFragment = Fragment_Home()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.navHostFragment, firstFragment)
-            .commit()
+        setSupportActionBar(toolbar)
+        bottomNav = findViewById(R.id.bottom_nav_view)
+        navController = findNavController(R.id.fragmentContainerView)
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.fragment_Home,R.id.framentFeed,R.id.liveEventsFragment,R.id.profileFragment))
+        setupActionBarWithNavController(navController,appBarConfiguration)
+        bottomNav.setupWithNavController(navController)
+
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.homeScreen -> {
-                replaceFragment(Fragment_Home()) // Replace with your FragmentA instance
-                true
-            }
-            R.id.events -> {
-                replaceFragment(LiveEventsFragment()) // Replace with your FragmentB instance
-                true
-            }
-            R.id.feed -> {
-                replaceFragment(FramentFeed()) // Replace with your FragmentB instance
-                true
-            }
-            R.id.profile-> {
-                replaceFragment(ProfileFragment()) // Replace with your FragmentB instance
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.navHostFragment, fragment) // Replace R.id.fragment_container with your container ID
-            .addToBackStack(null) // Add to back stack if needed
-            .commit()
-    }
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.bottom_nav_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
 
 }
