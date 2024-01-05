@@ -11,20 +11,20 @@
 
    <LinearLayout
        android:layout_width="match_parent"
-       android:layout_height="275sp"
+       android:layout_height="275dp"
        android:background="@drawable/splashscreen_background"
        android:layout_marginStart="40dp"
        android:layout_marginEnd="40dp"
        android:gravity="bottom"
-       android:layout_marginTop="150sp">
+       android:layout_marginTop="150dp">
 
 
        <LinearLayout
            android:layout_width="match_parent"
-           android:layout_height="195sp"
-           android:layout_marginStart="5sp"
-           android:layout_marginEnd="45sp"
-           android:layout_marginBottom="5sp"
+           android:layout_height="195dp"
+           android:layout_marginStart="5dp"
+           android:layout_marginEnd="45dp"
+           android:layout_marginBottom="5dp"
            android:background="@drawable/splashscreen_blackcurve"
            android:orientation="vertical"
            android:gravity="bottom">
@@ -34,7 +34,8 @@
            android:text="SAMAGAM"
            android:textSize="50sp"
            android:textColor="#1BFFFFFF"
-           android:textStyle="bold" />
+           android:textStyle="bold"
+              />
            <TextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
@@ -43,7 +44,7 @@
                android:textColor="#4BFFFFFF"
                android:textStyle="bold"
                android:layout_marginTop="-24dp"
-               
+
 
                />
            <TextView
@@ -89,12 +90,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Start"
-                android:textSize="40dp"
+                android:textSize="40sp"
                 android:textStyle="bold"
                 android:gravity="end"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:textColor="#F0740F9F"
-
                 />
         </LinearLayout>
     </RelativeLayout>
