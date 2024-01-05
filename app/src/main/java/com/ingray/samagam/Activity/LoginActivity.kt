@@ -38,6 +38,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun callOnClickListeners() {
 
+
+
         signin.setOnClickListener{
             sEmail = email.text.toString()
             sPass = password.text.toString()
@@ -79,9 +81,7 @@ class LoginActivity : AppCompatActivity() {
         signup.setOnClickListener{
             var intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
-
         }
-
     }
 
     private fun checkTheConditions():Boolean {
