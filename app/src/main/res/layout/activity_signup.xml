@@ -102,11 +102,12 @@
             android:layout_marginStart="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_15ssp"
             android:layout_marginEnd="@dimen/_45sdp"
-            android:layout_marginBottom="@dimen/_15ssp"
+            android:layout_marginBottom="@dimen/_30ssp"
             android:text="Signup"
+            android:background="@drawable/buttons_color"
+            android:textColor="#C3A7FE"
             />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>
-
 </LinearLayout>

@@ -1,36 +1,43 @@
 package com.ingray.samagam.Activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.ingray.samagam.Adapters.ClubsAdapter
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ingray.samagam.Fragments.Fragment_Home
+import com.ingray.samagam.Fragments.FramentFeed
+import com.ingray.samagam.Fragments.LiveEventsFragment
+import com.ingray.samagam.Fragments.ProfileFragment
 import com.ingray.samagam.R
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var bottomNav:BottomNavigationView
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var navController:NavController
+    private lateinit var toolbar:Toolbar
 
-    private val itemList: MutableList<Any> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        toolbar = findViewById(R.id.toolbar)
 
-        val firstFragment = Fragment_Home()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.navHostFragment, firstFragment)
-            .commit()
+        setSupportActionBar(toolbar)
+        bottomNav = findViewById(R.id.bottom_nav_view)
+        navController = findNavController(R.id.fragmentContainerView)
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.fragment_Home,R.id.framentFeed,R.id.liveEventsFragment,R.id.profileFragment))
+        setupActionBarWithNavController(navController,appBarConfiguration)
+        bottomNav.setupWithNavController(navController)
 
-        // Example of replacing fragments on some event or button click
-        // replaceFragment(SecondFragment()) // Call this to replace with another fragment
     }
 
-    // Function to replace fragments
-    fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.navHostFragment, fragment)
-            .addToBackStack(null) // This allows the user to navigate back
-            .commit()
-    }
+
 }
