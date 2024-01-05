@@ -79,9 +79,7 @@ class LoginActivity : AppCompatActivity() {
         signup.setOnClickListener{
             var intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
-
         }
-
     }
 
     private fun checkTheConditions():Boolean {
