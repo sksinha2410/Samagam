@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_6sdp"
@@ -26,7 +26,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/iv_product"
+                android:id="@+id/ivLogo"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_100sdp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -42,42 +42,16 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_product"
-                tools:text="Product Title"
+                app:layout_constraintTop_toBottomOf="@id/ivLogo"
+                tools:text="Club-Name"
                 android:textSize="@dimen/_14ssp"
                 android:textColor="@color/brown"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_4sdp"
                 />
 
-            <TextView
-                android:id="@+id/tv_sale_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_title"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text = "12.50 $"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:textSize="@dimen/_12ssp"
-                android:textColor="@color/dark_grey"
-                />
-
-            <TextView
-                android:id="@+id/tv_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_sale_price"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:text = "6.90 $"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:textSize="@dimen/_12ssp"
-                android:textColor="@color/black"
-                />
+            
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
