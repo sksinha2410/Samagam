@@ -9,29 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/home_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/dark_pink"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
 
-        <TextView
-            android:id="@+id/brand_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SAMAGAM"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/home_toolbar"
-            app:layout_constraintTop_toTopOf="@id/home_toolbar"
-            app:layout_constraintBottom_toBottomOf="@id/home_toolbar"
-            android:textSize="@dimen/_24ssp"
-            />
+
+
 
 
 
@@ -41,9 +21,8 @@
             android:layout_height="wrap_content"
             android:text = "Clubs And Societies"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/home_toolbar"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_28sdp"
             android:textSize="@dimen/_18ssp"
             android:textColor="@color/brown"
             />
