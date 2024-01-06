@@ -18,4 +18,6 @@
     <string name="title_similar_movies">Similar</string>
     <string name="title_recommendation_movies">Recommendation</string>
     <string name="reviews_total_count" formatted="false">(%s reviews)</string>
+    <string name="live">Live</string>
+    <string name="upcoming">Upcoming</string>
 </resources>

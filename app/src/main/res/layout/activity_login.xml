@@ -37,7 +37,12 @@
                     android:text="Login"
                     android:textColor="#C3A7FE"
                     android:textSize="45sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+
+                    android:shadowColor="#000000"
+                    android:shadowDx="6.5"
+                    android:shadowDy="6.5"
+                    android:shadowRadius="1.6"/>
 
                 <EditText
                     android:id="@+id/etEmail"
