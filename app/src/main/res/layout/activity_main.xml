@@ -8,21 +8,24 @@
     tools:context=".Activity.MainActivity"
     android:background="@drawable/signup_background"
     >
+
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:layout_width="@dimen/_210sdp"
-
             android:layout_height="@dimen/_60sdp"
-            android:text="SAMAGAM"
+            android:layout_gravity="start"
             android:background="@drawable/white_left_40dp"
-            android:textSize="@dimen/_40sdp"/>
+            android:text="SAMAGAM"
+            android:textSize="@dimen/_40sdp" />
 
 
         <ImageView
@@ -31,9 +34,8 @@
             android:layout_gravity="end"
             android:background="@color/white"
             android:padding="@dimen/_8sdp"
-            android:src="@drawable/kart"/>
+            android:src="@drawable/kart" />
     </androidx.appcompat.widget.Toolbar>
-
 
     <fragment
         android:id="@+id/fragmentContainerView"
