@@ -56,9 +56,6 @@
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_4sdp"
                 />
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
