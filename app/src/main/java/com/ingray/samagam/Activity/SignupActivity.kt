@@ -8,6 +8,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.OnCompleteListener
@@ -23,6 +24,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var name: EditText
     private lateinit var confirmPass: EditText
     private lateinit var signUp: Button
+    private lateinit var logIn: TextView
     private lateinit var auth: FirebaseAuth
     private lateinit var sEmail:String
     private lateinit var sPass:String
@@ -89,10 +91,14 @@ class SignupActivity : AppCompatActivity() {
                             "Authentication failed.",
                             Toast.LENGTH_SHORT,
                         ).show()
-
                     }
                 }
             }
+        }
+
+        logIn.setOnClickListener{
+            var intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
 
     }
@@ -126,6 +132,7 @@ class SignupActivity : AppCompatActivity() {
         name = findViewById(R.id.etName)
         email = findViewById(R.id.etEmail)
         password = findViewById(R.id.etPass)
+        logIn = findViewById(R.id.redLogin)
         signUp= findViewById(R.id.btnSignUp)
         confirmPass = findViewById(R.id.etConfirmPass)
         auth = Firebase.auth
