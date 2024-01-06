@@ -22,8 +22,5 @@
         <item name="colorSecondaryContainer">@color/extra_light_pink</item>
     </style>
 
-    <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/dark_grey</item>
-        <item name="colorControlActivated">@color/brown</item>
-    </style>
+
 </resources>
