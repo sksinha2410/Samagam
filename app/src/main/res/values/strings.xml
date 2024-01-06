@@ -2,4 +2,20 @@
     <string name="app_name">Samagam</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="placeholder">--</string>
+    <string name="vote_count" formatted="false">%s reviews</string>
+    <string name="category_now_playing">Now Playing</string>
+    <string name="category_popular">Popular</string>
+    <string name="category_top_rated">Top Rated</string>
+    <string name="category_upcoming">Upcoming</string>
+    <string name="see_all">See All</string>
+
+    <string name="error_network_fail">Looks like your are offline.</string>
+    <string name="title_overview">Overview</string>
+    <string name="title_trailers">Trailers</string>
+    <string name="title_reviews">Reviews</string>
+    <string name="title_casts">Casts</string>
+    <string name="title_similar_movies">Similar</string>
+    <string name="title_recommendation_movies">Recommendation</string>
+    <string name="reviews_total_count" formatted="false">(%s reviews)</string>
 </resources>

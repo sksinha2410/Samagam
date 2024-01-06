@@ -10,10 +10,28 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        >
+        <TextView
+            android:layout_width="@dimen/_210sdp"
+
+            android:layout_height="@dimen/_60sdp"
+            android:text="SAMAGAM"
+            android:background="@drawable/white_left_40dp"
+            android:textSize="@dimen/_40sdp"/>
+
+
+        <ImageView
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_gravity="end"
+            android:background="@color/white"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/kart"/>
+    </androidx.appcompat.widget.Toolbar>
 
 
     <fragment
@@ -23,9 +41,9 @@
         android:layout_height="0dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/toolbar"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:navGraph="@navigation/nav_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

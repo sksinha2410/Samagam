@@ -41,6 +41,11 @@
             android:exported="true">
 
         </activity>
+        <activity
+            android:name=".Activity.EventDescriptionActivity"
+            android:exported="true">
+
+        </activity>
     </application>
 
 </manifest>

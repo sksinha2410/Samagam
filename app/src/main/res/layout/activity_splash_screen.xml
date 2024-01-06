@@ -5,58 +5,97 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.SplashScreenActivity"
-    android:background="@color/black"
-    android:gravity="center">
+    android:background="@drawable/signup_background"
+
+    android:orientation="vertical">
 
    <LinearLayout
        android:layout_width="match_parent"
-       android:layout_height="400sp"
-       android:background="@color/red"
+       android:layout_height="275dp"
+       android:background="@drawable/splashscreen_background"
        android:layout_marginStart="40dp"
        android:layout_marginEnd="40dp"
-       android:gravity="bottom">
+       android:gravity="bottom"
+       android:layout_marginTop="150dp">
+
+
        <LinearLayout
            android:layout_width="match_parent"
-           android:layout_height="300sp"
-           android:layout_marginStart="7sp"
-           android:layout_marginEnd="65sp"
-           android:layout_marginBottom="7dp"
-           android:background="@color/white"
+           android:layout_height="195dp"
+           android:layout_marginStart="5dp"
+           android:layout_marginEnd="45dp"
+           android:layout_marginBottom="5dp"
+           android:background="@drawable/splashscreen_blackcurve"
            android:orientation="vertical"
            android:gravity="bottom">
            <TextView
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:text="SAMAGAM"
-           android:textSize="45dp"
-           android:textColor="@color/black"
-           android:textStyle="bold" />
+           android:textSize="50sp"
+           android:textColor="#1BFFFFFF"
+           android:textStyle="bold"
+              />
            <TextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="SAMAGAM"
-               android:textSize="45dp"
-               android:textColor="@color/black"
+               android:textSize="50sp"
+               android:textColor="#4BFFFFFF"
                android:textStyle="bold"
+               android:layout_marginTop="-24dp"
+
+
                />
            <TextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="SAMAGAM"
-               android:textSize="45dp"
-               android:textColor="@color/black"
+               android:textSize="50sp"
+               android:textColor="#9CFFFFFF"
                android:textStyle="bold"
+               android:layout_marginTop="-26dp"
                />
            <TextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="SAMAGAM"
-               android:textSize="45dp"
-               android:textColor="@color/black"
+               android:textSize="50sp"
+               android:textColor="@color/white"
                android:textStyle="bold"
+               android:layout_marginTop="-26dp"
+
                />
        </LinearLayout>
-
    </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="190dp"
+            android:layout_height="190dp"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/image_for_login_page"/>
+        <LinearLayout
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_left_40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="50dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:gravity="end"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:textColor="#F0740F9F"
+                />
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>
