@@ -141,12 +141,12 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:layout_width="190dp"
-            android:layout_height="199dp"
+            android:layout_width="194dp"
+            android:layout_height="128dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="23dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="3dp"
             android:foregroundGravity="bottom"
             android:src="@drawable/image_for_login_page" />
 
