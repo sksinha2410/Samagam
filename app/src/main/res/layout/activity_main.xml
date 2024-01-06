@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".Activity.MainActivity"
-    android:background="@color/platinum"
+    android:background="@drawable/signup_background"
     >
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -40,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
+
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
         app:layout_constraintLeft_toLeftOf="@id/toolbar"
         app:layout_constraintRight_toRightOf="parent"
