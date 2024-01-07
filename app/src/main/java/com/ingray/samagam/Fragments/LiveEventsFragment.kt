@@ -155,7 +155,7 @@ class LiveEventsFragment : Fragment() {
             // Parse the given date-time string into a Date object
             val givenDateTime = inputDateFormat.parse(givenDateTimeStr)
 
-            // Check if the current date and time are before the given date and time
+            // Check if the current date and time are after the given date and time
             return currentDateTime.after(givenDateTime)
         } catch (e: Exception) {
             // Handle parsing exceptions

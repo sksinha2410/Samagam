@@ -27,6 +27,7 @@
             android:paddingStart="@dimen/_100sdp"
             android:paddingEnd="@dimen/_100sdp">
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImage"
             android:layout_width="123dp"
             android:layout_height="123dp"
             android:layout_gravity="center"
@@ -34,6 +35,7 @@
             android:background="@drawable/image_for_login_page" />
 
         <TextView
+            android:id="@+id/profileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="erwin krew"
@@ -41,6 +43,7 @@
             android:textSize="@dimen/_30sdp"
             android:textColor="#C3A7FE"/>
         <TextView
+            android:id="@+id/profileBranch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="electrical engineering NITP"
