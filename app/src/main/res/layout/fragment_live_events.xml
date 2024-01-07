@@ -49,7 +49,7 @@
                 android:layout_marginTop="20dp"
                 app:spanCount="2"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                android:orientation="vertical"/>
+                android:orientation="horizontal"/>
 
         </androidx.cardview.widget.CardView>
         <LinearLayout
@@ -91,7 +91,7 @@
                 android:layout_marginTop="20dp"
                 app:spanCount="2"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                android:orientation="vertical"/>
+                android:orientation="horizontal"/>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 

@@ -13,7 +13,9 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 class ClubsAdapter(options: FirebaseRecyclerOptions<Clubs?>) :
     FirebaseRecyclerAdapter<Clubs?, ClubsAdapter.userAdapterHolder?>(options) {
-    override fun onBindViewHolder(holder: userAdapterHolder, position: Int, model: Clubs) {
+    override fun onBindViewHolder(holder: userAdapterHolder,
+                                  position: Int,
+                                  model: Clubs) {
         try {
             holder.name.setText(model.club_name)
 
