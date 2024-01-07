@@ -23,7 +23,7 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
     ) {
         holder.username.setText(model.username)
         holder.time.setText(model.time)
-        holder.likes.setText(model.username)
+        holder.likes.setText(model.likes)
         Glide.with(holder.postImage.context).load(model.purl).into(holder.postImage)
         Glide.with(holder.profileImage.context).load(model.purl).into(holder.profileImage)
     }
@@ -31,7 +31,7 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
         parent: ViewGroup,
         viewType: Int
     ): userAdapterHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.live_item,parent,false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.feed_post_item,parent,false)
         return userAdapterHolder(view)
     }
 

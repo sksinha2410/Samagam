@@ -13,53 +13,55 @@
         android:orientation="vertical"
         android:background="@drawable/signup_background">
         <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/black"
             app:cardCornerRadius="@dimen/_15ssp"
-            android:layout_gravity="center"
             android:backgroundTint="#303030"
-            android:layout_marginTop="@dimen/_30sdp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/_100sdp"
-            android:paddingEnd="@dimen/_100sdp">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileImage"
-            android:layout_width="123dp"
-            android:layout_height="123dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_60sdp"
-            android:background="@drawable/image_for_login_page" />
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
 
-        <TextView
-            android:id="@+id/profileName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="erwin krew"
-            android:layout_gravity="center"
-            android:textSize="@dimen/_30sdp"
-            android:textColor="#C3A7FE"/>
-        <TextView
-            android:id="@+id/profileBranch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="electrical engineering NITP"
-            android:layout_gravity="center"/>
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="wrap_content"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/profile_recycler"
-                android:layout_marginTop="@dimen/_30sdp"
-                app:spanCount="3"
                 android:orientation="vertical">
-            </androidx.recyclerview.widget.RecyclerView>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="123dp"
+                    android:layout_height="123dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_60sdp"
+                    android:background="@drawable/image_for_login_page" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/profileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="erwin krew"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/_30sdp"
+                    android:textColor="#C3A7FE"/>
+                <TextView
+                    android:id="@+id/profileBranch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="electrical engineering NITP"
+                    android:layout_gravity="center"/>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/profile_recycler"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    app:spanCount="3"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager">
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+
 
         </androidx.cardview.widget.CardView>
     </LinearLayout>
