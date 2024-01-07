@@ -35,7 +35,7 @@ class EventAdapter(options: FirebaseRecyclerOptions<Events?>) :
         var event_name:TextView
 
         init {
-            posterImage =innerView.findViewById(R.id.ivLive)
+            posterImage =innerView.findViewById(R.id.ivLiveEvents)
             event_name = innerView.findViewById(R.id.tv_title)
         }
     }

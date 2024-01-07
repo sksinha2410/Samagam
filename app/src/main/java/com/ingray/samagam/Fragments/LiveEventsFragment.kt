@@ -37,7 +37,7 @@ class LiveEventsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         val view:View= inflater.inflate(R.layout.fragment_live_events, container, false)
         contex=view.context
@@ -48,7 +48,7 @@ class LiveEventsFragment : Fragment() {
                 for (childSnapshot in snapshot.children) {
                     val ev = childSnapshot.getValue(Events::class.java)
                     if (ev != null) {
-                        var isChecked:Boolean = checkTimeandDate(ev.event_date,ev.event_starttime,ev.event_endtime)
+                        val isChecked:Boolean = checkTimeandDate(ev.event_date,ev.event_starttime,ev.event_endtime)
                         Toast.makeText(view.context,isChecked.toString(), Toast.LENGTH_SHORT).show()
                         if(isChecked){
 

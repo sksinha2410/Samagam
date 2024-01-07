@@ -34,7 +34,7 @@ class Fragment_Home : Fragment() {
                 )
                 .build()
         clubsAdapter = ClubsAdapter(options)
-        recyclerView.setAdapter(clubsAdapter)
+        recyclerView.adapter = clubsAdapter
         clubsAdapter.startListening()
 
 
