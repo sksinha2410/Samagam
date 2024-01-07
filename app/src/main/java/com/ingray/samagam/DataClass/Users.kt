@@ -3,6 +3,7 @@ package com.ingray.samagam.DataClass
 data class Users(
     var name: String= "",
     var email: String= "",
-    var username: String= ""
+    var username: String= "",
+    var purl: String=""
 )
 
