@@ -18,6 +18,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import com.ingray.samagam.DataClass.Users
 import com.ingray.samagam.R
 import java.util.Objects
 
@@ -34,8 +35,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var sPass:String
     private lateinit var cPass:String
     private lateinit var sName:String
-    private lateinit var database:FirebaseDatabase
-    private lateinit var dref:DatabaseReference
+    private var dref:DatabaseReference=FirebaseDatabase.getInstance().getReference("Users")
 
 
 
@@ -70,15 +70,13 @@ class SignupActivity : AppCompatActivity() {
                         user?.sendEmailVerification()?.addOnCompleteListener(
                             OnCompleteListener<Void?> { tasks ->
                                 if (tasks.isSuccessful) {
-                                    var currUser = FirebaseAuth.getInstance().currentUser.toString()
-                                    var map = HashMap<String,String>()
-
-                                    map.put("email",sEmail)
-                                    map.put("password",sPass)
-                                    map.put("name",sName)
-
-                                    dref.child(currUser).setValue(map)
-
+                                    var currUser = FirebaseAuth.getInstance().currentUser?.uid
+                                    var data=Users()
+                                    data.name=sName
+                                    data.email=sEmail
+                                    if (currUser != null) {
+                                        dref.child(currUser).setValue(data)
+                                    }
 
                                     Toast.makeText(
                                         applicationContext,
@@ -152,7 +150,5 @@ class SignupActivity : AppCompatActivity() {
         signUp= findViewById(R.id.btnSignUp)
         confirmPass = findViewById(R.id.etConfirmPass)
         auth = Firebase.auth
-        database = FirebaseDatabase.getInstance()
-        dref = database.getReference("Users")
     }
 }
