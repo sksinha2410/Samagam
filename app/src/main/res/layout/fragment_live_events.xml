@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -71,21 +71,52 @@
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/event"/>
         </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/upcoming_Recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:spanCount="2"
+            android:layout_margin="4dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:orientation="horizontal"/>
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#303030">
+            android:layout_marginTop="20dp"
+            android:background="@drawable/upcoming_blue"
+            android:backgroundTint="#955123"
+            android:orientation="horizontal">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/upcoming_Recycler"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:spanCount="2"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                android:orientation="horizontal"/>
-        </androidx.cardview.widget.CardView>
+                android:paddingStart="7dp"
+                android:paddingBottom="3dp"
+                android:textSize="30sp"
+                android:text="Past"
+                android:textColor="#572B0A"
+                android:textStyle="bold"
+                tools:ignore="SpUsage" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:paddingTop="3dp"
+                android:paddingStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:tint="@color/brown"
+                android:src="@drawable/event"/>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/past_Recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:spanCount="2"
+            android:layout_margin="4dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:orientation="horizontal"/>
+
     </LinearLayout>
 
-</FrameLayout>
+</ScrollView>

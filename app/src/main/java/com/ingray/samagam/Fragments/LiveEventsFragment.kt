@@ -31,8 +31,11 @@ class LiveEventsFragment : Fragment() {
     lateinit var contex: Context
     private lateinit var liveEventRecycler:RecyclerView
     private lateinit var upcomingEventRecycler:RecyclerView
+    private lateinit var pastEventRecycler:RecyclerView
     private lateinit var eventAdapter: EventAdapter
-    private var dataBaseRef= FirebaseDatabase.getInstance().getReference("Live")
+    private lateinit var eventAdapterUpcoming: EventAdapter
+    private lateinit var eventAdapterPast: EventAdapter
+    private var dataBaseRef= FirebaseDatabase.getInstance().reference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,17 +52,36 @@ class LiveEventsFragment : Fragment() {
                     val ev = childSnapshot.getValue(Events::class.java)
                     if (ev != null) {
                         val isChecked:Boolean = checkTimeandDate(ev.event_date,ev.event_starttime,ev.event_endtime)
-                        Toast.makeText(view.context,isChecked.toString(), Toast.LENGTH_SHORT).show()
                         if(isChecked){
-
-                            dataBaseRef.child(ev.event_name).setValue(ev)
+                            dataBaseRef.child("Live").child(ev.event_name).setValue(ev)
+                        }
+                        val isBefore:Boolean = isBeforeGivenDateTime(ev.event_date,ev.event_starttime)
+                        if(isBefore){
+                            dataBaseRef.child("Upcoming").child(ev.event_name).setValue(ev)
+                        }
+                        val isAfter:Boolean = isAfterGivenDateTime(ev.event_date,ev.event_endtime)
+                        if(isAfter){
+                            dataBaseRef.child("PastEvents").child(ev.event_name).setValue(ev)
                         }
                     }
                 }
-                val options:FirebaseRecyclerOptions<Events?> = FirebaseRecyclerOptions.Builder<Events>().setQuery(dataBaseRef, Events::class.java).build()
+                val options:FirebaseRecyclerOptions<Events?> = FirebaseRecyclerOptions.Builder<Events>().
+                setQuery(dataBaseRef.child("Live"), Events::class.java).build()
                 eventAdapter = EventAdapter(options)
                 liveEventRecycler.adapter = eventAdapter
                 eventAdapter.startListening()
+
+                val options2:FirebaseRecyclerOptions<Events?> = FirebaseRecyclerOptions.Builder<Events>().
+                setQuery(dataBaseRef.child("Upcoming"), Events::class.java).build()
+                eventAdapterUpcoming = EventAdapter(options2)
+                upcomingEventRecycler.adapter = eventAdapterUpcoming
+                eventAdapterUpcoming.startListening()
+
+                val options3:FirebaseRecyclerOptions<Events?> = FirebaseRecyclerOptions.Builder<Events>().
+                setQuery(dataBaseRef.child("PastEvents"), Events::class.java).build()
+                eventAdapterPast = EventAdapter(options3)
+                pastEventRecycler.adapter = eventAdapterPast
+                eventAdapterPast.startListening()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -98,11 +120,58 @@ class LiveEventsFragment : Fragment() {
                 &&dateCalendar.get(Calendar.DATE)==currentdate.get(Calendar.DATE))
     }
 
+    fun isBeforeGivenDateTime(givenDate: String, givenTime: String): Boolean {
+        val inputDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+
+        // Get current date and time
+        val currentDateTime = Calendar.getInstance().time
+
+        try {
+            // Combine the given date and time strings into one date-time string
+            val givenDateTimeStr = "$givenDate $givenTime"
+
+            // Parse the given date-time string into a Date object
+            val givenDateTime = inputDateFormat.parse(givenDateTimeStr)
+
+            // Check if the current date and time are before the given date and time
+            return currentDateTime.before(givenDateTime)
+        } catch (e: Exception) {
+            // Handle parsing exceptions
+
+        }
+
+        return false
+    }
+    fun isAfterGivenDateTime(givenDate: String, givenTime: String): Boolean {
+        val inputDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+
+        // Get current date and time
+        val currentDateTime = Calendar.getInstance().time
+
+        try {
+            // Combine the given date and time strings into one date-time string
+            val givenDateTimeStr = "$givenDate $givenTime"
+
+            // Parse the given date-time string into a Date object
+            val givenDateTime = inputDateFormat.parse(givenDateTimeStr)
+
+            // Check if the current date and time are before the given date and time
+            return currentDateTime.after(givenDateTime)
+        } catch (e: Exception) {
+            // Handle parsing exceptions
+
+        }
+
+        return false
+    }
+
+
 
     private fun callId(view: View) {
         database=FirebaseDatabase.getInstance()
         dRef=database.getReference("Events")
         liveEventRecycler= view.findViewById(R.id.liveEvent_Recycler)
         upcomingEventRecycler= view.findViewById(R.id.upcoming_Recycler)
+        pastEventRecycler= view.findViewById(R.id.past_Recycler)
     }
 }
