@@ -21,6 +21,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp">
       <de.hdodenhof.circleimageview.CircleImageView
+          android:id="@+id/profileImage"
           android:layout_width="60dp"
           android:layout_height="60dp"
           android:src="@color/black"/>
@@ -33,26 +34,29 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginStart="10dp">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="name"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:textColor="#9C27B0"
-        />
                 <TextView
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Username"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:textColor="#9C27B0"
+                    />
+                <TextView
+                    android:id="@+id/time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="time"
                     android:textSize="15dp"
                     android:textStyle="bold"/>
+
         </LinearLayout>
     </RelativeLayout>
 
     </LinearLayout>
         <ImageView
+            android:id="@+id/postImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@color/red"
@@ -75,7 +79,8 @@
                 android:src="@color/black"
                 android:layout_marginTop="10dp"/>
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/upvote"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:textStyle="bold"
