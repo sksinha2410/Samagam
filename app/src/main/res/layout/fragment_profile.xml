@@ -26,19 +26,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/logout"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_left_40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Logout"
+                        android:textSize="40sp"
+                        android:textStyle="bold"
+                        android:gravity="end"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:textColor="#F0740F9F"
+                        />
+                </LinearLayout>
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profileImage"
                     android:layout_width="123dp"
                     android:layout_height="123dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_60sdp"
+                   android:layout_marginTop="10dp"
                     android:background="@drawable/image_for_login_page" />
 
                 <TextView
                     android:id="@+id/profileName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="erwin krew"
+                    android:text=""
                     android:layout_gravity="center"
                     android:textSize="@dimen/_30sdp"
                     android:textColor="#C3A7FE"/>
@@ -46,8 +68,9 @@
                     android:id="@+id/profileBranch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="electrical engineering NITP"
-                    android:layout_gravity="center"/>
+                    android:text=""
+                    android:layout_gravity="center"
+                    android:textColor="#C5592F"/>
 
 
                 <androidx.recyclerview.widget.RecyclerView
