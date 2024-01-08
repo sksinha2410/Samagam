@@ -30,13 +30,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_80sdp"
                 android:text="SAMAGAM"
-                android:shadowColor="@color/light_pink"
+                android:shadowColor="#9F8FED"
                 android:shadowRadius="5"
                 android:textStyle="bold"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:textColor="@color/black"
+                android:fontFamily="@font/londrina_solid"
+                android:letterSpacing="0.1"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/_40sdp" />
+                android:textSize="@dimen/_55sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_80sdp"
+                android:text="SAMAGAM"
+                android:shadowColor="#9F8FED"
+                android:shadowRadius="5"
+                android:textStyle="bold"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/londrina_outline"
+                android:letterSpacing="0.1"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/_55sdp" />
 
         </RelativeLayout>
 

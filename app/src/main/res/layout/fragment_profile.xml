@@ -48,13 +48,42 @@
                         android:textColor="#F0740F9F"
                         />
                 </LinearLayout>
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profileImage"
-                    android:layout_width="123dp"
-                    android:layout_height="123dp"
-                    android:layout_gravity="center"
-                   android:layout_marginTop="10dp"
-                    android:background="@drawable/image_for_login_page" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="@dimen/_126sdp"
+                    android:layout_height="@dimen/_126sdp"
+                    android:background="@drawable/circle_stroke"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_34sdp"
+                        android:text="+"
+                        android:textColor="#9F8FED"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_40sdp"
+                        android:fontFamily="@font/londrina_solid"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/profileImage" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profileImage"
+                        android:layout_width="123dp"
+                        android:layout_height="123dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circle_stroke"
+                        android:elevation="@dimen/_30sdp"
+                        android:src="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <TextView
                     android:id="@+id/profileName"
