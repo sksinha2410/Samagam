@@ -32,7 +32,7 @@ class FramentFeed : Fragment() {
 
 
         val options: FirebaseRecyclerOptions<Posts?> = FirebaseRecyclerOptions.Builder<Posts>().
-        setQuery(dataBaseRef.child("Feed"), Posts::class.java).build()
+        setQuery(dataBaseRef.child("Posts"), Posts::class.java).build()
         feedAdapter = FeedAdapter(options)
         feedRecycler.adapter = feedAdapter
         feedAdapter.startListening()

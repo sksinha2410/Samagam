@@ -6,66 +6,69 @@
     android:layout_height="match_parent"
     tools:context=".Activity.SplashScreenActivity"
     android:background="@drawable/signup_background"
-
     android:orientation="vertical">
 
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="275dp"
        android:background="@drawable/splashscreen_background"
-       android:layout_marginStart="40dp"
-       android:layout_marginEnd="40dp"
+       android:layout_marginHorizontal="40dp"
        android:gravity="bottom"
        android:layout_marginTop="150dp">
 
-
        <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="195dp"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
            android:layout_marginStart="5dp"
-           android:layout_marginEnd="45dp"
            android:layout_marginBottom="5dp"
+           android:paddingEnd="15dp"
            android:background="@drawable/splashscreen_blackcurve"
            android:orientation="vertical"
            android:gravity="bottom">
            <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:text="SAMAGAM"
-           android:textSize="50sp"
-           android:textColor="#1BFFFFFF"
-           android:textStyle="bold"
-              />
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:fontFamily="@font/londrina_outline"
+               android:text="SAMAGAM"
+               android:letterSpacing="0.1"
+               android:textSize="63sp"
+               android:textColor="#1BFFFFFF"
+               android:textStyle="bold"/>
+
            <TextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+               android:fontFamily="@font/londrina_outline"
                android:text="SAMAGAM"
-               android:textSize="50sp"
+               android:letterSpacing="0.1"
+               android:textSize="63sp"
                android:textColor="#4BFFFFFF"
                android:textStyle="bold"
-               android:layout_marginTop="-24dp"
+               android:layout_marginTop="-24dp"/>
 
-
-               />
            <TextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+               android:fontFamily="@font/londrina_outline"
                android:text="SAMAGAM"
-               android:textSize="50sp"
+               android:letterSpacing="0.1"
+               android:textSize="63sp"
                android:textColor="#9CFFFFFF"
                android:textStyle="bold"
                android:layout_marginTop="-26dp"
                />
+
            <TextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:text="SAMAGAM"
-               android:textSize="50sp"
-               android:textColor="@color/white"
-               android:textStyle="bold"
                android:layout_marginTop="-26dp"
-
+               android:fontFamily="@font/londrina_solid"
+               android:text="SAMAGAM"
+               android:textColor="#C9FFFFFF"
+               android:letterSpacing="0.1"
+               android:textSize="63sp"
                />
+
        </LinearLayout>
    </LinearLayout>
 
