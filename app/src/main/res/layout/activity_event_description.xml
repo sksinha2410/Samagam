@@ -9,6 +9,7 @@
     android:paddingEnd="@dimen/_2sdp"
     >
     <TextView
+        android:id="@+id/event_name"
         style="@style/Headline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,28 +19,20 @@
 
 
     <TextView
+        android:id="@+id/event_type"
         style="@style/Caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:text="Hackathon"/>
     <TextView
+        android:id="@+id/time"
         style="@style/Caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:text="12-01-2023"/>
 
-    <ImageView
-        style="@style/Caption"
-        android:textColor="@color/dark_grey"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textRuntime"
-        android:drawablePadding="@dimen/_4sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:src="@drawable/live"
-        app:drawableTint="@color/dark_grey" />
 
     <TextView
         style="@style/Headline6"
@@ -49,10 +42,37 @@
         android:text="@string/title_overview"/>
 
     <TextView
+        android:id="@+id/description"
         style="@style/Caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:text="Tesla is reepresenting blah blah blah"/>
+
+    <TextView
+        style="@style/Headline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="Links"/>
+
+    <TextView
+        android:id="@+id/reg_link"
+        style="@style/Caption"
+        android:layout_width="wrap_content"
+        android:linksClickable="true"
+        android:autoLink="web"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text=""/>
+    <TextView
+        android:id="@+id/brochure_link"
+        style="@style/Caption"
+        android:layout_width="wrap_content"
+        android:linksClickable="true"
+        android:autoLink="web"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text=""/>
 
 </LinearLayout>

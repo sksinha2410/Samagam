@@ -1,6 +1,7 @@
 package com.ingray.samagam.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -91,6 +92,68 @@ class LiveEventsFragment : Fragment() {
                 Log.e("Firebase", "Error fetching events: ${error.message}")
             }
         })
+
+        val database = FirebaseDatabase.getInstance()
+        val upcomingRef = database.getReference("Upcoming")
+        val liveRef = database.getReference("Live")
+
+// Get current date and time
+        val currentDate:String = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+        val currentTime:String = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
+
+// Retrieve events from Firebase
+        upcomingRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (eventSnapshot in dataSnapshot.children) {
+                    val event = eventSnapshot.getValue(Events::class.java)
+
+                    if (event != null &&
+                        event.event_date < currentDate
+                    ) {
+                        // Delete events that have passed the start time with date
+                        eventSnapshot.ref.removeValue()
+
+                    }
+
+                    else if (event != null && event.event_date == currentDate && event.event_starttime<=currentTime){
+                        Toast.makeText(view.context,"Reached",Toast.LENGTH_SHORT).show()
+                        eventSnapshot.ref.removeValue()
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle potential errors here
+            }
+        })
+        liveRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (eventSnapshot in dataSnapshot.children) {
+                    val event = eventSnapshot.getValue(Events::class.java)
+
+                    if (event != null &&
+                        event.event_date < currentDate
+                    ) {
+                        // Delete events that have passed the start time with date
+                        eventSnapshot.ref.removeValue()
+
+                    }
+
+                    else if (event != null && event.event_date == currentDate && event.event_endtime<=currentTime){
+                        Toast.makeText(view.context,"Reached",Toast.LENGTH_SHORT).show()
+                        eventSnapshot.ref.removeValue()
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle potential errors here
+            }
+        })
+
+
+
+
         return view
     }
 
