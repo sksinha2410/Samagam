@@ -1,5 +1,6 @@
 package com.ingray.samagam.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -18,6 +20,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.protobuf.Value
+import com.ingray.samagam.Activity.LoginActivity
 import com.ingray.samagam.Adapters.FeedAdapter
 import com.ingray.samagam.Adapters.ProfilePostAdapter
 import com.ingray.samagam.DataClass.Posts
@@ -33,6 +36,7 @@ class ProfileFragment : Fragment() {
     private lateinit var view :View
     private lateinit var recyclerPost: RecyclerView
     private lateinit var ppAdapter: ProfilePostAdapter
+    private lateinit var logout:LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +45,14 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
        view = inflater.inflate(R.layout.fragment_profile, container, false)
         callById()
+        logout.setOnClickListener{
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(
+                activity, LoginActivity::class.java
+            )
+            startActivity(intent)
+
+        }
         deRef.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
              var us : Users
@@ -77,6 +89,7 @@ class ProfileFragment : Fragment() {
         profileName = view.findViewById(R.id.profileName)
         profileBranch = view.findViewById(R.id.profileBranch)
         recyclerPost=view.findViewById(R.id.profile_recycler)
+        logout = view.findViewById(R.id.logout)
     }
 
 

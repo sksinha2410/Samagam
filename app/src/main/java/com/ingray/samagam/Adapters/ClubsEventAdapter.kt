@@ -25,6 +25,9 @@ class ClubsEventAdapter(options: FirebaseRecyclerOptions<Events?>) :
         model: Events
     ) {
         holder.event_name.setText(model.event_name)
+        holder.date.setText(model.event_date)
+        holder.time.setText(model.event_starttime)
+        holder.venue.setText(model.event_venue)
         Glide.with(holder.posterImage.context).load(model.purl).into(holder.posterImage)
 
         holder.reg_link.setOnClickListener {
@@ -63,12 +66,19 @@ class ClubsEventAdapter(options: FirebaseRecyclerOptions<Events?>) :
         var event_name:TextView
         var brochure_link:CardView
         var reg_link:CardView
+        var date:TextView
+        var time:TextView
+        var venue:TextView
+
 
         init {
             posterImage =innerView.findViewById(R.id.event_poster)
             event_name = innerView.findViewById(R.id.event_name)
             brochure_link = innerView.findViewById(R.id.rulebook)
             reg_link = innerView.findViewById(R.id.register)
+            date = innerView.findViewById(R.id.date)
+            time = innerView.findViewById(R.id.time)
+            venue = innerView.findViewById(R.id.venue)
         }
     }
 }

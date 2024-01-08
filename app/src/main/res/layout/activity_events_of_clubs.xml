@@ -59,6 +59,7 @@
         android:id="@+id/clubs_event_Recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="1000dp"
         android:layout_marginTop="@dimen/_16sdp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
