@@ -3,13 +3,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".Activity.EventsOfClubsActivity">
-    <Button
-        android:id="@+id/xmlButton"
+    tools:context=".Activity.EventsOfClubsActivity"
+    android:background="@drawable/signup_background"
+    >
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_weight="0.3"
+            android:background="@drawable/toolback">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:gravity="center_vertical"
+                android:shadowColor="@color/light_pink"
+                android:shadowRadius="5"
+                android:text="SAMAGAM"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_40sdp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="end"
+            android:layout_weight="1"
+
+            android:background="@drawable/toolbackr"
+            android:padding="@dimen/_13sdp"
+            android:src="@drawable/ghost" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/clubName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="XML Button" />
+        android:textSize="@dimen/_35sdp"
+        android:layout_gravity="center"
+        android:text="ClubName"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/londrina_outline"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/clubs_event_Recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
+
+
+
+
+
 
 </LinearLayout>

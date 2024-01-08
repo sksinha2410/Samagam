@@ -15,13 +15,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
+                android:id="@+id/event_poster"
                 android:layout_width="match_parent"
+                android:scaleType="centerCrop"
                 android:layout_height="@dimen/_200sdp"
                 android:src="@color/black"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp">
                 <TextView
+                    android:id="@+id/event_name"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
@@ -33,6 +36,7 @@
                     android:maxLines="1"
                     android:textSize="@dimen/_28ssp"/>
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/rulebook"
                     android:layout_width="0dp"
                     android:layout_weight="1.7"
                     android:layout_gravity="center_vertical"
@@ -54,6 +58,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/register"
                     android:layout_width="0dp"
                     android:layout_weight="1.5"
                     app:cardCornerRadius="3dp"
