@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ingray.samagam.DataClass.Events
@@ -21,10 +22,11 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
         position: Int,
         model: Posts
     ) {
+        Toast.makeText(holder.itemView.context,"Entered Feed",Toast.LENGTH_LONG).show()
         holder.username.setText(model.username)
         holder.time.setText(model.time)
         holder.likes.setText(model.likes)
-        Glide.with(holder.postImage.context).load(model.purl).into(holder.postImage)
+        Glide.with(holder.postImage.context).load(model.postUrl).into(holder.postImage)
         Glide.with(holder.profileImage.context).load(model.purl).into(holder.profileImage)
     }
     override fun onCreateViewHolder(

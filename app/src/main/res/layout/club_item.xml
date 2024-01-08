@@ -42,11 +42,7 @@
                     android:src="@color/black"
                     android:scaleType="centerCrop"
                     />
-
             </androidx.cardview.widget.CardView>
-
-
-
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
@@ -60,9 +56,6 @@
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_4sdp"
                 />
-
-            
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
