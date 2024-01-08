@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.ingray.samagam.Adapters.EventAdapter
+import com.ingray.samagam.Adapters.EventAdapterPast
+import com.ingray.samagam.Adapters.EventAdapterUpcoming
 import com.ingray.samagam.DataClass.Events
 import com.ingray.samagam.R
 import java.text.SimpleDateFormat
@@ -33,8 +35,8 @@ class LiveEventsFragment : Fragment() {
     private lateinit var upcomingEventRecycler:RecyclerView
     private lateinit var pastEventRecycler:RecyclerView
     private lateinit var eventAdapter: EventAdapter
-    private lateinit var eventAdapterUpcoming: EventAdapter
-    private lateinit var eventAdapterPast: EventAdapter
+    private lateinit var eventAdapterUpcoming: EventAdapterUpcoming
+    private lateinit var eventAdapterPast: EventAdapterPast
     private var dataBaseRef= FirebaseDatabase.getInstance().reference
 
     override fun onCreateView(
@@ -73,13 +75,13 @@ class LiveEventsFragment : Fragment() {
 
                 val options2:FirebaseRecyclerOptions<Events?> = FirebaseRecyclerOptions.Builder<Events>().
                 setQuery(dataBaseRef.child("Upcoming"), Events::class.java).build()
-                eventAdapterUpcoming = EventAdapter(options2)
+                eventAdapterUpcoming = EventAdapterUpcoming(options2)
                 upcomingEventRecycler.adapter = eventAdapterUpcoming
                 eventAdapterUpcoming.startListening()
 
                 val options3:FirebaseRecyclerOptions<Events?> = FirebaseRecyclerOptions.Builder<Events>().
                 setQuery(dataBaseRef.child("PastEvents"), Events::class.java).build()
-                eventAdapterPast = EventAdapter(options3)
+                eventAdapterPast = EventAdapterPast(options3)
                 pastEventRecycler.adapter = eventAdapterPast
                 eventAdapterPast.startListening()
             }

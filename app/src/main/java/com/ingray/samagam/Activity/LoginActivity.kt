@@ -118,15 +118,24 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = Firebase.auth.currentUser
-        if (currentUser != null) {
+        if(auth.currentUser?.isEmailVerified == true){
+            if (currentUser != null) {
+                Toast.makeText(
+                    applicationContext,
+                    "Entered",
+                    Toast.LENGTH_SHORT
+                ).show()
+                var intent:Intent = Intent(this,MainActivity::class.java)
+                startActivity(intent)
+                finish()
+        }else{
             Toast.makeText(
                 applicationContext,
-                "Entered",
-                Toast.LENGTH_SHORT
-            ).show()
-            var intent:Intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
-            finish()
+                "Email not Verified",
+                Toast.LENGTH_LONG
+            )
+        }
+
         }
     }
 

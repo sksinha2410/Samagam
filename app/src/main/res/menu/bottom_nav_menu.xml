@@ -3,17 +3,17 @@
 
     <item
         android:id="@id/fragment_Home"
-        android:icon="@drawable/supporter"
+        android:icon="@drawable/home"
         android:title="Home"/>
 
     <item
         android:id="@id/liveEventsFragment"
-        android:icon="@drawable/event"
+        android:icon="@drawable/lives"
         android:title="Live"/>
 
     <item
         android:id="@id/framentFeed"
-        android:icon="@drawable/social"
+        android:icon="@drawable/feed"
         android:title="Feed"/>
 
     <item
