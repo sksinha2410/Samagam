@@ -50,14 +50,9 @@ class LoginActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
 
                             if(auth.currentUser?.isEmailVerified == true){
-                                Log.d(TAG, "signInWithEmail:success")
-                                Toast.makeText(
-                                    applicationContext,
-                                    "Success",
-                                    Toast.LENGTH_LONG
-                                )
-                                    .show()
-                                val user = auth.currentUser
+                                val intent = Intent(this,MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
                             }else{
                                 Toast.makeText(
                                     applicationContext,
@@ -114,29 +109,6 @@ class LoginActivity : AppCompatActivity() {
         signin= findViewById(R.id.btnSignin)
         auth = Firebase.auth
     }
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = Firebase.auth.currentUser
-        if(auth.currentUser?.isEmailVerified == true){
-            if (currentUser != null) {
-                Toast.makeText(
-                    applicationContext,
-                    "Entered",
-                    Toast.LENGTH_SHORT
-                ).show()
-                var intent:Intent = Intent(this,MainActivity::class.java)
-                startActivity(intent)
-                finish()
-        }else{
-            Toast.makeText(
-                applicationContext,
-                "Email not Verified",
-                Toast.LENGTH_LONG
-            )
-        }
 
-        }
-    }
 
 }

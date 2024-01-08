@@ -90,15 +90,15 @@
             >
 
             <TextView
+                android:id="@+id/start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Start"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                android:gravity="end"
                 android:layout_marginEnd="@dimen/_20sdp"
+                android:gravity="end"
+                android:text="Start"
                 android:textColor="#F0740F9F"
-                />
+                android:textSize="40sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>
