@@ -44,7 +44,7 @@ class ProfileFragment : Fragment() {
         deRef.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
              var us : Users
-                if(snapshot.exists()){
+             if(snapshot.exists()){
                     us = snapshot.getValue(Users::class.java)!!
                     profileName.setText(us.name)
                     Glide.with(view.context).load(us.purl).into(profileImage)
