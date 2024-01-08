@@ -11,6 +11,7 @@ import com.ingray.samagam.DataClass.Events
 import com.ingray.samagam.R
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.ingray.samagam.CustomDialog
 
 class EventAdapterPast(options: FirebaseRecyclerOptions<Events?>) :
     FirebaseRecyclerAdapter<Events?, EventAdapterPast.userAdapterHolder?>(options) {
@@ -21,6 +22,10 @@ class EventAdapterPast(options: FirebaseRecyclerOptions<Events?>) :
     ) {
         holder.event_name.setText(model.event_name)
         Glide.with(holder.posterImage.context).load(model.purl).into(holder.posterImage)
+        holder.posterImage.setOnClickListener{
+            val customDialog = CustomDialog(holder.itemView.context, model)
+            customDialog.showDialog()
+        }
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,
