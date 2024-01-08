@@ -29,6 +29,8 @@ class FramentFeed : Fragment() {
         var view = inflater.inflate(R.layout.fragment_frament_feed, container, false)
         feedRecycler = view.findViewById(R.id.feed_Recycler)
         feedRecycler.itemAnimator = null
+
+
         val options: FirebaseRecyclerOptions<Posts?> = FirebaseRecyclerOptions.Builder<Posts>().
         setQuery(dataBaseRef.child("Feed"), Posts::class.java).build()
         feedAdapter = FeedAdapter(options)
