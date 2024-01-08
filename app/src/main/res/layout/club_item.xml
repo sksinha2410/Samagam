@@ -6,16 +6,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/clubCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/_6sdp"
+        app:cardCornerRadius="@dimen/_16sdp"
         app:cardBackgroundColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:strokeColor="@color/brown"
-        app:strokeWidth="@dimen/_2sdp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="13dp"
         android:layout_marginBottom="15dp"
@@ -24,21 +23,29 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:layout_marginTop="3dp">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/ivLogo"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvLogo"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"
+                android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/test"
-                android:scaleType="centerCrop"
-                />
+                android:layout_marginTop="3dp"
+                app:cardCornerRadius="@dimen/_16sdp"
+                android:layout_marginHorizontal="3dp">
+                <ImageView
+                    android:id="@+id/ivLogo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:src="@color/black"
+                    android:scaleType="centerCrop"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+
 
             <TextView
                 android:id="@+id/tv_title"
@@ -46,10 +53,10 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivLogo"
+                app:layout_constraintTop_toBottomOf="@id/cvLogo"
                 tools:text="Club-Name"
                 android:textSize="16sp"
-                android:textColor="@color/brown"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_4sdp"
                 />
