@@ -6,13 +6,13 @@
     android:paddingBottom="@dimen/_14sdp"
     android:layout_marginVertical="@dimen/_10sdp"
     android:layout_marginStart="@dimen/_10sdp"
-    android:background="@drawable/custom_card_upcoming"
+    android:background="@drawable/custom_card_past"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="35dp"
+        app:cardCornerRadius="10dp"
         app:cardMaxElevation="@dimen/_20sdp"
         >
         <LinearLayout
