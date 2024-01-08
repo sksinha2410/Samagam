@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="data_list">
+        <item>Selection 1</item>
+        <item>Selection 2</item>
+        <item>Selection 3</item>
+        <item>Selection 4</item>
+        <item>Selection 5</item>
+        <item>Selection 6</item>
+    </string-array>
+</resources>
