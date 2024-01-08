@@ -38,7 +38,7 @@
         android:id="@+id/textRuntime"
         android:drawablePadding="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:src="@drawable/event"
+        android:src="@drawable/live"
         app:drawableTint="@color/dark_grey" />
 
     <TextView
