@@ -31,49 +31,49 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/input_box"
+                    android:background="@drawable/inner_gradienr_edit"
                     android:hint="Event Name"
                     android:paddingVertical="@dimen/_5sdp"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="20dp"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:textColorHint="#A7A5A5"/>
+                    android:paddingStart="@dimen/_20sdp"
+                    android:textColorHint="#555353"/>
 
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/input_box"
+                    android:background="@drawable/inner_gradienr_edit"
                     android:hint="Registration Link"
                     android:paddingVertical="@dimen/_5sdp"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="20dp"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:textColorHint="#A7A5A5"/>
+                    android:paddingStart="@dimen/_20sdp"
+                    android:textColorHint="#555353"/>
 
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/input_box"
+                    android:background="@drawable/inner_gradienr_edit"
                     android:hint="Event Type"
                     android:paddingVertical="@dimen/_5sdp"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="20dp"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:textColorHint="#A7A5A5"/>
+                    android:paddingStart="@dimen/_20sdp"
+                    android:textColorHint="#555353"/>
 
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/input_box"
+                    android:background="@drawable/inner_gradienr_edit"
                     android:hint="Brochure Link"
                     android:paddingVertical="@dimen/_5sdp"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="20dp"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:textColorHint="#A7A5A5"/>
+                    android:paddingStart="@dimen/_20sdp"
+                    android:textColorHint="#555353"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -83,33 +83,33 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/input_box"
+                        android:background="@drawable/inner_gradienr_edit"
                         android:hint="Start Time"
-                        android:textColorHint="#A7A5A5"
+                        android:textColorHint="#555353"
                         android:layout_marginHorizontal="@dimen/_10sdp"
                         android:paddingVertical="@dimen/_5sdp"
-                        android:paddingHorizontal="@dimen/_3sdp"/>
+                        android:paddingHorizontal="@dimen/_15sdp"/>
 
                       <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/input_box"
+                        android:background="@drawable/inner_gradienr_edit"
                         android:hint="End Time"
-                        android:textColorHint="#A7A5A5"
+                        android:textColorHint="#555353"
                         android:layout_marginHorizontal="@dimen/_10sdp"
                         android:paddingVertical="@dimen/_5sdp"
-                        android:paddingHorizontal="@dimen/_3sdp"
+                        android:paddingHorizontal="@dimen/_15sdp"
                           android:layout_marginStart="@dimen/_15ssp"/>
 
                       <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/input_box"
+                        android:background="@drawable/inner_gradienr_edit"
                         android:hint="Date"
-                        android:textColorHint="#A7A5A5"
+                        android:textColorHint="#555353"
                         android:layout_marginHorizontal="@dimen/_10sdp"
                         android:paddingVertical="@dimen/_5sdp"
-                        android:paddingHorizontal="@dimen/_25sdp"
+                        android:paddingHorizontal="@dimen/_20sdp"
                           android:layout_marginStart="@dimen/_25ssp"/>
 
 
@@ -117,24 +117,24 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/input_box"
+                    android:background="@drawable/inner_gradienr_edit"
                     android:hint="Venue"
                     android:paddingVertical="@dimen/_5sdp"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="20dp"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:textColorHint="#A7A5A5"/>
+                    android:paddingStart="@dimen/_20sdp"
+                    android:textColorHint="#555353"/>
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/input_box"
+                    android:background="@drawable/inner_gradienr_edit"
                     android:hint="Description"
                     android:paddingVertical="@dimen/_5sdp"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:textColorHint="#A7A5A5"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:textColorHint="#555353"
                     android:paddingBottom="@dimen/_410sdp" />
 
                 <Button
