@@ -42,8 +42,5 @@ class EventsOfClubsActivity : AppCompatActivity() {
         clubsEventAdapter = ClubsEventAdapter(options)
         club_event_recycler.adapter = clubsEventAdapter
         clubsEventAdapter.startListening()
-
-
-
     }
 }
