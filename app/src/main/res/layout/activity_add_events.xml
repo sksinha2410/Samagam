@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.AddEventsActivity"android:background="@drawable/signup_background">
+    tools:context=".Activity.AddEventsActivity"
+    android:background="@drawable/signup_background">
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -13,8 +14,7 @@
             android:backgroundTint="#272626"
             android:layout_gravity="center"
             android:outlineProvider="paddedBounds"
-            app:cardCornerRadius="@dimen/_15sdp"
-            >
+            app:cardCornerRadius="@dimen/_15sdp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

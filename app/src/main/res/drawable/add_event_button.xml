@@ -8,6 +8,5 @@
             android:centerY="50%"
             android:centerX="50%"
             android:startColor="#3E3D3D"
-            android:endColor="#3E3D3D"
+            android:endColor="#3E3D3D"/>
     </shape>
-</selector>
