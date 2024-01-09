@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activity.AddEventsActivity"
     android:background="@drawable/signup_background">
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -14,8 +15,8 @@
             android:backgroundTint="#272626"
             android:layout_gravity="center"
             android:outlineProvider="paddedBounds"
-            app:cardCornerRadius="@dimen/_15sdp"
-            >
+            app:cardCornerRadius="@dimen/_15sdp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -29,7 +30,14 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_25sdp"/>
 
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"/>
+
                 <EditText
+                    android:id="@+id/event_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/inner_gradienr_edit"
@@ -42,6 +50,7 @@
 
 
                 <EditText
+                    android:id="@+id/reg_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/inner_gradienr_edit"
@@ -54,6 +63,7 @@
 
 
                 <EditText
+                    android:id="@+id/event_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/inner_gradienr_edit"
@@ -66,6 +76,7 @@
 
 
                 <EditText
+                    android:id="@+id/brochure_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/inner_gradienr_edit"
@@ -77,45 +88,64 @@
                     android:textColorHint="#555353"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_20sdp">
-                    <EditText
-                        android:layout_width="wrap_content"
+
+                    <TextView
+                        android:id="@+id/start_time"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/inner_gradienr_edit"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15ssp"
+                        android:layout_weight="1"
+                        android:background="@drawable/calendar_drawable"
+                        android:drawableTop="@drawable/calendar"
                         android:hint="Start Time"
-                        android:textColorHint="#555353"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:paddingVertical="@dimen/_5sdp"
-                        android:paddingHorizontal="@dimen/_15sdp"/>
-
-                      <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/inner_gradienr_edit"
-                        android:hint="End Time"
-                        android:textColorHint="#555353"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:paddingVertical="@dimen/_5sdp"
                         android:paddingHorizontal="@dimen/_15sdp"
-                          android:layout_marginStart="@dimen/_15ssp"/>
-
-                      <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/inner_gradienr_edit"
-                        android:hint="Date"
-                        android:textColorHint="#555353"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
                         android:paddingVertical="@dimen/_5sdp"
-                        android:paddingHorizontal="@dimen/_20sdp"
-                          android:layout_marginStart="@dimen/_25ssp"/>
+                        android:textAlignment="center"
+                        android:textColorHint="#555353"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/end_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_15ssp"
+                        android:layout_weight="1"
+                        android:background="@drawable/calendar_drawable"
+                        android:drawableTop="@drawable/calendar"
+                        android:hint="End Time"
+                        android:paddingHorizontal="@dimen/_15sdp"
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:textAlignment="center"
+                        android:textColorHint="#555353"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_25ssp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/calendar_drawable"
+                        android:drawableTop="@drawable/calendar"
+                        android:hint="Date"
+                        android:paddingHorizontal="@dimen/_15sdp"
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:textAlignment="center"
+                        android:textColorHint="#555353"
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>
                 <EditText
+                    android:id="@+id/venue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/inner_gradienr_edit"
@@ -127,6 +157,7 @@
                     android:textColorHint="#555353"/>
 
                 <EditText
+                    android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
@@ -139,13 +170,15 @@
                     android:paddingBottom="@dimen/_410sdp" />
 
                 <Button
+                    android:id="@+id/btn_submit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/add_button_events"
-                    android:text="Submit"
                     android:layout_marginTop="@dimen/_20sdp"
-                    android:paddingHorizontal="@dimen/_50sdp"/>
+                    android:background="@drawable/add_button_events"
+                    android:paddingHorizontal="@dimen/_50sdp"
+                    android:text="Submit"
+                    android:textStyle="bold" />
 
 
             </LinearLayout>

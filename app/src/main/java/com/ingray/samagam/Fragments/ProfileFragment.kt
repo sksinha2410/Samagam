@@ -1,7 +1,10 @@
 package com.ingray.samagam.Fragments
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -37,7 +40,7 @@ class ProfileFragment : Fragment() {
     private lateinit var recyclerPost: RecyclerView
     private lateinit var ppAdapter: ProfilePostAdapter
     private lateinit var logout:LinearLayout
-
+    val Pick_image=1
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -79,9 +82,25 @@ class ProfileFragment : Fragment() {
 
 
 
-
+        profileImage.setOnClickListener{
+            openGallery()
+        }
         return view
 
+    }
+
+    private fun openGallery() {
+        val gallery=Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(gallery,Pick_image)
+
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == Pick_image && resultCode == RESULT_OK && data != null) {
+            val imageUri: Uri = data.data!!
+            profileImage.setImageURI(imageUri)
+        }
     }
 
     private fun callById() {
