@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.AddEventsActivity"android:background="@drawable/signup_background">
+    tools:context=".Activity.AddEventsActivity"
+    android:background="@drawable/signup_background">
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -141,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/add_event_button"
+                    android:background="@drawable/add_button_events"
                     android:text="Submit"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:paddingHorizontal="@dimen/_50sdp"/>
