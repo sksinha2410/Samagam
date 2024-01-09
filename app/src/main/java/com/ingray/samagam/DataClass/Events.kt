@@ -10,7 +10,8 @@ data class Events(
     var event_starttime:String = "",
     var event_endtime:String = "",
     var event_date:String = "",
-    var event_venue:String = ""
+    var event_venue:String = "",
+    var club_name:String=""
 
 
 )
