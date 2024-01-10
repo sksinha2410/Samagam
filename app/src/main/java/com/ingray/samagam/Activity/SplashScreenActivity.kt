@@ -47,7 +47,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     applicationContext,
                     "Email not Verified",
                     Toast.LENGTH_LONG
-                )
+                ).show()
             }
 
         }
