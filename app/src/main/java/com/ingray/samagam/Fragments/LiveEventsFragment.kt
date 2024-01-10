@@ -229,9 +229,6 @@ class LiveEventsFragment : Fragment() {
 
         return false
     }
-
-
-
     private fun callId(view: View) {
         database=FirebaseDatabase.getInstance()
         dRef=database.getReference("Events")
