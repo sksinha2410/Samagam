@@ -7,30 +7,52 @@
     android:layout_height="match_parent"
     android:paddingStart="@dimen/_2sdp"
     android:paddingEnd="@dimen/_2sdp"
+    android:background="@drawable/signup_background"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/event_colourfull_backgroud">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginEnd="@dimen/_3sdp"
+        android:layout_marginBottom="@dimen/_3sdp"
+        android:background="@drawable/event_black_background"
+        >
     <TextView
         android:id="@+id/event_name"
         style="@style/Headline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginStart="15dp"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="#DC8DFA"
         android:text="TESLA: Innovational"/>
-
-
-
     <TextView
         android:id="@+id/event_type"
         style="@style/Caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:layout_marginStart="15dp"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:textColor="#DC8DFA"
         android:text="Hackathon"/>
     <TextView
         android:id="@+id/time"
         style="@style/Caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:layout_marginStart="15dp"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:textColor="#DC8DFA"
         android:text="12-01-2023"/>
 
 
@@ -39,6 +61,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginStart="15dp"
+        android:textColor="#A3A2A2"
         android:text="@string/title_overview"/>
 
     <TextView
@@ -46,7 +70,9 @@
         style="@style/Caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:layout_marginStart="15dp"
+        android:textSize="15dp"
+        android:textColor="#A3A2A2"
         android:text="Tesla is reepresenting blah blah blah"/>
 
     <TextView
@@ -54,6 +80,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
+        android:textColor="#DC8DFA"
+        android:layout_marginStart="15dp"
         android:text="Links"/>
 
     <TextView
@@ -63,6 +91,8 @@
         android:linksClickable="true"
         android:autoLink="web"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:textSize="15dp"
         android:textColor="@color/black"
         android:text=""/>
     <TextView
@@ -71,8 +101,11 @@
         android:layout_width="wrap_content"
         android:linksClickable="true"
         android:autoLink="web"
+        android:layout_marginStart="15dp"
+        android:textSize="15dp"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:text=""/>
-
+</LinearLayout>
+</LinearLayout>
 </LinearLayout>
