@@ -26,13 +26,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-                <LinearLayout
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/addPost"
+                        android:layout_width="175dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/white_right_40dp"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="10dp"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="+ Post"
+                            android:textSize="40sp"
+                            android:textStyle="bold"
+                            android:gravity="end"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            android:textColor="#F0740F9F"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
                     android:id="@+id/logout"
                     android:layout_width="175dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/white_left_40dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
+                        android:layout_alignParentEnd="true"
+
                     android:layout_gravity="end"
                     android:layout_marginTop="10dp"
                     >
@@ -48,6 +71,9 @@
                         android:textColor="#F0740F9F"
                         />
                 </LinearLayout>
+
+                </RelativeLayout>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="@dimen/_126sdp"
                     android:layout_height="@dimen/_126sdp"

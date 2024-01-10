@@ -45,6 +45,7 @@ class ProfileFragment : Fragment() {
     private lateinit var recyclerPost: RecyclerView
     private lateinit var ppAdapter: ProfilePostAdapter
     private lateinit var logout:LinearLayout
+    private lateinit var addPost:LinearLayout
     val Pick_image=1
     var storageReference = FirebaseStorage.getInstance().reference
     lateinit var purl:String
@@ -85,10 +86,6 @@ class ProfileFragment : Fragment() {
         ppAdapter = ProfilePostAdapter(options)
         recyclerPost.adapter = ppAdapter
         ppAdapter.startListening()
-
-
-
-
         profileImage.setOnClickListener{
             openGallery()
         }
@@ -168,6 +165,7 @@ class ProfileFragment : Fragment() {
         profileBranch = view.findViewById(R.id.profileBranch)
         recyclerPost=view.findViewById(R.id.profile_recycler)
         logout = view.findViewById(R.id.logout)
+        addPost = view.findViewById(R.id.addPost)
     }
 
 
