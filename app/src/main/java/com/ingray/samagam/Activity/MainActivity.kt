@@ -38,11 +38,5 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(setOf(R.id.fragment_Home,R.id.framentFeed,R.id.liveEventsFragment,R.id.profileFragment))
         setupActionBarWithNavController(navController,appBarConfiguration)
         bottomNav.setupWithNavController(navController)
-
-
-
     }
-
-
-
 }

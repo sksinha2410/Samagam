@@ -10,7 +10,6 @@ import com.ingray.samagam.R
 
 class NotificationFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -19,6 +18,4 @@ class NotificationFragment : Fragment() {
         val view:View=inflater.inflate(R.layout.fragment_notification, container, false)
         return view
     }
-
-
 }

@@ -37,9 +37,6 @@ class Fragment_Home : Fragment() {
         recyclerView.adapter = clubsAdapter
         clubsAdapter.startListening()
 
-
         return view
-
     }
-
 }
