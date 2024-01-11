@@ -79,6 +79,8 @@ class AddPostsActivity : AppCompatActivity() {
             post.time = timestr
             post.purl = prourl
             post.userId = userId
+
+            dbRef.child(userId).child("Posts").child(timestr).setValue(post)
         }
 
     }

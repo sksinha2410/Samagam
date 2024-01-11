@@ -14,6 +14,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.ingray.samagam.DataClass.Posts
 import de.hdodenhof.circleimageview.CircleImageView
+import java.util.concurrent.TimeUnit
 
 class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
     FirebaseRecyclerAdapter<Posts?, FeedAdapter.userAdapterHolder?>(options) {
@@ -24,7 +25,16 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
     ) {
         Toast.makeText(holder.itemView.context,"Entered Feed",Toast.LENGTH_LONG).show()
         holder.username.setText(model.username)
-        holder.time.setText(model.time)
+        val previousTimeMillis =model.time.toLong()
+
+        val currentTimeMillis = System.currentTimeMillis()
+
+        val timeDifferenceMillis = currentTimeMillis - previousTimeMillis
+
+        val hoursDifference = TimeUnit.MILLISECONDS.toHours(timeDifferenceMillis)
+
+        holder.time.text = hoursDifference.toString()
+
         holder.likes.setText(model.likes)
         Glide.with(holder.postImage.context).load(model.postUrl).into(holder.postImage)
         Glide.with(holder.profileImage.context).load(model.purl).into(holder.profileImage)
