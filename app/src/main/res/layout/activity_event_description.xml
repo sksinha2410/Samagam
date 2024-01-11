@@ -7,109 +7,127 @@
     android:background="#0FA1F3"
     android:layout_height="wrap_content"
     >
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/event_colourfull_backgroud">
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginEnd="@dimen/_3sdp"
-                android:layout_marginBottom="@dimen/_3sdp"
-                android:background="@drawable/event_black_background"
-                >
-                <TextView
-                    android:id="@+id/event_name"
-                    style="@style/Headline6"
-                    android:layout_width="wrap_content"
+                android:background="@drawable/event_colourfull_backgroud">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginStart="15dp"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:textColor="#A735D3"
-                    android:text="TESLA: Innovational"/>
-                <TextView
-                    android:id="@+id/event_type"
-                    style="@style/Caption"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:textStyle="bold"
-                    android:textSize="15dp"
-                    android:textColor="#DC8DFA"
-                    android:text="Hackathon"/>
-                <TextView
-                    android:id="@+id/time"
-                    style="@style/Caption"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    android:textColor="#DC8DFA"
-                    android:text="12-01-2023"/>
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:background="@drawable/event_black_background"
+                    >
+                    <TextView
+                        android:id="@+id/event_name"
+                        style="@style/Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginStart="15dp"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:textColor="#A735D3"
+                        android:text="TESLA: Innovational"/>
+                    <TextView
+                        android:id="@+id/event_type"
+                        style="@style/Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:textColor="#DC8DFA"
+                        android:text="Hackathon"/>
+                    <TextView
+                        android:id="@+id/time"
+                        style="@style/Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:textColor="#DC8DFA"
+                        android:text="12-01-2023"/>
 
 
-                <TextView
-                    style="@style/Headline6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginStart="15dp"
-                    android:textColor="#A3A2A2"
-                    android:text="@string/title_overview"/>
+                    <TextView
+                        style="@style/Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginStart="15dp"
+                        android:textColor="#A3A2A2"
+                        android:text="@string/title_overview"/>
 
-                <TextView
-                    android:id="@+id/description"
-                    style="@style/Caption"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:textSize="15dp"
-                    android:textColor="#A3A2A2"
-                    android:text="Tesla is reepresenting blah blah blah"/>
+                    <TextView
+                        android:id="@+id/description"
+                        style="@style/Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:textSize="15dp"
+                        android:textColor="#A3A2A2"
+                        android:text="Updating Descripton"/>
 
-                <TextView
-                    style="@style/Headline6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:textColor="#DC8DFA"
-                    android:layout_marginStart="15dp"
-                    android:text="Links"/>
-
-                <TextView
-                    android:id="@+id/reg_link"
-                    style="@style/Caption"
-                    android:layout_width="wrap_content"
-                    android:linksClickable="true"
-                    android:autoLink="web"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    android:text=""/>
-                <TextView
-                    android:id="@+id/brochure_link"
-                    style="@style/Caption"
-                    android:layout_width="wrap_content"
-                    android:linksClickable="true"
-                    android:autoLink="web"
-                    android:layout_marginStart="15dp"
-                    android:textSize="15dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text=""/>
+                    <TextView
+                        style="@style/Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:textColor="#DC8DFA"
+                        android:layout_marginStart="15dp"
+                        android:text="Links"/>
+                    <TextView
+                        style="@style/Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:textColor="#9B5DB3"
+                        android:layout_marginStart="15dp"
+                        android:text="Register"/>
+                    <TextView
+                        android:id="@+id/reg_link"
+                        style="@style/Caption"
+                        android:layout_width="wrap_content"
+                        android:linksClickable="true"
+                        android:autoLink="web"
+                        android:layout_marginBottom="-3dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:textSize="15dp"
+                        android:textColor="@color/black"
+                        android:text=""/>
+                    <TextView
+                        style="@style/Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:textColor="#9B5DB3"
+                        android:layout_marginStart="15dp"
+                        android:text="Brochure"/>
+                    <TextView
+                        android:id="@+id/brochure_link"
+                        style="@style/Caption"
+                        android:layout_width="wrap_content"
+                        android:linksClickable="true"
+                        android:autoLink="web"
+                        android:layout_marginStart="15dp"
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/bottom_nav_icon_color"
+                        android:layout_marginBottom="15dp"
+                        android:text=""/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
-
-
-    </LinearLayout>
+    </ScrollView>
 </androidx.cardview.widget.CardView>
