@@ -1,11 +1,11 @@
 package com.ingray.samagam.DataClass
 
 data class Posts(
-    val postUrl: String="",
-    val purl: String="",
-    val postId: String="",
-    val username: String="",
-    val userId: String="",
-    val likes: String="",
-    val time:String=""
+    var postUrl: String="",
+    var purl: String="",
+    var postId: String="",
+    var username: String="",
+    var userId: String="",
+    var likes: String="",
+    var time:String=""
 )

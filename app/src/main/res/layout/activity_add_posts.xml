@@ -1,9 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.AddPostsActivity">
+    tools:context=".Activity.AddEventsActivity"
+    android:background="@drawable/signup_background">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginVertical="@dimen/_20sdp"
+        android:backgroundTint="#272626"
+        android:layout_gravity="center"
+        android:outlineProvider="paddedBounds"
+        app:cardCornerRadius="@dimen/_15sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADD - POSTS"
+                android:textColor="#C3A7FE"
+                android:textSize="25dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_25sdp"/>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:background="@color/white"
+                    >
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginHorizontal="@dimen/_15sdp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+
+                        android:layout_marginTop="10dp">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/profileImage"
+                            android:paddingBottom="4dp"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@color/black"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginStart="10dp">
+                            <TextView
+                                android:id="@+id/username"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Username"
+                                android:textSize="25dp"
+                                android:textStyle="bold"
+                                android:textColor="#9C27B0"
+                                />
+                            <TextView
+                                android:id="@+id/time"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="time"
+                                android:textSize="15dp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="8dp">
+
+                        <ImageView
+                            android:id="@+id/postImage"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:src="@drawable/add_photo"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintDimensionRatio="4:3"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/upvote"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textStyle="bold"
+                            android:textSize="20dp"
+                            android:layout_marginTop="10dp"
+                            android:textColor="#9C27B0"
+                            app:drawableStartCompat="@drawable/love" />
+                        <TextView
+                            android:id="@+id/share"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textStyle="bold"
+                            android:textSize="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="5dp"
+                            android:textColor="#9C27B0"
+                            app:drawableStartCompat="@drawable/send" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/add_button_events"
+                android:paddingHorizontal="@dimen/_50sdp"
+                android:text="Submit"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
