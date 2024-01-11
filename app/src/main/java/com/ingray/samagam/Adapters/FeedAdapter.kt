@@ -14,6 +14,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.ingray.samagam.DataClass.Posts
 import de.hdodenhof.circleimageview.CircleImageView
+import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
 class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
@@ -23,17 +24,22 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
         position: Int,
         model: Posts
     ) {
-        Toast.makeText(holder.itemView.context,"Entered Feed",Toast.LENGTH_LONG).show()
+
         holder.username.setText(model.username)
         val previousTimeMillis =model.time.toLong()
 
-        val currentTimeMillis = System.currentTimeMillis()
+        val currentTimeMillis = Calendar.getInstance().timeInMillis
 
         val timeDifferenceMillis = currentTimeMillis - previousTimeMillis
 
         val hoursDifference = TimeUnit.MILLISECONDS.toHours(timeDifferenceMillis)
 
-        holder.time.text = hoursDifference.toString()
+        if (hoursDifference/24 >= 1){
+            holder.time.text = (hoursDifference/24).toString() + " days ago"
+        }
+        else{
+            holder.time.text = hoursDifference.toString() + " hours ago"
+        }
 
         holder.likes.setText(model.likes)
         Glide.with(holder.postImage.context).load(model.postUrl).into(holder.postImage)

@@ -39,6 +39,4 @@ class FramentFeed : Fragment() {
 
         return view
     }
-
-    
 }

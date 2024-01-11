@@ -118,12 +118,17 @@
                     android:textSize="@dimen/_30sdp"
                     android:textColor="#C3A7FE"/>
                 <TextView
-                    android:id="@+id/profileBranch"
+                    android:id="@+id/addEvent"
                     android:layout_width="wrap_content"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:background="@drawable/event_colourfull_backgroud"
+                    android:text="Add Event"
+                    android:textSize="@dimen/_20sdp"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_2sdp"
                     android:layout_gravity="center"
-                    android:textColor="#C5592F"/>
+                    android:textColor="@color/black"/>
 
 
                 <androidx.recyclerview.widget.RecyclerView

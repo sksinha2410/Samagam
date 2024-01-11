@@ -2,8 +2,14 @@ package com.ingray.samagam.Activity
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -11,16 +17,24 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.ingray.samagam.DataClass.Events
 import com.ingray.samagam.R
+import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -33,6 +47,7 @@ class AddEventsActivity : AppCompatActivity() {
     private lateinit var start_time: TextView
     private lateinit var end_time: TextView
     private lateinit var date: TextView
+    private lateinit var eventPoster: ImageView
     private lateinit var venue: EditText
     private lateinit var description: EditText
     private lateinit var btn_submit: Button
@@ -43,6 +58,9 @@ class AddEventsActivity : AppCompatActivity() {
     private lateinit var start:String
     private lateinit var end:String
     lateinit var ev:Events
+    val Pick_image=1
+    var storageReference = FirebaseStorage.getInstance().reference
+    lateinit var purl:String
 
     private var startTime: Calendar = Calendar.getInstance()
     private var endTime: Calendar = Calendar.getInstance()
@@ -52,17 +70,17 @@ class AddEventsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_events)
         callById()
         ev= Events()
-        callOnClick()
         getItemFromSpinner()
-
-
-
+        callOnClick()
     }
 
     private fun callOnClick() {
         start_time.setOnClickListener{
             showTimePickerDialog(true)
 
+        }
+        eventPoster.setOnClickListener{
+            openGallery()
         }
         end_time.setOnClickListener{
             showTimePickerDialog(false)
@@ -76,18 +94,81 @@ class AddEventsActivity : AppCompatActivity() {
             var bool:Boolean=checkInit()
             if(bool){
                 initEvents()
+
                 val time=Calendar.getInstance().timeInMillis.toString()
                 deRef.child("Clubs").child(selectedItem).child("Events").child(time).setValue(ev)
                 deRef.child("Events").child(time).setValue(ev)
+                Toast.makeText(applicationContext,"Event added",Toast.LENGTH_LONG).show()
+                val intent = Intent(applicationContext,MainActivity::class.java)
+                startActivity(intent)
+                finish()
             }
+        }
+    }
+    private fun openGallery() {
+        val gallery= Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(gallery,Pick_image)
 
+    }
+    @RequiresApi(Build.VERSION_CODES.P)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == Pick_image && resultCode == RESULT_OK && data != null) {
+            val resultUri: Uri = data.data!!
+            uploadImageToFirebase(resultUri)
+
+            eventPoster.setImageURI(resultUri)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    private fun uploadImageToFirebase(imageUri: Uri) {
+        val fileRef: StorageReference =
+            storageReference.child("PosterEvent/" + Calendar.getInstance().timeInMillis.toString() + "profile.jpg")
+
+        // Load the image into a Bitmap
+        val bitmap: Bitmap
+        try {
+            // Assuming imageUri is a valid URI
+            val source = ImageDecoder.createSource(contentResolver, imageUri)
+            bitmap = ImageDecoder.decodeBitmap(source)
+            // Use the bitmap here...
+        } catch (e: IOException) {
+            e.printStackTrace()
+            return
+        }
+
+// Compress the image with reduced quality (adjust quality as needed)
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(
+            Bitmap.CompressFormat.JPEG,
+            60,
+            baos
+        ) // Adjust the quality here (50 in this example)
+
+        // Convert the compressed Bitmap to bytes
+        val data = baos.toByteArray()
+
+        // Upload the compressed image to Firebase Storage
+        val uploadTask = fileRef.putBytes(data)
+        uploadTask.addOnSuccessListener { // Handle the successful upload
+            fileRef.downloadUrl.addOnSuccessListener { uri ->
+                purl = uri.toString()
+
+                Glide.with(applicationContext).load(purl).into(eventPoster)
+            }
+        }.addOnFailureListener { // Handle the failure to upload
+            Toast.makeText(applicationContext, "Failed.", Toast.LENGTH_LONG).show()
         }
     }
 
     private fun checkInit():Boolean {
         if (TextUtils.isEmpty(event_name.text.toString())) {
             Toast.makeText(this, "Enter Event Name", Toast.LENGTH_SHORT).show()
-        }else if (TextUtils.isEmpty(reg_link.text.toString())) {
+        }else if (purl .isEmpty()){
+            Toast.makeText(this, "Please upload event poster", Toast.LENGTH_SHORT).show()
+        } else if (TextUtils.isEmpty(reg_link.text.toString())) {
             Toast.makeText(this, "Enter reg link", Toast.LENGTH_SHORT).show()
         } else if (TextUtils.isEmpty(brochure_link.text.toString())) {
             Toast.makeText(this, "Enter brochure Link", Toast.LENGTH_SHORT)
@@ -106,6 +187,7 @@ class AddEventsActivity : AppCompatActivity() {
                 "Date is not selected",
                 Toast.LENGTH_SHORT
             ).show()
+
         }else{
             return true;
         }
@@ -118,7 +200,8 @@ class AddEventsActivity : AppCompatActivity() {
         ev.reg_link=reg_link.text.toString()
         ev.event_type=event_type.text.toString()
         ev.brochure_link=brochure_link.text.toString()
-
+        ev.club_name = selectedItem
+        ev.purl = purl
         ev.event_starttime=start_time.text.toString()
         ev.event_endtime=end_time.text.toString()
         ev.event_date=date.text.toString()
@@ -222,5 +305,6 @@ class AddEventsActivity : AppCompatActivity() {
         description=findViewById(R.id.description)
         btn_submit=findViewById(R.id.btn_submit)
         spinner=findViewById(R.id.spinner)
+        eventPoster=findViewById(R.id.event_poster)
     }
 }
