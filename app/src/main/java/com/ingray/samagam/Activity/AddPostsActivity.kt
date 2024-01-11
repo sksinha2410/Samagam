@@ -81,7 +81,7 @@ class AddPostsActivity : AppCompatActivity() {
                 post.purl = prourl
                 post.userId = userId
 
-                dbRef.child(userId).child("Posts").child(timestr).setValue(post)
+                dbRef.child("Users").child(userId).child("Posts").child(timestr).setValue(post)
                 dbRef.child("Posts").child(timestr).setValue(post)
                 Toast.makeText(applicationContext,"Post added",Toast.LENGTH_LONG).show()
                 finish()
