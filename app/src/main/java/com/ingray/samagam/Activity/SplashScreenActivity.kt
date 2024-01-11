@@ -25,7 +25,6 @@ class SplashScreenActivity : AppCompatActivity() {
             startActivity(mainIntent)
             finish()
         }
-
     }
 
     public override fun onStart() {
@@ -47,6 +46,4 @@ class SplashScreenActivity : AppCompatActivity() {
 
         }
     }
-
-
 }
