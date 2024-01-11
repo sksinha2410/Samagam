@@ -27,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.ingray.samagam.Activity.AddEventsActivity
+import com.ingray.samagam.Activity.AddPostsActivity
 import com.ingray.samagam.Activity.LoginActivity
 import com.ingray.samagam.Adapters.ProfilePostAdapter
 import com.ingray.samagam.DataClass.Posts
@@ -39,7 +41,7 @@ import java.io.IOException
 class ProfileFragment : Fragment() {
     private lateinit var profileImage : CircleImageView
     private lateinit var profileName : TextView
-    private lateinit var profileBranch:TextView
+    private lateinit var addEvent:TextView
     var deRef = FirebaseDatabase.getInstance().getReference("Users")
     private lateinit var view :View
     private lateinit var recyclerPost: RecyclerView
@@ -49,6 +51,7 @@ class ProfileFragment : Fragment() {
     val Pick_image=1
     var storageReference = FirebaseStorage.getInstance().reference
     lateinit var purl:String
+    lateinit var admin:String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,8 +73,11 @@ class ProfileFragment : Fragment() {
              if(snapshot.exists()){
                     us = snapshot.getValue(Users::class.java)!!
                     profileName.setText(us.name)
+                    admin = us.userType
+                    if (admin == "1"){
+                        addEvent.visibility = View.VISIBLE
+                    }
                     Glide.with(view.context).load(us.purl).into(profileImage)
-                    profileBranch.setText(us.username)
                 }
             }
 
@@ -89,8 +95,16 @@ class ProfileFragment : Fragment() {
         profileImage.setOnClickListener{
             openGallery()
         }
-        return view
+        addPost.setOnClickListener{
+            val intent = Intent(view.context,AddPostsActivity::class.java)
+            view.context.startActivity(intent)
+        }
 
+        addEvent.setOnClickListener{
+            val intent = Intent(view.context,AddEventsActivity::class.java)
+            view.context.startActivity(intent)
+        }
+        return view
     }
 
     private fun openGallery() {
@@ -162,7 +176,7 @@ class ProfileFragment : Fragment() {
     private fun callById() {
         profileImage = view.findViewById(R.id.profileImage)
         profileName = view.findViewById(R.id.profileName)
-        profileBranch = view.findViewById(R.id.profileBranch)
+        addEvent = view.findViewById(R.id.addEvent)
         recyclerPost=view.findViewById(R.id.profile_recycler)
         logout = view.findViewById(R.id.logout)
         addPost = view.findViewById(R.id.addPost)

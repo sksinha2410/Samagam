@@ -46,7 +46,7 @@ class AddPostsActivity : AppCompatActivity() {
     // Spinner
     private lateinit var spinner: Spinner
     val Pick_image=1
-    private lateinit var purl:String
+    private var purl:String = ""
     private lateinit var prourl:String
 
     val cal = Calendar.getInstance().timeInMillis
@@ -71,16 +71,24 @@ class AddPostsActivity : AppCompatActivity() {
 
         }
         submitButton.setOnClickListener{
-            val post:Posts = Posts()
-            post.postId = timestr
-            post.postUrl= purl
-            post.likes = "0"
-            post.username = usernameTextView.text.toString()
-            post.time = timestr
-            post.purl = prourl
-            post.userId = userId
+            if (!purl.isEmpty()){
+                val post:Posts = Posts()
+                post.postId = timestr
+                post.postUrl= purl
+                post.likes = "0"
+                post.username = usernameTextView.text.toString()
+                post.time = timestr
+                post.purl = prourl
+                post.userId = userId
 
-            dbRef.child(userId).child("Posts").child(timestr).setValue(post)
+                dbRef.child("Users").child(userId).child("Posts").child(timestr).setValue(post)
+                dbRef.child("Posts").child(timestr).setValue(post)
+                Toast.makeText(applicationContext,"Post added",Toast.LENGTH_LONG).show()
+                finish()
+            }
+           else{
+                Toast.makeText(applicationContext,"Select Post Image",Toast.LENGTH_LONG).show()
+            }
         }
 
     }
@@ -97,15 +105,13 @@ class AddPostsActivity : AppCompatActivity() {
         if (requestCode == Pick_image && resultCode == RESULT_OK && data != null) {
             val resultUri: Uri = data.data!!
             uploadImageToFirebase(resultUri)
-
-            profileImageView.setImageURI(resultUri)
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
     private fun uploadImageToFirebase(imageUri: Uri) {
         val fileRef: StorageReference =
-            storageReference.child("users/" +"post"+ timestr + "post.jpg")
+            storageReference.child("posts/" +"post"+ timestr + "post.jpg")
 
         // Load the image into a Bitmap
         val bitmap: Bitmap
@@ -132,7 +138,7 @@ class AddPostsActivity : AppCompatActivity() {
             fileRef.downloadUrl.addOnSuccessListener { uri ->
                 purl = uri.toString()
 
-                Glide.with(applicationContext).load(purl).into(profileImageView)
+                Glide.with(applicationContext).load(purl).into(postImageView)
             }
         }.addOnFailureListener { // Handle the failure to upload
             Toast.makeText(applicationContext, "Failed.", Toast.LENGTH_LONG).show()
