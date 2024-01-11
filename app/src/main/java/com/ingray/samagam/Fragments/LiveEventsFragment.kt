@@ -138,8 +138,7 @@ class LiveEventsFragment : Fragment() {
 
                     }
 
-                    else if (event != null && event.event_date == currentDate && event.event_endtime<=currentTime){
-                        Toast.makeText(view.context,"Reached",Toast.LENGTH_SHORT).show()
+                    else if (event != null && event.event_date == currentDate && event.event_endtime<currentTime){
                         eventSnapshot.ref.removeValue()
                     }
                 }
