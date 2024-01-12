@@ -136,7 +136,7 @@
                             android:textSize="20dp"
                             android:layout_marginTop="10dp"
                             android:textColor="#9C27B0"
-                            app:drawableStartCompat="@drawable/love" />
+                            app:drawableStartCompat="@drawable/red_heart" />
                         <TextView
                             android:id="@+id/share"
                             android:layout_width="wrap_content"
