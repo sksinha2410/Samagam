@@ -131,6 +131,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/event_colourfull_backgroud"
                     android:text="Add Event"
+                    android:layout_marginBottom="5dp"
                     android:textSize="@dimen/_20sdp"
                     android:paddingHorizontal="@dimen/_5sdp"
                     android:paddingVertical="@dimen/_2sdp"
