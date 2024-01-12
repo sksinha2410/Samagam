@@ -62,9 +62,13 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
         likedByRef!!.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-                    if (snapshot.hasChild(userId) && snapshot.child(userId).getValue(Boolean::class.java) == true){
-                        holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_heart,0,0,0)
+                    if (snapshot.child(userId).exists()){
+                        var b = snapshot.child(userId).getValue(Boolean::class.java)
+                        if (snapshot.hasChild(userId) && b.toString() == "true"){
+                            holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_heart,0,0,0)
+                        }
                     }
+
                 }
             }
 
