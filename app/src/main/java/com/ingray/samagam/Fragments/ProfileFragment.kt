@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -52,6 +53,7 @@ class ProfileFragment : Fragment() {
     var storageReference = FirebaseStorage.getInstance().reference
     lateinit var purl:String
     lateinit var admin:String
+    private lateinit var progress: ProgressBar
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,6 +61,7 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
        view = inflater.inflate(R.layout.fragment_profile, container, false)
         callById()
+        progress.visibility = View.INVISIBLE
         logout.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(
@@ -77,8 +80,13 @@ class ProfileFragment : Fragment() {
                     if (admin == "1"){
                         addEvent.visibility = View.VISIBLE
                     }
-                    Glide.with(view.context).load(us.purl).into(profileImage)
-                }
+
+                    if (us.purl.isEmpty()){
+                        profileImage.setImageResource(R.drawable.add_photo)
+                    }else{
+                        Glide.with(view.context).load(us.purl).into(profileImage)
+                    }
+             }
             }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -118,8 +126,8 @@ class ProfileFragment : Fragment() {
 
         if (requestCode == Pick_image && resultCode == RESULT_OK && data != null) {
             val resultUri: Uri = data.data!!
+            progress.visibility = View.VISIBLE
             uploadImageToFirebase(resultUri)
-
             profileImage.setImageURI(resultUri)
         }
     }
@@ -166,9 +174,11 @@ class ProfileFragment : Fragment() {
                 } catch (e: Exception) {
                 }
                 Glide.with(view.context).load(purl).into(profileImage)
+                progress.visibility = View.INVISIBLE
             }
         }.addOnFailureListener { // Handle the failure to upload
             Toast.makeText(view.context, "Failed.", Toast.LENGTH_LONG).show()
+            progress.visibility = View.INVISIBLE
         }
     }
 
@@ -180,6 +190,7 @@ class ProfileFragment : Fragment() {
         recyclerPost=view.findViewById(R.id.profile_recycler)
         logout = view.findViewById(R.id.logout)
         addPost = view.findViewById(R.id.addPost)
+        progress =view.findViewById(R.id.sale_progressBar)
     }
 
 

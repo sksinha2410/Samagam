@@ -13,8 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        app:cardMaxElevation="@dimen/_20sdp"
-        >
+        app:cardMaxElevation="@dimen/_20sdp">
+
+        <ProgressBar
+            android:id="@+id/sale_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:visibility="visible"
+            android:theme="@style/progressBar"
+            android:layout_gravity="center"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,9 +34,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@color/black"
-                android:scaleType="centerCrop"
-                />
+                android:scaleType="centerCrop"/>
 
             <TextView
                 android:id="@+id/tv_title"
@@ -46,8 +52,7 @@
                 android:textSize="16sp"
                 android:textColor="@color/red"
                 android:textStyle="bold"
-                android:layout_marginTop="@dimen/_4sdp"
-                />
+                android:layout_marginTop="@dimen/_4sdp"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

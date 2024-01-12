@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -24,6 +25,7 @@ class ClubsEventAdapter(options: FirebaseRecyclerOptions<Events?>) :
         position: Int,
         model: Events
     ) {
+        holder.progress.visibility = View.VISIBLE
         holder.event_name.setText(model.event_name)
         holder.date.setText(model.event_date)
         holder.time.setText(model.event_starttime)
@@ -69,7 +71,7 @@ class ClubsEventAdapter(options: FirebaseRecyclerOptions<Events?>) :
         var date:TextView
         var time:TextView
         var venue:TextView
-
+        var progress:ProgressBar
 
         init {
             posterImage =innerView.findViewById(R.id.event_poster)
@@ -79,6 +81,7 @@ class ClubsEventAdapter(options: FirebaseRecyclerOptions<Events?>) :
             date = innerView.findViewById(R.id.date)
             time = innerView.findViewById(R.id.time)
             venue = innerView.findViewById(R.id.venue)
+            progress=innerView.findViewById(R.id.sale_progressBar)
         }
     }
 }

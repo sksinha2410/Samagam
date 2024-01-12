@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -61,6 +62,7 @@ class AddEventsActivity : AppCompatActivity() {
     val Pick_image=1
     var storageReference = FirebaseStorage.getInstance().reference
     lateinit var purl:String
+    private lateinit var progress:ProgressBar
 
     private var startTime: Calendar = Calendar.getInstance()
     private var endTime: Calendar = Calendar.getInstance()
@@ -69,6 +71,7 @@ class AddEventsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_events)
         callById()
+        progress.visibility = View.INVISIBLE
         ev= Events()
         getItemFromSpinner()
         callOnClick()
@@ -116,6 +119,7 @@ class AddEventsActivity : AppCompatActivity() {
 
         if (requestCode == Pick_image && resultCode == RESULT_OK && data != null) {
             val resultUri: Uri = data.data!!
+            progress.visibility = View.VISIBLE
             uploadImageToFirebase(resultUri)
 
             eventPoster.setImageURI(resultUri)
@@ -157,9 +161,11 @@ class AddEventsActivity : AppCompatActivity() {
                 purl = uri.toString()
 
                 Glide.with(applicationContext).load(purl).into(eventPoster)
+                progress.visibility = View.INVISIBLE
             }
         }.addOnFailureListener { // Handle the failure to upload
             Toast.makeText(applicationContext, "Failed.", Toast.LENGTH_LONG).show()
+            progress.visibility = View.INVISIBLE
         }
     }
 
@@ -306,5 +312,6 @@ class AddEventsActivity : AppCompatActivity() {
         btn_submit=findViewById(R.id.btn_submit)
         spinner=findViewById(R.id.spinner)
         eventPoster=findViewById(R.id.event_poster)
+        progress = findViewById(R.id.sale_progressBar)
     }
 }

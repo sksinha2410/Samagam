@@ -41,19 +41,7 @@
                 android:layout_gravity="center"
                 />
 
-
         </androidx.cardview.widget.CardView>
-
-
-
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    
 
 </FrameLayout>

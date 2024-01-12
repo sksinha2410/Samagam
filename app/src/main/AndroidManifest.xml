@@ -19,9 +19,6 @@
             android:name=".Activity.AddEventsActivity"
             android:exported="false" />
         <activity
-            android:name=".Tester"
-            android:exported="true"></activity>
-        <activity
             android:name=".Activity.AddPostsActivity"
             android:exported="false" />
         <activity
@@ -36,9 +33,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activity.OtherDetailsActivity"
-            android:exported="false" />
         <activity
             android:name=".Activity.SignupActivity"
             android:exported="false" />
