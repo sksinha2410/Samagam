@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -29,6 +30,7 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
 
     private var dbRef:DatabaseReference = FirebaseDatabase.getInstance().reference.child("Posts")
     private val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    private var repRef = FirebaseDatabase.getInstance().reference.child("ReportedPost")
 
 
     override fun onBindViewHolder(
@@ -82,6 +84,11 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
             handleLikeButtonClick(holder,model,likedByRef)
         }
 
+        holder.report.setOnClickListener{
+            repRef.child(model.postId).setValue(model)
+            Toast.makeText(holder.report.context,"Report sent successfully", Toast.LENGTH_LONG).show()
+        }
+
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -97,6 +104,7 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
         var username:TextView
         var time:TextView
         var likes:TextView
+        var report:ImageView
 
         init {
             profileImage = innerView.findViewById(R.id.profileImage)
@@ -104,7 +112,7 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
             username = innerView.findViewById(R.id.username)
             time = innerView.findViewById(R.id.time)
             likes = innerView.findViewById(R.id.upvote)
-
+            report= innerView.findViewById(R.id.report)
         }
     }
 

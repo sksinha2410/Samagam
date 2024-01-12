@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -31,6 +32,7 @@ import com.google.firebase.storage.StorageReference
 import com.ingray.samagam.Activity.AddEventsActivity
 import com.ingray.samagam.Activity.AddPostsActivity
 import com.ingray.samagam.Activity.LoginActivity
+import com.ingray.samagam.Activity.ReportedPost
 import com.ingray.samagam.Adapters.ProfilePostAdapter
 import com.ingray.samagam.DataClass.Posts
 import com.ingray.samagam.DataClass.Users
@@ -54,6 +56,7 @@ class ProfileFragment : Fragment() {
     lateinit var purl:String
     lateinit var admin:String
     private lateinit var progress: ProgressBar
+    private lateinit var report:TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -79,6 +82,7 @@ class ProfileFragment : Fragment() {
                     admin = us.userType
                     if (admin == "1"){
                         addEvent.visibility = View.VISIBLE
+                        report.visibility =View.VISIBLE
                     }
 
                     if (us.purl.isEmpty()){
@@ -110,6 +114,10 @@ class ProfileFragment : Fragment() {
 
         addEvent.setOnClickListener{
             val intent = Intent(view.context,AddEventsActivity::class.java)
+            view.context.startActivity(intent)
+        }
+        report.setOnClickListener{
+            val intent = Intent(view.context,ReportedPost::class.java)
             view.context.startActivity(intent)
         }
         return view
@@ -182,7 +190,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-
     private fun callById() {
         profileImage = view.findViewById(R.id.profileImage)
         profileName = view.findViewById(R.id.profileName)
@@ -191,7 +198,6 @@ class ProfileFragment : Fragment() {
         logout = view.findViewById(R.id.logout)
         addPost = view.findViewById(R.id.addPost)
         progress =view.findViewById(R.id.sale_progressBar)
+        report=view.findViewById(R.id.allReports)
     }
-
-
 }

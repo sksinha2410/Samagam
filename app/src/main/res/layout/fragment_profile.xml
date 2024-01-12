@@ -137,6 +137,19 @@
                     android:layout_gravity="center"
                     android:textColor="@color/black"/>
 
+                <TextView
+                    android:id="@+id/allReports"
+                    android:layout_width="wrap_content"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/event_colourfull_backgroud"
+                    android:text="See Reported Feed"
+                    android:textSize="@dimen/_20sdp"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"/>
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
