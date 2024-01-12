@@ -29,7 +29,7 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
 
     private var dbRef:DatabaseReference = FirebaseDatabase.getInstance().reference.child("Posts")
     private val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
-     var likedByRef: DatabaseReference? = null
+
 
     override fun onBindViewHolder(
         holder: userAdapterHolder,
@@ -57,7 +57,7 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
         holder.likes.setText(model.likes)
         Glide.with(holder.postImage.context).load(model.postUrl).into(holder.postImage)
         Glide.with(holder.profileImage.context).load(model.purl).into(holder.profileImage)
-        likedByRef= dbRef.child(model.postId).child("LikedBy")
+        var likedByRef= dbRef.child(model.postId).child("LikedBy")
 
         likedByRef!!.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -79,7 +79,7 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
         })
 
         holder.likes.setOnClickListener {
-            handleLikeButtonClick(holder,model)
+            handleLikeButtonClick(holder,model,likedByRef)
         }
 
     }
@@ -108,7 +108,7 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
         }
     }
 
-    private fun handleLikeButtonClick(holder: userAdapterHolder,model:Posts) {
+    private fun handleLikeButtonClick(holder: userAdapterHolder,model:Posts,likedByRef:DatabaseReference) {
         likedByRef!!.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
