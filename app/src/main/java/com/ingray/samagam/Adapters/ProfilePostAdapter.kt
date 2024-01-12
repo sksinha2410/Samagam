@@ -21,7 +21,6 @@ class ProfilePostAdapter (options: FirebaseRecyclerOptions<Posts?>) :
         position: Int,
         model: Posts
     ) {
-        Toast.makeText(holder.posterImage.context,"reached", Toast.LENGTH_SHORT).show()
         Glide.with(holder.posterImage.context).load(model.postUrl).into(holder.posterImage)
     }
     override fun onCreateViewHolder(

@@ -109,6 +109,4 @@ class LoginActivity : AppCompatActivity() {
         signin= findViewById(R.id.btnSignin)
         auth = Firebase.auth
     }
-
-
 }

@@ -25,7 +25,6 @@ class SplashScreenActivity : AppCompatActivity() {
             startActivity(mainIntent)
             finish()
         }
-
     }
 
     public override fun onStart() {
@@ -34,11 +33,6 @@ class SplashScreenActivity : AppCompatActivity() {
         val currentUser = Firebase.auth.currentUser
         if(FirebaseAuth.getInstance().currentUser?.isEmailVerified == true){
             if (currentUser != null) {
-                Toast.makeText(
-                    applicationContext,
-                    "Entered",
-                    Toast.LENGTH_SHORT
-                ).show()
                 var intent:Intent = Intent(this,MainActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -52,6 +46,4 @@ class SplashScreenActivity : AppCompatActivity() {
 
         }
     }
-
-
 }

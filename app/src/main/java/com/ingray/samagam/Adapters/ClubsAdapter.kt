@@ -53,5 +53,3 @@ class ClubsAdapter(options: FirebaseRecyclerOptions<Clubs?>) :
         }
     }
 }
-
-

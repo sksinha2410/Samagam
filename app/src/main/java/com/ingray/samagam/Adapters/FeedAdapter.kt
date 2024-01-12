@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.getValue
 import com.ingray.samagam.DataClass.Posts
 import com.ingray.samagam.R
 import de.hdodenhof.circleimageview.CircleImageView
@@ -58,7 +59,20 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
         Glide.with(holder.profileImage.context).load(model.purl).into(holder.profileImage)
         likedByRef= dbRef.child(model.postId).child("LikedBy")
 
+        likedByRef!!.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    if (snapshot.hasChild(userId) && snapshot.child(userId).getValue(Boolean::class.java) == true){
+                        holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_heart,0,0,0)
+                    }
+                }
+            }
 
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
 
         holder.likes.setOnClickListener {
             handleLikeButtonClick(holder,model)
