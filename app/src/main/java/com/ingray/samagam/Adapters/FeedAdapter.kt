@@ -128,7 +128,7 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
                             for (childSnapshot in dataSnapshot.children) {
                                 // Check if the value is true
                                 val value = childSnapshot.getValue(Boolean::class.java)
-                                if (value != null && value) {
+                                if (value != null && !value) {
                                     trueCount++
                                 }
                             }
