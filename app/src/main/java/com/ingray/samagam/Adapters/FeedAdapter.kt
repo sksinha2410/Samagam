@@ -1,5 +1,6 @@
 package com.ingray.samagam.Adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,18 +22,20 @@ import de.hdodenhof.circleimageview.CircleImageView
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
+
 class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
     FirebaseRecyclerAdapter<Posts?, FeedAdapter.userAdapterHolder?>(options) {
 
-        private var dbRef:DatabaseReference = FirebaseDatabase.getInstance().reference.child("Posts")
-        private val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        private var bool:Boolean = false
-        private lateinit var ref:DatabaseReference
+    private var dbRef:DatabaseReference = FirebaseDatabase.getInstance().reference.child("Posts")
+    private val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
+     var likedByRef: DatabaseReference? = null
+
     override fun onBindViewHolder(
         holder: userAdapterHolder,
         position: Int,
         model: Posts
     ) {
+
 
         holder.username.setText(model.username)
         val previousTimeMillis = model.time.toLong()
@@ -53,59 +56,14 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
         holder.likes.setText(model.likes)
         Glide.with(holder.postImage.context).load(model.postUrl).into(holder.postImage)
         Glide.with(holder.profileImage.context).load(model.purl).into(holder.profileImage)
+        likedByRef= dbRef.child(model.postId).child("LikedBy")
 
-        dbRef.child(model.time).child("LikedBy").addValueEventListener(object :ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (checkUser in snapshot.children){
-                    if(checkUser.exists()){
-                        val checkID = checkUser.child("userId").value.toString()
-                        if (checkID == userId){
-                            holder.likes.setCompoundDrawablesWithIntrinsicBounds(
-                                R.drawable.red_heart,
-                                0,
-                                0,
-                                0
-                            )
-                            bool=true
-                            ref = checkUser.ref
-                            break
-                        }
-                    }
-                }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
 
-        holder.likes.setOnClickListener{
-            var oldLikes =model.likes.toLong()
-            if (bool){
-                oldLikes -= 1
-                var map= hashMapOf<String,String>()
-                map.set("likes", oldLikes.toString())
-                dbRef.child(model.time).updateChildren(map as Map<String, Any>)
-                ref.removeValue()
-                bool=false
-                holder.likes.setCompoundDrawablesWithIntrinsicBounds(
-                    R.drawable.white_heart,
-                    0,
-                    0,
-                    0
-                )
-            }
-            else{
-                oldLikes += 1
-                var map= hashMapOf<String,String>()
-                map.set("likes", oldLikes.toString())
-                dbRef.child(model.time).updateChildren(map as Map<String, Any>)
-                var map2 = hashMapOf<String, String>()
-
-                map2.set("userId", userId)
-                dbRef.child(model.time).child("LikedBy").child(userId).setValue(map2)
-            }
+        holder.likes.setOnClickListener {
+            handleLikeButtonClick(holder,model)
         }
+
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -130,5 +88,53 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
             likes = innerView.findViewById(R.id.upvote)
 
         }
+    }
+
+    private fun handleLikeButtonClick(holder: userAdapterHolder,model:Posts) {
+        likedByRef!!.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+
+                if (dataSnapshot.hasChild(userId)) {
+                    // User has previously liked the post, toggle the value
+                    val currentLikeStatus = dataSnapshot.child(userId).getValue(Boolean::class.java)
+                    if (currentLikeStatus==true){
+                        holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.white_heart,0,0,0)
+                    }else{
+                        holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_heart,0,0,0)
+                    }
+                    likedByRef!!.child(userId).setValue(!(currentLikeStatus ?: false))
+                    Log.d("FirebaseDemo", "Like status toggled")
+
+                } else {
+                    // User is liking the post for the first time
+                    likedByRef!!.child(userId).setValue(true)
+                    Log.d("FirebaseDemo", "Liked for the first time")
+                    holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_heart,0,0,0)
+
+                }
+
+                var trueCount = 0
+
+                for (childSnapshot in dataSnapshot.children) {
+                    // Check if the value is true
+                    val value = childSnapshot.getValue(Boolean::class.java)
+                    if (value != null && !value) {
+                        trueCount++
+                    }
+                }
+
+                holder.likes.text = trueCount.toString()
+                dbRef.child(model.postId).child("likes").setValue(trueCount.toString())
+
+
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.e("FirebaseDemo", "Error updating like status: ${databaseError.message}")
+            }
+        })
+
     }
 }
