@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,11 +18,11 @@
         android:theme="@style/Theme.Samagam"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.AddEventsActivity"
+            android:name=".Activity.ReportedPost"
             android:exported="false" />
         <activity
-            android:name=".Tester"
-            android:exported="true"></activity>
+            android:name=".Activity.AddEventsActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.AddPostsActivity"
             android:exported="false" />
@@ -36,9 +38,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activity.OtherDetailsActivity"
-            android:exported="false" />
         <activity
             android:name=".Activity.SignupActivity"
             android:exported="false" />

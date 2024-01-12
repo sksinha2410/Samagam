@@ -9,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -54,7 +56,7 @@ class AddPostsActivity : AppCompatActivity() {
 
     // Button
     private lateinit var submitButton: Button
-
+    private lateinit var progress:ProgressBar
     private var dbRef:DatabaseReference = FirebaseDatabase.getInstance().reference
     private var storageReference: StorageReference = FirebaseStorage.getInstance().reference
     private lateinit var userId:String
@@ -63,8 +65,8 @@ class AddPostsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_posts)
 
-
         callById()
+        progress.visibility = View.INVISIBLE
         assignUser()
         postImageView.setOnClickListener{
             openGallery()
@@ -104,6 +106,7 @@ class AddPostsActivity : AppCompatActivity() {
 
         if (requestCode == Pick_image && resultCode == RESULT_OK && data != null) {
             val resultUri: Uri = data.data!!
+            progress.visibility = View.VISIBLE
             uploadImageToFirebase(resultUri)
         }
     }
@@ -139,9 +142,11 @@ class AddPostsActivity : AppCompatActivity() {
                 purl = uri.toString()
 
                 Glide.with(applicationContext).load(purl).into(postImageView)
+                progress.visibility = View.INVISIBLE
             }
         }.addOnFailureListener { // Handle the failure to upload
             Toast.makeText(applicationContext, "Failed.", Toast.LENGTH_LONG).show()
+            progress.visibility = View.INVISIBLE
         }
     }
 
@@ -176,6 +181,7 @@ class AddPostsActivity : AppCompatActivity() {
         // Initialize ImageViews
         profileImageView = findViewById(R.id.profileImage)
         postImageView = findViewById(R.id.postImage)
+        progress=findViewById(R.id.sale_progressBar)
 
         // Initialize Spinner
         spinner = findViewById(R.id.spinner)

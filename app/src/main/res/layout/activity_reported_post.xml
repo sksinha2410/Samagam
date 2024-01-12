@@ -47,16 +47,15 @@
 
     </LinearLayout>
     <TextView
-        android:id="@+id/clubName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/_35sdp"
         android:layout_gravity="center"
-        android:text="ClubName"
+        android:text="Reported Posts"
         android:textColor="#FFFFFF"
         android:fontFamily="@font/londrina_outline"/>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/clubs_event_Recycler"
+        android:id="@+id/rep_Recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="1000dp"

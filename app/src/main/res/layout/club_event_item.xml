@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-   >
+    xmlns:tools="http://schemas.android.com/tools">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,12 +15,30 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/event_poster"
+
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:scaleType="centerCrop"
                 android:layout_height="@dimen/_200sdp"
-                android:src="@color/black"/>
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="8dp">
+                <ProgressBar
+                    android:id="@+id/sale_progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:theme="@style/progressBar"
+                    tools:visibility="visible" />
+                <ImageView
+                    android:id="@+id/event_poster"
+                    android:layout_width="match_parent"
+                    android:scaleType="centerCrop"
+                    android:layout_height="@dimen/_200sdp"/>
+
+
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp">

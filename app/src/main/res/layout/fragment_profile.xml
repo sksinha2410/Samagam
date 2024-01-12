@@ -97,14 +97,21 @@
                         android:layout_gravity="center"
                         android:background="@drawable/circle_stroke"
                         android:elevation="@dimen/_30sdp"
-                        android:src="@color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
-
-
+                    <ProgressBar
+                        android:id="@+id/sale_progressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:theme="@style/progressBar"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:visibility="visible" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -124,6 +131,20 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/event_colourfull_backgroud"
                     android:text="Add Event"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="@dimen/_20sdp"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/allReports"
+                    android:layout_width="wrap_content"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/event_colourfull_backgroud"
+                    android:text="See Reported Feed"
                     android:textSize="@dimen/_20sdp"
                     android:paddingHorizontal="@dimen/_5sdp"
                     android:paddingVertical="@dimen/_2sdp"

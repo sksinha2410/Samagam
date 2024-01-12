@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerOptions
@@ -16,6 +17,7 @@ class Fragment_Home : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var clubsAdapter: ClubsAdapter
+    private lateinit var progress: ProgressBar
 
 
     override fun onCreateView(
@@ -24,6 +26,7 @@ class Fragment_Home : Fragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment__home, container, false)
         recyclerView = view.findViewById(R.id.clubs_Recycler)
+        progress =view.findViewById(R.id.sale_progressBar)
         recyclerView.itemAnimator = null
 
         val options: FirebaseRecyclerOptions<Clubs?> =
@@ -37,6 +40,7 @@ class Fragment_Home : Fragment() {
         recyclerView.adapter = clubsAdapter
         clubsAdapter.startListening()
 
+        progress.visibility = View.INVISIBLE
         return view
     }
 }
