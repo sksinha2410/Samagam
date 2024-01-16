@@ -58,6 +58,11 @@
                         android:textColor="#DC8DFA"
                         android:text="12-01-2023"/>
 
+                    <ImageView
+                        android:id="@+id/poster"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
 
                     <TextView
                         style="@style/Headline6"
