@@ -21,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var email:EditText
     private lateinit var password:EditText
     private lateinit var signup:TextView
+    private lateinit var reset:TextView
     private lateinit var signin:Button
     private lateinit var auth: FirebaseAuth
     lateinit var sEmail:String
@@ -30,7 +31,15 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+
+
+
         callVariablesById()
+        val tent = intent
+        val cEmail = tent.getStringExtra("email").toString()
+        if(cEmail!="null"){
+            email.setText(cEmail)
+        }
 
         callOnClickListeners()
 
@@ -72,6 +81,10 @@ class LoginActivity : AppCompatActivity() {
                     }
             }
         }
+        reset.setOnClickListener{
+            var intent = Intent(this, ForgetPasswordActivity::class.java)
+            startActivity(intent)
+        }
 
         signup.setOnClickListener{
             var intent = Intent(this, SignupActivity::class.java)
@@ -105,6 +118,7 @@ class LoginActivity : AppCompatActivity() {
     private fun callVariablesById() {
         email = findViewById(R.id.etEmail)
         password = findViewById(R.id.etPass)
+        reset = findViewById(R.id.resetPass)
         signup = findViewById(R.id.redSignup)
         signin= findViewById(R.id.btnSignin)
         auth = Firebase.auth
