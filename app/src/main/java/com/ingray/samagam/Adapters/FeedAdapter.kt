@@ -29,6 +29,7 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
     FirebaseRecyclerAdapter<Posts?, FeedAdapter.userAdapterHolder?>(options) {
 
     private var dbRef:DatabaseReference = FirebaseDatabase.getInstance().reference.child("Posts")
+    private var userRef:DatabaseReference = FirebaseDatabase.getInstance().reference.child("Users")
     private val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
     private var repRef = FirebaseDatabase.getInstance().reference.child("ReportedPost")
 
@@ -66,7 +67,7 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
                 if (snapshot.exists()){
                     if (snapshot.child(userId).exists()){
                         var b = snapshot.child(userId).getValue(Boolean::class.java)
-                        if (snapshot.hasChild(userId) && b.toString() == "true"){
+                        if (snapshot.hasChild(userId) && b == true){
                             holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_heart,0,0,0)
                         }
                     }
@@ -124,33 +125,55 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
                 if (dataSnapshot.hasChild(userId)) {
                     // User has previously liked the post, toggle the value
                     val currentLikeStatus = dataSnapshot.child(userId).getValue(Boolean::class.java)
-                    if (currentLikeStatus==true){
-                        holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.white_heart,0,0,0)
-                    }else{
-                        holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_heart,0,0,0)
-                    }
-                    likedByRef!!.child(userId).setValue(!(currentLikeStatus ?: false)).addOnCompleteListener{
+                    likedByRef.child(userId).setValue(!currentLikeStatus!!).addOnCompleteListener {
                         if (it.isSuccessful){
-                            var trueCount = 0
-
-                            for (childSnapshot in dataSnapshot.children) {
-                                // Check if the value is true
-                                val value = childSnapshot.getValue(Boolean::class.java)
-                                if (value != null && !value) {
-                                    trueCount++
-                                }
+                            if (!currentLikeStatus) {
+                                holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_heart,0,0,0)
+                            }else{
+                                holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.white_heart,0,0,0)
                             }
 
-                            holder.likes.text = trueCount.toString()
-                            dbRef.child(model.postId).child("likes").setValue(trueCount.toString())
+                            likedByRef.addListenerForSingleValueEvent(object :ValueEventListener{
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    if(snapshot.exists()){
+                                        var count = 0;
+                                        for(snapshots in snapshot.children){
+                                            if(snapshots.exists()){
+                                                val bool = snapshots.getValue(Boolean::class.java)
+                                                if(bool == true){
+                                                    count+=1
+                                                }
+
+                                            }
+                                        }
+                                        dbRef.child(model.postId).child("likes").setValue(count.toString())
+                                        userRef.child(model.userId).child("Posts").child(model.postId).child("likes").setValue(count.toString())
+
+                                    }
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+                                    TODO("Not yet implemented")
+                                }
+                            })
                         }
                     }
+
+
+
+
+
                     Log.d("FirebaseDemo", "Like status toggled")
 
-                } else {
+                }
+
+                else {
                     // User is liking the post for the first time
                     likedByRef!!.child(userId).setValue(true).addOnCompleteListener {
-                        dbRef.child(model.postId).child("likes").setValue("1")
+
+                        var count = (model.likes.toLong()+1).toString()
+                        dbRef.child(model.postId).child("likes").setValue(count)
+                        userRef.child(model.userId).child("Posts").child(model.postId).child("likes").setValue(count.toString())
                     }
                     Log.d("FirebaseDemo", "Liked for the first time")
                     holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_heart,0,0,0)
