@@ -1,5 +1,6 @@
 package com.ingray.samagam.Adapters
 
+import android.app.AlertDialog
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -86,8 +87,24 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
         }
 
         holder.report.setOnClickListener{
-            repRef.child(model.postId).setValue(model)
-            Toast.makeText(holder.report.context,"Report sent successfully", Toast.LENGTH_LONG).show()
+
+            val builder: AlertDialog.Builder = AlertDialog.Builder(holder.report.context)
+            builder
+                .setMessage("Report of Post will be sent for Review ")
+                .setTitle("Do You surely want to report the post?")
+                .setPositiveButton("Yes") { dialog, which ->
+
+                    repRef.child(model.postId).setValue(model)
+                    Toast.makeText(holder.report.context,"Report sent successfully", Toast.LENGTH_LONG).show()
+
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    // Do something else.
+                }
+
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
         }
 
     }
