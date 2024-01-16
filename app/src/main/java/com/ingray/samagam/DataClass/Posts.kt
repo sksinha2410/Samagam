@@ -7,5 +7,6 @@ data class Posts(
     var username: String="",
     var userId: String="",
     var likes: String="",
-    var time:String=""
+    var time:String="",
+    var event_name:String="",
 )
