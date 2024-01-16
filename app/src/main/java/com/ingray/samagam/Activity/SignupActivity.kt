@@ -88,6 +88,7 @@ class SignupActivity : AppCompatActivity() {
                                         this,
                                         LoginActivity::class.java
                                     )
+                                    intent.putExtra("email",sEmail)
                                     startActivity(intent)
                                     finish()
                                 } else {
