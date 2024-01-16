@@ -6,12 +6,14 @@ import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.ingray.samagam.DataClass.Events
 
 class CustomDialog(private val context: Context, private val model: Events) {
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "MissingInflatedId")
     fun showDialog() {
         val dialogBuilder = AlertDialog.Builder(context)
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -21,6 +23,7 @@ class CustomDialog(private val context: Context, private val model: Events) {
         val eventName = dialogView.findViewById<TextView>(R.id.event_name)
         val eventType = dialogView.findViewById<TextView>(R.id.event_type)
         val time = dialogView.findViewById<TextView>(R.id.time)
+        val poster = dialogView.findViewById<ImageView>(R.id.poster)
         val description = dialogView.findViewById<TextView>(R.id.description)
         val regLink = dialogView.findViewById<TextView>(R.id.reg_link)
         val brochureLink = dialogView.findViewById<TextView>(R.id.brochure_link)
@@ -35,6 +38,7 @@ class CustomDialog(private val context: Context, private val model: Events) {
         description.text = model.description
         regLink.text = model.reg_link
         brochureLink.text = model.brochure_link
+        Glide.with(dialogView.context).load(model.purl).into(poster)
 
         dialogBuilder.setView(dialogView)
 
