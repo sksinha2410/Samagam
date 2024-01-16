@@ -38,6 +38,7 @@ import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class AddEventsActivity : AppCompatActivity() {
@@ -214,6 +215,24 @@ class AddEventsActivity : AppCompatActivity() {
         ev.event_venue=venue.text.toString()
         ev.description=description.text.toString()
 
+        val resultInMillis = convertDateTimeToMillis(date.text.toString(), start_time.text.toString())
+
+        ev.event_date_time = resultInMillis
+
+
+
+    }
+    fun convertDateTimeToMillis(eventDate: String, eventTime: String): Long {
+        val dateTimeString = "$eventDate $eventTime"
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+
+        val calendar = Calendar.getInstance()
+        calendar.time = dateFormat.parse(dateTimeString) ?: Date(0)
+
+        // Set milliseconds to zero
+        calendar.set(Calendar.MILLISECOND, 0)
+
+        return calendar.timeInMillis
     }
 
     private fun getItemFromSpinner() {
