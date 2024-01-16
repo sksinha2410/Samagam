@@ -70,6 +70,8 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
                         var b = snapshot.child(userId).getValue(Boolean::class.java)
                         if (snapshot.hasChild(userId) && b == true){
                             holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_heart,0,0,0)
+                        }else{
+                            holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.white_heart,0,0,0)
                         }
                     }
 
