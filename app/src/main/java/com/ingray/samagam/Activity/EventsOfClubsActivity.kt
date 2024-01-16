@@ -54,7 +54,7 @@ class EventsOfClubsActivity : AppCompatActivity() {
         val options: FirebaseRecyclerOptions<Events?> =
             FirebaseRecyclerOptions.Builder<Events>()
                 .setQuery(
-                    FirebaseDatabase.getInstance().reference.child("Clubs").child(name).child("Events"),
+                    FirebaseDatabase.getInstance().reference.child("Clubs").child(name).child("Events").orderByChild("event_date_time").limitToFirst(3),
                     Events::class.java
                 )
                 .build()
