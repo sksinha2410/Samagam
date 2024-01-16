@@ -71,6 +71,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:ems="10"
+                android:paddingBottom="@dimen/_10sdp"
                 android:textColor="@color/white"
                 android:background="@drawable/input_box"
                 android:hint="Password"
@@ -79,8 +80,23 @@
                 android:textSize="22sp"
                 android:paddingStart="23dp"
                 android:paddingEnd="23dp"
-                android:paddingBottom="10dp"
                 android:paddingTop="10dp"/>
+                <TextView
+                    android:id="@+id/resetPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="end"
+                    android:text="Forget password?"
+                    android:paddingEnd="20dp"
+                    android:textColor="#C3A7FE"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:shadowColor="#000000"
+                    android:shadowDx="6.5"
+                    android:shadowDy="6.5"
+                    android:shadowRadius="1.6"/>
 
                 <Button
                     android:id="@+id/btnSignin"
