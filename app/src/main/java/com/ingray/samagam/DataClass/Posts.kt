@@ -9,4 +9,5 @@ data class Posts(
     var likes: String="",
     var time:String="",
     var event_name:String="",
+    var hrsAgo:Long=0
 )
