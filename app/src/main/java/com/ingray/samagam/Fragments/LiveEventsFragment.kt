@@ -81,7 +81,7 @@ class LiveEventsFragment : Fragment() {
                 eventAdapterUpcoming.startListening()
 
                 val options3:FirebaseRecyclerOptions<Events?> = FirebaseRecyclerOptions.Builder<Events>().
-                setQuery(dataBaseRef.child("PastEvents").orderByChild("event_date_time"), Events::class.java).build()
+                setQuery(dataBaseRef.child("PastEvents").orderByChild("hrsAgo"), Events::class.java).build()
                 eventAdapterPast = EventAdapterPast(options3)
                 pastEventRecycler.adapter = eventAdapterPast
                 eventAdapterPast.startListening()

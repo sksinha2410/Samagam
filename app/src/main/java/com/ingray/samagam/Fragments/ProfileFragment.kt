@@ -97,9 +97,12 @@ class ProfileFragment : Fragment() {
                     us = snapshot.getValue(Users::class.java)!!
                     profileName.setText(us.name)
                     admin = us.userType
-                    if (admin == "1"){
+                    if (admin == "0"){
+                        addEvent.visibility = View.GONE
+                        report.visibility =View.GONE
+                    }else{
                         addEvent.visibility = View.VISIBLE
-                        report.visibility =View.VISIBLE
+                        report.visibility = View.VISIBLE
                     }
 
                     if (us.purl.isEmpty()){
