@@ -100,9 +100,13 @@ class ProfileFragment : Fragment() {
                     if (admin == "0"){
                         addEvent.visibility = View.GONE
                         report.visibility =View.GONE
-                    }else{
+                    }else if(admin =="1"){
                         addEvent.visibility = View.VISIBLE
                         report.visibility = View.VISIBLE
+                    }
+                    else{
+                        addEvent.visibility = View.VISIBLE
+                        report.visibility = View.GONE
                     }
 
                     if (us.purl.isEmpty()){
