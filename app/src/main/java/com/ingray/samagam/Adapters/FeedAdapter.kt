@@ -48,8 +48,12 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
         val currentTimeMillis = Calendar.getInstance().timeInMillis
 
         val timeDifferenceMillis = currentTimeMillis - previousTimeMillis
-
         val hoursDifference = TimeUnit.MILLISECONDS.toHours(timeDifferenceMillis)
+
+        var map = HashMap<String, Long>()
+        map.put("hrsAgo",hoursDifference)
+        dbRef.child(model.postId).updateChildren(map as Map<String, Any>)
+
 
         if (hoursDifference/24 >= 1){
             holder.time.text = (hoursDifference/24).toString() + " days ago"
