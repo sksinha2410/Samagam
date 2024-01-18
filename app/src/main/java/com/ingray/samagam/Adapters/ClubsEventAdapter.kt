@@ -17,6 +17,15 @@ import com.ingray.samagam.DataClass.Events
 import com.ingray.samagam.R
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.ingray.samagam.CustomDialog
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class ClubsEventAdapter(options: FirebaseRecyclerOptions<Events?>) :
     FirebaseRecyclerAdapter<Events?, ClubsEventAdapter.userAdapterHolder?>(options) {
@@ -31,6 +40,12 @@ class ClubsEventAdapter(options: FirebaseRecyclerOptions<Events?>) :
         holder.time.setText(model.event_starttime)
         holder.venue.setText(model.event_venue)
         Glide.with(holder.posterImage.context).load(model.purl).into(holder.posterImage)
+
+
+        holder.posterImage.setOnClickListener{
+            val customDialog = CustomDialog(holder.itemView.context, model)
+            customDialog.showDialog()
+        }
 
         holder.reg_link.setOnClickListener {
             val xmlLink = model.reg_link
@@ -84,4 +99,5 @@ class ClubsEventAdapter(options: FirebaseRecyclerOptions<Events?>) :
             progress=innerView.findViewById(R.id.sale_progressBar)
         }
     }
+
 }

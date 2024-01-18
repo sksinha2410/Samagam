@@ -33,11 +33,13 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.ingray.samagam.DataClass.Events
+import com.ingray.samagam.DataClass.Users
 import com.ingray.samagam.R
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class AddEventsActivity : AppCompatActivity() {
@@ -47,6 +49,7 @@ class AddEventsActivity : AppCompatActivity() {
     private lateinit var brochure_link: EditText
     private lateinit var start_time: TextView
     private lateinit var end_time: TextView
+    private lateinit var clubName: TextView
     private lateinit var date: TextView
     private lateinit var eventPoster: ImageView
     private lateinit var venue: EditText
@@ -71,10 +74,38 @@ class AddEventsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_events)
         callById()
+        spinner.visibility = View.GONE
         progress.visibility = View.INVISIBLE
         ev= Events()
         getItemFromSpinner()
         callOnClick()
+
+        deRef.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var us : Users
+                if(snapshot.exists()){
+                    us = snapshot.getValue(Users::class.java)!!
+                    var admin = us.userType
+                    if (admin == "1"){
+                        spinner.visibility = View.VISIBLE
+                        clubName.visibility = View.GONE
+                    }else{
+                        var club = us.userType
+                        spinner.visibility = View.GONE
+                        clubName.visibility = View.VISIBLE
+                        clubName.text = club
+                        selectedItem = club
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle errors here
+                Log.e("Firebase", "Error fetching events: ${error.message}")
+            }
+        })
+
+
     }
 
     private fun callOnClick() {
@@ -214,10 +245,28 @@ class AddEventsActivity : AppCompatActivity() {
         ev.event_venue=venue.text.toString()
         ev.description=description.text.toString()
 
+        val resultInMillis = convertDateTimeToMillis(date.text.toString(), start_time.text.toString())
+
+        ev.event_date_time = resultInMillis
+
+
+
+    }
+    fun convertDateTimeToMillis(eventDate: String, eventTime: String): Long {
+        val dateTimeString = "$eventDate $eventTime"
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+
+        val calendar = Calendar.getInstance()
+        calendar.time = dateFormat.parse(dateTimeString) ?: Date(0)
+
+        // Set milliseconds to zero
+        calendar.set(Calendar.MILLISECOND, 0)
+
+        return calendar.timeInMillis
     }
 
     private fun getItemFromSpinner() {
-        val data= arrayOf("SAC","Expresso","IEEE","Natvansh","ASME","Saptak","Think India","Vista","Total Chaos","E-Cell","GDSC","Hackslash","Tesla","DesCo","ASCE","Robotics","GYB","Incubation Centre","Others")
+        val data= arrayOf("SAC","Expresso","IEEE","Natvansh","ASME","Saptak","Think India","Vista","Total Chaos","E-Cell","GDSC","Hackslash","Tesla","DesCo","ASCE","Robotics","GYB","Incubation Centre","Others","Chess")
         val adapt=ArrayAdapter(this,android.R.layout.simple_spinner_item,data)
         adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter=adapt
@@ -311,6 +360,7 @@ class AddEventsActivity : AppCompatActivity() {
         description=findViewById(R.id.description)
         btn_submit=findViewById(R.id.btn_submit)
         spinner=findViewById(R.id.spinner)
+        clubName=findViewById(R.id.clubName)
         eventPoster=findViewById(R.id.event_poster)
         progress = findViewById(R.id.sale_progressBar)
     }

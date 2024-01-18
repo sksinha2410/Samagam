@@ -69,19 +69,19 @@ class LiveEventsFragment : Fragment() {
                     }
                 }
                 val options:FirebaseRecyclerOptions<Events?> = FirebaseRecyclerOptions.Builder<Events>().
-                setQuery(dataBaseRef.child("Live"), Events::class.java).build()
+                setQuery(dataBaseRef.child("Live").orderByChild("event_date_time"), Events::class.java).build()
                 eventAdapter = EventAdapter(options)
                 liveEventRecycler.adapter = eventAdapter
                 eventAdapter.startListening()
 
                 val options2:FirebaseRecyclerOptions<Events?> = FirebaseRecyclerOptions.Builder<Events>().
-                setQuery(dataBaseRef.child("Upcoming"), Events::class.java).build()
+                setQuery(dataBaseRef.child("Upcoming").orderByChild("event_date_time"), Events::class.java).build()
                 eventAdapterUpcoming = EventAdapterUpcoming(options2)
                 upcomingEventRecycler.adapter = eventAdapterUpcoming
                 eventAdapterUpcoming.startListening()
 
                 val options3:FirebaseRecyclerOptions<Events?> = FirebaseRecyclerOptions.Builder<Events>().
-                setQuery(dataBaseRef.child("PastEvents"), Events::class.java).build()
+                setQuery(dataBaseRef.child("PastEvents").orderByChild("hrsAgo"), Events::class.java).build()
                 eventAdapterPast = EventAdapterPast(options3)
                 pastEventRecycler.adapter = eventAdapterPast
                 eventAdapterPast.startListening()

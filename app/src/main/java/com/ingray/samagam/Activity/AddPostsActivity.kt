@@ -11,6 +11,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Spinner
@@ -33,6 +34,7 @@ import com.ingray.samagam.R
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.util.Calendar
+import java.util.Locale
 
 class AddPostsActivity : AppCompatActivity() {
 
@@ -40,6 +42,7 @@ class AddPostsActivity : AppCompatActivity() {
     private lateinit var timeTextView: TextView
     private lateinit var upvoteTextView: TextView
     private lateinit var shareTextView: TextView
+    private lateinit var event_name: EditText
 
     // ImageViews
     private lateinit var profileImageView: CircleImageView
@@ -73,7 +76,7 @@ class AddPostsActivity : AppCompatActivity() {
 
         }
         submitButton.setOnClickListener{
-            if (!purl.isEmpty()){
+            if (purl.isNotEmpty() && event_name.text.toString().isNotEmpty()){
                 val post:Posts = Posts()
                 post.postId = timestr
                 post.postUrl= purl
@@ -82,6 +85,7 @@ class AddPostsActivity : AppCompatActivity() {
                 post.time = timestr
                 post.purl = prourl
                 post.userId = userId
+                post.event_name = event_name.text.toString().toLowerCase(Locale.ROOT)
 
                 dbRef.child("Users").child(userId).child("Posts").child(timestr).setValue(post)
                 dbRef.child("Posts").child(timestr).setValue(post)
@@ -89,7 +93,10 @@ class AddPostsActivity : AppCompatActivity() {
                 finish()
             }
            else{
-                Toast.makeText(applicationContext,"Select Post Image",Toast.LENGTH_LONG).show()
+               if(purl.isEmpty()){
+                Toast.makeText(applicationContext,"Select Post Image",Toast.LENGTH_LONG).show()}else{
+                   Toast.makeText(applicationContext,"Enter Event Name",Toast.LENGTH_LONG).show()
+                }
             }
         }
 
@@ -185,6 +192,7 @@ class AddPostsActivity : AppCompatActivity() {
 
         // Initialize Spinner
         spinner = findViewById(R.id.spinner)
+        event_name = findViewById(R.id.event_name)
 
         // Initialize Button
         submitButton = findViewById(R.id.btn_submit)

@@ -12,16 +12,24 @@ import com.ingray.samagam.DataClass.Events
 import com.ingray.samagam.R
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.ingray.samagam.DataClass.Posts
 
 class ProfilePostAdapter (options: FirebaseRecyclerOptions<Posts?>) :
     FirebaseRecyclerAdapter<Posts?, ProfilePostAdapter .userAdapterHolder?>(options) {
+
+        private var likeRef = FirebaseDatabase.getInstance().reference.child("Posts")
     override fun onBindViewHolder(
         holder: userAdapterHolder,
         position: Int,
         model: Posts
     ) {
         Glide.with(holder.posterImage.context).load(model.postUrl).into(holder.posterImage)
+        holder.likes.setText(model.likes)
+
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -33,10 +41,12 @@ class ProfilePostAdapter (options: FirebaseRecyclerOptions<Posts?>) :
 
     inner class userAdapterHolder(innerView:View):RecyclerView.ViewHolder(innerView) {
         var posterImage:ImageView
+        var likes:TextView
 
 
         init {
             posterImage =innerView.findViewById(R.id.image_post)
+            likes =innerView.findViewById(R.id.likes)
         }
     }
 }

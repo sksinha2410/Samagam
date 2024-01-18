@@ -1,6 +1,7 @@
 package com.ingray.samagam.Fragments
 
 import android.app.Activity.RESULT_OK
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
@@ -66,11 +67,27 @@ class ProfileFragment : Fragment() {
         callById()
         progress.visibility = View.INVISIBLE
         logout.setOnClickListener{
+            val builder: AlertDialog.Builder = AlertDialog.Builder(view.context)
+            builder
+
+                .setTitle("Do You surely want to logout?")
+                .setPositiveButton("Yes") { dialog, which ->
+
+                    val intent = Intent(
+                        activity, LoginActivity::class.java
+                    )
+                    startActivity(intent)
+                    Toast.makeText(view.context,"Logged Out", Toast.LENGTH_LONG).show()
+
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    // Do something else.
+                }
+
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
             FirebaseAuth.getInstance().signOut()
-            val intent = Intent(
-                activity, LoginActivity::class.java
-            )
-            startActivity(intent)
+
 
         }
         deRef.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
@@ -80,9 +97,16 @@ class ProfileFragment : Fragment() {
                     us = snapshot.getValue(Users::class.java)!!
                     profileName.setText(us.name)
                     admin = us.userType
-                    if (admin == "1"){
+                    if (admin == "0"){
+                        addEvent.visibility = View.GONE
+                        report.visibility =View.GONE
+                    }else if(admin =="1"){
                         addEvent.visibility = View.VISIBLE
-                        report.visibility =View.VISIBLE
+                        report.visibility = View.VISIBLE
+                    }
+                    else{
+                        addEvent.visibility = View.VISIBLE
+                        report.visibility = View.GONE
                     }
 
                     if (us.purl.isEmpty()){
