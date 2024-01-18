@@ -138,6 +138,7 @@ class ProfileFragment : Fragment() {
 
         addEvent.setOnClickListener{
             val intent = Intent(view.context,AddEventsActivity::class.java)
+            intent.putExtra("userType",admin)
             view.context.startActivity(intent)
         }
         report.setOnClickListener{
