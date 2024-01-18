@@ -12,8 +12,8 @@ android {
         applicationId = "com.ingray.samagam"
         minSdk = 24
         targetSdk = 34
-        versionCode = 6
-        versionName = "1.1"
+        versionCode = 7
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -49,6 +49,7 @@ dependencies {
     implementation ("com.firebaseui:firebase-ui-database:8.0.2")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation("com.google.firebase:firebase-messaging:23.4.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     implementation ("com.github.bumptech.glide:glide:4.16.0")

@@ -1,23 +1,16 @@
 package com.ingray.samagam.Activity
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.ingray.samagam.CustomDialog
-import com.ingray.samagam.Fragments.Fragment_Home
-import com.ingray.samagam.Fragments.FramentFeed
-import com.ingray.samagam.Fragments.LiveEventsFragment
-import com.ingray.samagam.Fragments.ProfileFragment
+import com.google.firebase.messaging.FirebaseMessaging
 import com.ingray.samagam.R
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +23,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        FirebaseMessaging.getInstance().subscribeToTopic("All")
+            .addOnCompleteListener(OnCompleteListener<Void?> { task ->
+                var msg = "Done"
+                if (!task.isSuccessful) {
+                    msg = "Failed"
+                }
+            })
+
+
         toolbar = findViewById(R.id.toolbar)
 
         setSupportActionBar(toolbar)
