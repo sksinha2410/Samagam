@@ -80,25 +80,37 @@
             android:layout_height="190dp"
             android:layout_alignParentBottom="true"
             android:src="@drawable/image_for_login_page"/>
+
         <LinearLayout
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/white_left_40dp"
-            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="50dp"
-            >
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/white_left_40dp"
+            android:orientation="horizontal">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:gravity="start"
+                android:src="@drawable/ghost"/>
 
             <TextView
                 android:id="@+id/start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="16dp"
+                android:paddingBottom="8dp"
                 android:gravity="end"
                 android:text="Start"
-                android:textColor="#F0740F9F"
-                android:textSize="40sp"
+                android:textColor="#673AB7"
+                android:textSize="34sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
     </RelativeLayout>
 </LinearLayout>

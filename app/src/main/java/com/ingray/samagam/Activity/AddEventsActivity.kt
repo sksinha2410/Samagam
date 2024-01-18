@@ -63,6 +63,7 @@ class AddEventsActivity : AppCompatActivity() {
     private lateinit var end:String
     lateinit var ev:Events
     val Pick_image=1
+    private lateinit var userType:String
     var storageReference = FirebaseStorage.getInstance().reference
     lateinit var purl:String
     private lateinit var progress:ProgressBar
@@ -73,37 +74,25 @@ class AddEventsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_events)
+        val intent = intent
+        userType = intent.getStringExtra("userType")!!
         callById()
         spinner.visibility = View.GONE
+        clubName.visibility = View.GONE
         progress.visibility = View.INVISIBLE
         ev= Events()
         getItemFromSpinner()
         callOnClick()
 
-        deRef.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                var us : Users
-                if(snapshot.exists()){
-                    us = snapshot.getValue(Users::class.java)!!
-                    var admin = us.userType
-                    if (admin == "1"){
-                        spinner.visibility = View.VISIBLE
-                        clubName.visibility = View.GONE
-                    }else{
-                        var club = us.userType
-                        spinner.visibility = View.GONE
-                        clubName.visibility = View.VISIBLE
-                        clubName.text = club
-                        selectedItem = club
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Handle errors here
-                Log.e("Firebase", "Error fetching events: ${error.message}")
-            }
-        })
+        if (userType == "1"){
+            spinner.visibility = View.VISIBLE
+            clubName.visibility = View.GONE
+        }else{
+            spinner.visibility = View.GONE
+            clubName.visibility = View.VISIBLE
+            clubName.text = userType
+            selectedItem = userType
+        }
 
 
     }

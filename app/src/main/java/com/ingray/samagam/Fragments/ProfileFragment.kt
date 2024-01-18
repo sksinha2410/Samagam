@@ -66,30 +66,7 @@ class ProfileFragment : Fragment() {
        view = inflater.inflate(R.layout.fragment_profile, container, false)
         callById()
         progress.visibility = View.INVISIBLE
-        logout.setOnClickListener{
-            val builder: AlertDialog.Builder = AlertDialog.Builder(view.context)
-            builder
 
-                .setTitle("Do You surely want to logout?")
-                .setPositiveButton("Yes") { dialog, which ->
-
-                    val intent = Intent(
-                        activity, LoginActivity::class.java
-                    )
-                    startActivity(intent)
-                    Toast.makeText(view.context,"Logged Out", Toast.LENGTH_LONG).show()
-
-                }
-                .setNegativeButton("No") { dialog, which ->
-                    // Do something else.
-                }
-
-            val dialog: AlertDialog = builder.create()
-            dialog.show()
-            FirebaseAuth.getInstance().signOut()
-
-
-        }
         deRef.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
              var us : Users
@@ -138,11 +115,37 @@ class ProfileFragment : Fragment() {
 
         addEvent.setOnClickListener{
             val intent = Intent(view.context,AddEventsActivity::class.java)
+            intent.putExtra("userType",admin)
             view.context.startActivity(intent)
         }
         report.setOnClickListener{
             val intent = Intent(view.context,ReportedPost::class.java)
             view.context.startActivity(intent)
+        }
+        logout.setOnClickListener{
+            val builder: AlertDialog.Builder = AlertDialog.Builder(view.context)
+            builder
+
+                .setTitle("Do You surely want to logout?")
+                .setPositiveButton("Yes") { dialog, which ->
+
+                    val intent = Intent(
+                        activity, LoginActivity::class.java
+                    )
+                    startActivity(intent)
+                    Toast.makeText(view.context,"Logged Out", Toast.LENGTH_LONG).show()
+                    FirebaseAuth.getInstance().signOut()
+
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    // Do something else.
+                }
+
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
+
+
         }
         return view
     }
