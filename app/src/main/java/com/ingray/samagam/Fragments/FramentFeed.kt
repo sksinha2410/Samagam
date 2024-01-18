@@ -17,7 +17,7 @@ import com.ingray.samagam.R
 
 class FramentFeed : Fragment() {
     lateinit var feedRecycler:RecyclerView
-    lateinit var feedAdapter: FeedAdapter
+    lateinit var feedA: FeedAdapter
     private var dataBaseRef= FirebaseDatabase.getInstance().reference
 
     @SuppressLint("MissingInflatedId")
@@ -33,9 +33,9 @@ class FramentFeed : Fragment() {
 
         val options: FirebaseRecyclerOptions<Posts?> = FirebaseRecyclerOptions.Builder<Posts>().
         setQuery(dataBaseRef.child("Posts"), Posts::class.java).build()
-        feedAdapter = FeedAdapter(options)
-        feedRecycler.adapter = feedAdapter
-        feedAdapter.startListening()
+        feedA = FeedAdapter(options)
+        feedRecycler.adapter = feedA
+        feedA.startListening()
 
         return view
     }
