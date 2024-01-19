@@ -33,7 +33,7 @@
                 <ImageView
                     android:id="@+id/event_poster"
                     android:layout_width="match_parent"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     android:layout_height="@dimen/_200sdp"/>
                 <ImageView
                     android:id="@+id/ivEdit"
