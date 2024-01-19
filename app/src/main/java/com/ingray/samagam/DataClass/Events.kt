@@ -13,7 +13,8 @@ data class Events(
     var event_venue:String = "",
     var club_name:String="",
     var event_date_time:Long = 0,
-    var hrsAgo:Long =0
+    var hrsAgo:Long =0,
+    var key:String = "",
 
 
 )

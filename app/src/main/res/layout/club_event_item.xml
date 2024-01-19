@@ -35,6 +35,14 @@
                     android:layout_width="match_parent"
                     android:scaleType="centerCrop"
                     android:layout_height="@dimen/_200sdp"/>
+                <ImageView
+                    android:id="@+id/ivEdit"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/editevent"
+                    android:visibility="gone"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="@dimen/_2sdp"/>
 
 
             </RelativeLayout>

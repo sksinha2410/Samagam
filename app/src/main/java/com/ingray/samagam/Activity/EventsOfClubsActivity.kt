@@ -50,16 +50,35 @@ class EventsOfClubsActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
+        FirebaseDatabase.getInstance().reference.child("Clubs").child(name).child("Events").addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(s in snapshot.children){
+                        val map = HashMap<String,String>()
+                        val str:String = s.key.toString()
+                        map.put("key",str)
+                        s.ref.updateChildren(map as Map<String, Any>)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+
 
         val options: FirebaseRecyclerOptions<Events?> =
             FirebaseRecyclerOptions.Builder<Events>()
                 .setQuery(
-                    FirebaseDatabase.getInstance().reference.child("Clubs").child(name).child("Events").orderByChild("event_date_time").limitToFirst(3),
+                    FirebaseDatabase.getInstance().reference.child("Clubs").child(name).child("Events").orderByChild("event_date_time"),
                     Events::class.java
                 )
                 .build()
-        clubsEventAdapter = ClubsEventAdapter(options)
+        clubsEventAdapter = ClubsEventAdapter(this,options,name)
+
         club_event_recycler.adapter = clubsEventAdapter
         clubsEventAdapter.startListening()
     }
+
 }

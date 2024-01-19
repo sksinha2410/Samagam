@@ -8,7 +8,7 @@
     android:background="@drawable/signup_background">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -27,31 +27,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ADD - EVENTS"
+                    android:text="EDIT - EVENT"
                     android:textColor="#C3A7FE"
                     android:textSize="25dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_25sdp"/>
-                <TextView
-                    android:id="@+id/clubName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:visibility="gone"
-                    android:textColor="#C3A7FE"
-                    android:textSize="16sp"
-                    android:layout_gravity="center"/>
 
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_20sdp"
-                    android:visibility="gone"
-                    android:layout_marginHorizontal="@dimen/_15sdp"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_200sdp"
+                    android:visibility="gone"
                     android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="8dp">
                     <ImageView
@@ -61,14 +47,7 @@
                         android:layout_height="@dimen/_200sdp"
                         android:src="@drawable/add_pic"/>
 
-                    <ProgressBar
-                        android:id="@+id/sale_progressBar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="center"
-                        android:theme="@style/progressBar"
-                        tools:visibility="visible" />
+
                 </RelativeLayout>
 
 
@@ -206,17 +185,38 @@
                     android:textColorHint="#555353"
                     android:paddingBottom="@dimen/_410sdp" />
 
-                <Button
-                    android:id="@+id/btn_submit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:background="@drawable/add_button_events"
-                    android:paddingHorizontal="@dimen/_50sdp"
-                    android:text="Submit"
-                    android:layout_marginBottom="10dp"
-                    android:textStyle="bold" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:id="@+id/btn_cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/add_button_events"
+                        android:paddingHorizontal="@dimen/_10sdp"
+                        android:layout_marginStart="20dp"
+                        android:text="Cancel"
+
+                        android:layout_marginBottom="10dp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btn_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:background="@drawable/add_button_events"
+                        android:paddingHorizontal="@dimen/_10sdp"
+                        android:layout_alignParentEnd="true"
+                        android:text="Save"
+                        android:layout_marginBottom="10dp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
 
 
             </LinearLayout>
