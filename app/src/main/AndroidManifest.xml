@@ -17,10 +17,6 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Samagam"
-        tools:targetApi="31" >
-        <activity
-            android:name=".Activity.ClubDetailsActivity"
-            android:exported="false" />
         <activity
             android:name=".Activity.ForgetPasswordActivity"
             android:exported="false" />
