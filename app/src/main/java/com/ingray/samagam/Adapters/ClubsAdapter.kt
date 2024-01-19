@@ -13,6 +13,7 @@ import com.ingray.samagam.DataClass.Clubs
 import com.ingray.samagam.R
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.ingray.samagam.Activity.ClubDetailsActivity
 import com.ingray.samagam.Activity.EventsOfClubsActivity
 
 class ClubsAdapter(options: FirebaseRecyclerOptions<Clubs?>) :
@@ -26,7 +27,7 @@ class ClubsAdapter(options: FirebaseRecyclerOptions<Clubs?>) :
 
             Glide.with(holder.profileImage.context).load(model.imageUrl).into(holder.profileImage)
             holder.clubCard.setOnClickListener{
-                val intent = Intent(view.context,EventsOfClubsActivity::class.java)
+                val intent = Intent(view.context,ClubDetailsActivity::class.java)
                 intent.putExtra("clubName", model.club_name) // Pass any necessary data to the new activity
                 holder.itemView.context.startActivity(intent)
 
