@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#373434"
+   >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TESLA"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:letterSpacing="0.15"
+        android:padding="15dp"
+        android:textColor="#CE6ADF"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@drawable/contact_details_whitebackground"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:gravity="bottom"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:orientation="horizontal"
+           >
+
+            <LinearLayout
+                android:layout_width="305dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/contact_details_purple"
+                android:gravity="center|top"
+                android:orientation="vertical"
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Office bearer 2024"
+                    android:textStyle="bold"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"/>
+                <LinearLayout
+                    android:layout_width="305dp"
+                    android:layout_height="wrap_content">
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        android:layout_width="60dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="15dp"
+                        android:src=""
+                        />
+                <androidx.cardview.widget.CardView
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    android:layout_width="60dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"/>
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        android:layout_width="60dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="15dp"
+                        />
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        android:layout_width="60dp"
+                        android:layout_height="70dp"
+                        android:background="@color/red"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="15dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/contact_details_pink"/>
+
+
+    </LinearLayout>
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@drawable/contact_details_whitebackground"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:gravity="bottom"
+        android:layout_marginTop="25dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:layout_width="305dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/contact_details_purple"
+                android:gravity="center|top"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Club Events"
+                    android:textStyle="bold"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"/>
+                <LinearLayout
+                    android:layout_width="305dp"
+                    android:layout_height="wrap_content">
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        android:layout_width="120dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="15dp"
+                        />
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="5dp"
+                        android:layout_width="120dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="15dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/contact_details_pink"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@drawable/contact_details_whitebackground"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:gravity="bottom"
+        android:layout_marginTop="25dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:layout_width="305dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/contact_details_purple"
+                android:gravity="center|top"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alumini section"
+                    android:textStyle="bold"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"/>
+                <LinearLayout
+                    android:layout_width="305dp"
+                    android:layout_height="wrap_content">
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        android:layout_width="60dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="15dp"
+                        />
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        android:layout_width="60dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="15dp"/>
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        android:layout_width="60dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="15dp"
+                        />
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        android:layout_width="60dp"
+                        android:layout_height="70dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="15dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/contact_details_pink"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
