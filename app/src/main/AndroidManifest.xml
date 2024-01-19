@@ -54,6 +54,9 @@
             android:name=".Activity.EventsOfClubsActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.ClubDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.SplashScreenActivity"
             android:exported="true" >
             <intent-filter>
