@@ -1,10 +1,12 @@
 package com.ingray.samagam.Activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -20,6 +22,7 @@ import kotlin.collections.ArrayList
 class  ClubMembersDetailActivity : AppCompatActivity() {
     private lateinit var batchName: TextView
     private lateinit var members: RecyclerView
+    private lateinit var addAlumni: FloatingActionButton
     private lateinit var adapt:ClubMembersAdapter
     private  var arrList:ArrayList<String> = ArrayList<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +49,6 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
                         val randomIndex2 = random.nextInt(arrList.size)
                         val randomIndex3 = random.nextInt(arrList.size)
                         val randomIndex4 = random.nextInt(arrList.size)
-                        arrList[randomIndex1]
                         val map = HashMap<String,String>()
                         map.put("profile1",arrList[randomIndex1])
                         map.put("profile2",arrList[randomIndex2])
@@ -65,8 +67,8 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
         val options: FirebaseRecyclerOptions<Alumni?> =
             FirebaseRecyclerOptions.Builder<Alumni>()
                 .setQuery(
-                    FirebaseDatabase.getInstance().reference.child("Clubs").child(name!!)
-                        .child("Alumni").child(batch!!).child("Members"),
+                    FirebaseDatabase.getInstance().reference.child("Clubs").child(name)
+                        .child("Alumni").child(batch).child("Members"),
                     Alumni::class.java
                 )
                 .build()
@@ -74,10 +76,16 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
         members.adapter = adapt
         adapt.startListening()
 
+        addAlumni.setOnClickListener{
+//            val intent = Intent(applicationContext,AddAlumniActivity::class.java)
+//            startActivity(intent)
+        }
+
     }
 
     private fun callbyId() {
         batchName=findViewById(R.id.batchName)
         members=findViewById(R.id.members_recycler)
+        addAlumni = findViewById(R.id.addAlumni)
     }
 }

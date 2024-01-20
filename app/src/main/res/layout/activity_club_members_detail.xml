@@ -1,24 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.ClubMembersDetailActivity"
     android:orientation="vertical">
-    <TextView
-        android:id="@+id/batchName"
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/batchName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="batch"
+            android:textSize="@dimen/_30sdp"
+            android:layout_gravity="center_horizontal"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/members_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:minHeight="@dimen/_160sdp"/>
+
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addAlumni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="batch"
-        android:textSize="@dimen/_30sdp"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/linkedin"
+        android:contentDescription="TODO" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/members_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:minHeight="@dimen/_160sdp"/>
 
-</LinearLayout>
+</RelativeLayout>

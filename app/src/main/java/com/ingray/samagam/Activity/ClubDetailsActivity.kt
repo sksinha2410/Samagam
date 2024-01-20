@@ -54,7 +54,7 @@ class ClubDetailsActivity : AppCompatActivity() {
         val options: FirebaseRecyclerOptions<MembersProfile?> =
             FirebaseRecyclerOptions.Builder<MembersProfile>()
                 .setQuery(
-                    FirebaseDatabase.getInstance().reference.child("Clubs").child("Tesla").child("Alumni"),
+                    FirebaseDatabase.getInstance().reference.child("Clubs").child(name).child("Alumni"),
                     MembersProfile::class.java
                 )
                 .build()
