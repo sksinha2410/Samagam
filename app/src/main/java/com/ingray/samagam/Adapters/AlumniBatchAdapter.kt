@@ -20,7 +20,7 @@ import com.ingray.samagam.Activity.EventsOfClubsActivity
 import com.ingray.samagam.DataClass.Alumni
 import com.ingray.samagam.DataClass.MembersProfile
 
-class AlumniBatchAdapter(options: FirebaseRecyclerOptions<MembersProfile?>) :
+class AlumniBatchAdapter(options: FirebaseRecyclerOptions<MembersProfile?>, val clubName: String) :
     FirebaseRecyclerAdapter<MembersProfile?, AlumniBatchAdapter.userAdapterHolder?>(options) {
     lateinit var view: View
     override fun onBindViewHolder(holder: userAdapterHolder,
@@ -33,9 +33,11 @@ class AlumniBatchAdapter(options: FirebaseRecyclerOptions<MembersProfile?>) :
         holder.batchName.text=model.batch
         holder.cvAll.setOnClickListener{
              val intent=Intent(holder.cvAll.context,ClubMembersDetailActivity::class.java)
+            intent.putExtra("clubName",clubName)
+            intent.putExtra("batch",model.batch)
              view.context.startActivity(intent)
          }
-        val deref= FirebaseDatabase.getInstance().reference.child("Clubs").child("Alumni").child("")
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): userAdapterHolder {
