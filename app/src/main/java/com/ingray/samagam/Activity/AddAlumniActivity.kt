@@ -58,7 +58,7 @@ class AddAlumniActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_alumni)
-        intent.getStringExtra(name)
+        var clubName = intent.getStringExtra("Clubname")
 
 
         callById()
@@ -85,7 +85,11 @@ class AddAlumniActivity : AppCompatActivity() {
             ad.placeOfWork=location.text.toString()
             ad.twitter=twitter.text.toString()
             ad.position=position.text.toString()
-
+            if (clubName != null) {
+                deRef.child("Clubs").child(clubName).child("Alumni").child(selectedItem).child("Members").setValue(ad)
+                Toast.makeText(this,"Member added",Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
     }
 
@@ -110,10 +114,9 @@ class AddAlumniActivity : AppCompatActivity() {
         progress = findViewById(R.id.progress)
         btnSubmit = findViewById(R.id.btn_submit)
 
-
-
-
     }
+
+
     private fun openGallery() {
         val gallery= Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(gallery,Pick_image)
