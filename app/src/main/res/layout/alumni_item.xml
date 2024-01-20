@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@drawable/signup_background">
+    android:orientation="vertical">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/event_colourfull_backgroud"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:layout_marginHorizontal="@dimen/_50sdp">
+            android:layout_marginHorizontal="@dimen/_10sdp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -33,7 +31,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:src="@drawable/home"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/_10sdp"
@@ -136,7 +134,7 @@
                     android:autoLink="web"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                   android:background="@drawable/logo"
+                   android:background="@drawable/linkedin"
                     android:layout_weight="1"/>
 
                 <TextView
@@ -145,7 +143,7 @@
                     android:autoLink="web"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                   android:background="@drawable/logo"
+                   android:background="@drawable/github"
                     android:layout_weight="1"/>
 
                 <TextView
@@ -154,7 +152,7 @@
                     android:autoLink="web"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                   android:background="@drawable/logo"
+                   android:background="@drawable/instagram"
                     android:layout_weight="1"/>
 
                 <TextView
@@ -163,7 +161,7 @@
                     android:autoLink="web"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                   android:background="@drawable/logo"
+                   android:background="@drawable/discord"
                     android:layout_weight="1"/>
 
                 <TextView
@@ -172,7 +170,7 @@
                     android:autoLink="email"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                   android:background="@drawable/logo"
+                   android:background="@drawable/mail"
                     android:layout_weight="1"/>
 
                 <TextView
@@ -181,7 +179,7 @@
                     android:id="@+id/twitter"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/logo"
+                    android:background="@drawable/twitter"
                     android:layout_weight="1"/>
 
             </LinearLayout>
