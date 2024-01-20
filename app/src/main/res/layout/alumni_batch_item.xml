@@ -38,6 +38,7 @@
                         android:layout_marginEnd="10dp"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/batchName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Alumni 2020-2024"
@@ -59,6 +60,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:layout_weight="1">
                                 <ImageView
+                                    android:id="@+id/profile1"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:scaleType="fitXY"
@@ -74,21 +76,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:layout_weight="1">
                                 <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:scaleType="fitXY"
-                                    android:src="@drawable/logo"/>
-
-                            </androidx.cardview.widget.CardView>
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                app:cardCornerRadius="15dp"
-                                android:layout_marginEnd="6dp"
-                                android:layout_marginBottom="10dp"
-                                android:background="@drawable/outdent"
-                                android:layout_weight="1">
-                                <ImageView
+                                    android:id="@+id/profile2"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:scaleType="fitXY"
@@ -104,6 +92,23 @@
                                 android:background="@drawable/outdent"
                                 android:layout_weight="1">
                                 <ImageView
+                                    android:id="@+id/profile3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/logo"/>
+
+                            </androidx.cardview.widget.CardView>
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="15dp"
+                                android:layout_marginEnd="6dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/outdent"
+                                android:layout_weight="1">
+                                <ImageView
+                                    android:id="@+id/profile4"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:scaleType="fitXY"
@@ -119,6 +124,7 @@
 
                     </LinearLayout>
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cvAll"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         app:cardBackgroundColor="#fed8ea"

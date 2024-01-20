@@ -8,6 +8,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.FirebaseDatabase
+import com.ingray.samagam.Adapters.AlumniBatchAdapter
+import com.ingray.samagam.Adapters.ClubsEventAdapter
+import com.ingray.samagam.DataClass.Events
+import com.ingray.samagam.DataClass.MembersProfile
 import com.ingray.samagam.R
 
 class ClubDetailsActivity : AppCompatActivity() {
@@ -15,6 +21,8 @@ class ClubDetailsActivity : AppCompatActivity() {
     private lateinit var clubName: TextView
     private lateinit var clubNames: TextView
     private lateinit var alumni_batch_recycler: RecyclerView
+    private lateinit var adapt: AlumniBatchAdapter
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +46,16 @@ class ClubDetailsActivity : AppCompatActivity() {
             intent.putExtra("clubName",name)
             startActivity(intent)
         }
+        val options: FirebaseRecyclerOptions<MembersProfile?> =
+            FirebaseRecyclerOptions.Builder<MembersProfile>()
+                .setQuery(
+                    FirebaseDatabase.getInstance().reference.child("Clubs").child(name).child("Alumni"),
+                    MembersProfile::class.java
+                )
+                .build()
+        adapt = AlumniBatchAdapter(options)
 
-
+        alumni_batch_recycler.adapter = adapt
+       adapt.startListening()
     }
 }
