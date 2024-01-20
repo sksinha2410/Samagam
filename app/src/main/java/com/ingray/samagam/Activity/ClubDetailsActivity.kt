@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.ingray.samagam.Adapters.AlumniBatchAdapter
 import com.ingray.samagam.Adapters.ClubsEventAdapter
 import com.ingray.samagam.DataClass.Events
@@ -46,14 +50,15 @@ class ClubDetailsActivity : AppCompatActivity() {
             intent.putExtra("clubName",name)
             startActivity(intent)
         }
+
         val options: FirebaseRecyclerOptions<MembersProfile?> =
             FirebaseRecyclerOptions.Builder<MembersProfile>()
                 .setQuery(
-                    FirebaseDatabase.getInstance().reference.child("Clubs").child(name).child("Alumni"),
+                    FirebaseDatabase.getInstance().reference.child("Clubs").child("Tesla").child("Alumni"),
                     MembersProfile::class.java
                 )
                 .build()
-        adapt = AlumniBatchAdapter(options)
+        adapt = AlumniBatchAdapter(options,name)
 
         alumni_batch_recycler.adapter = adapt
        adapt.startListening()
