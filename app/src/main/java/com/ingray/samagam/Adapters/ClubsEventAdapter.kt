@@ -92,8 +92,6 @@ class ClubsEventAdapter(private val activity: AppCompatActivity, options: Fireba
             }catch (e:Exception){
                 Toast.makeText(holder.itemView.context,"No Brochure link Available",Toast.LENGTH_SHORT).show()
             }
-
-
         }
     }
     override fun onCreateViewHolder(

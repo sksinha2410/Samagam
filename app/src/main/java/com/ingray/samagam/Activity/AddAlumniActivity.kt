@@ -86,7 +86,8 @@ class AddAlumniActivity : AppCompatActivity() {
             ad.twitter=twitter.text.toString()
             ad.position=position.text.toString()
             if (clubName != null) {
-                deRef.child("Clubs").child(clubName).child("Alumni").child(selectedItem).child("Members").setValue(ad)
+                deRef.child("Clubs").child(clubName).child("Alumni").child(selectedItem).child("Members").child(
+                    Calendar.getInstance().timeInMillis.toString()).setValue(ad)
                 Toast.makeText(this,"Member added",Toast.LENGTH_SHORT).show()
                 finish()
             }
