@@ -20,6 +20,9 @@
         android:theme="@style/Theme.Samagam"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.AddAlumniActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ClubMembersDetailActivity"
             android:exported="false" />
         <activity
@@ -38,7 +41,7 @@
 
         <activity
             android:name=".FCMNotification"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Activity.ForgetPasswordActivity"
             android:exported="false" />
