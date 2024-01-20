@@ -58,9 +58,13 @@ class AddAlumniActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_alumni)
-        
-        callById()
+        intent.getStringExtra(name)
 
+
+        callById()
+        profile.setOnClickListener{
+            openGallery()
+        }
         getItemFromSpinner()
         btnSubmit.setOnClickListener{
             val ad = Alumni()
@@ -77,6 +81,10 @@ class AddAlumniActivity : AppCompatActivity() {
             ad.postInClub = postinclub.text.toString()
             ad.phoneNo = phoneno.text.toString()
             ad.purl = purl
+            ad.achievements=achievement.text.toString()
+            ad.placeOfWork=location.text.toString()
+            ad.twitter=twitter.text.toString()
+            ad.position=position.text.toString()
 
         }
     }
