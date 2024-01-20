@@ -51,7 +51,7 @@ class AddAlumniActivity : AppCompatActivity() {
     private lateinit var profile:ImageView
     private lateinit var btnSubmit:Button
     private lateinit var selectedItem:String
-    private lateinit var purl:String
+    private var purl:String =""
     private lateinit var progress:ProgressBar
     private var deRef : DatabaseReference = FirebaseDatabase.getInstance().reference
     private var storageRef = FirebaseStorage.getInstance().reference
@@ -88,6 +88,10 @@ class AddAlumniActivity : AppCompatActivity() {
             if (clubName != null) {
                 deRef.child("Clubs").child(clubName).child("Alumni").child(selectedItem).child("Members").child(
                     Calendar.getInstance().timeInMillis.toString()).setValue(ad)
+                var map = HashMap<String, String>()
+                map.put("batch",selectedItem)
+                deRef.child("Clubs").child(clubName).child("Alumni").child(selectedItem).updateChildren(
+                    map as Map<String, Any>)
                 Toast.makeText(this,"Member added",Toast.LENGTH_SHORT).show()
                 finish()
             }
