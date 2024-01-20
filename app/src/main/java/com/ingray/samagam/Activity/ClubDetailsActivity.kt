@@ -7,12 +7,14 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import com.ingray.samagam.R
 
 class ClubDetailsActivity : AppCompatActivity() {
     private lateinit var cvEvents:CardView
     private lateinit var clubName: TextView
     private lateinit var clubNames: TextView
+    private lateinit var alumni_batch_recycler: RecyclerView
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +27,8 @@ class ClubDetailsActivity : AppCompatActivity() {
         cvEvents = findViewById(R.id.clubEvent)
         clubName = findViewById(R.id.clubName)
         clubNames = findViewById(R.id.clubNames)
+        alumni_batch_recycler = findViewById(R.id.alumni_batch_recycler)
+        alumni_batch_recycler.itemAnimator = null
 
         clubName.text = names
         clubNames.text = name
