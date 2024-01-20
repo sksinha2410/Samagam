@@ -33,6 +33,18 @@ class ClubMembersAdapter(options: FirebaseRecyclerOptions<Alumni?>) :
         holder.description.text=model.description
         holder.achievement.text=model.achievements
         Glide.with(holder.profile.context).load(model.purl).into(holder.profile)
+
+        checkCondition(holder,model)
+
+        callOnClick(holder,model)
+
+
+
+
+
+    }
+
+    private fun callOnClick(holder: ClubMembersAdapter.userAdapterHolder, model: Alumni) {
         holder.github.setOnClickListener {
             val xmllink = model.github
             try {
@@ -56,6 +68,105 @@ class ClubMembersAdapter(options: FirebaseRecyclerOptions<Alumni?>) :
             {Toast.makeText(holder.github.context,"Link invalid", Toast.LENGTH_SHORT).show()
 
             }
+        }
+
+        holder.linkedin.setOnClickListener {
+            val xmllink = model.linkedIn
+            try {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(xmllink))
+                holder.itemView.context.startActivity(intent)
+            }catch (
+                e:Exception
+            )
+            {Toast.makeText(holder.github.context,"Link invalid", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
+        holder.email.setOnClickListener {
+            val emailLink = "mailto:${model.email}"
+            try {
+                val intent = Intent(Intent.ACTION_SENDTO)
+                intent.data = Uri.parse(emailLink)
+                holder.itemView.context.startActivity(intent)
+            } catch (e: Exception) {
+                Toast.makeText(holder.itemView.context, "Error opening email", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        holder.descord.setOnClickListener {
+            val xmllink = model.discord
+            try {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(xmllink))
+                holder.itemView.context.startActivity(intent)
+            }catch (
+                e:Exception
+            )
+            {Toast.makeText(holder.github.context,"Link invalid", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
+
+        holder.twitter.setOnClickListener {
+            val xmllink = model.twitter
+            try {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(xmllink))
+                holder.itemView.context.startActivity(intent)
+            }catch (
+                e:Exception
+            )
+            {Toast.makeText(holder.github.context,"Link invalid", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+    }
+
+    private fun checkCondition(holder: ClubMembersAdapter.userAdapterHolder, model: Alumni) {
+        if(model.name.isEmpty()){
+            holder.name.visibility = View.GONE
+        }
+        if(model.position.isEmpty()){
+            holder.position.visibility = View.GONE
+        }
+        if(model.company.isEmpty()){
+            holder.company.visibility = View.GONE
+        }
+        if(model.batch.isEmpty()){
+            holder.batch.visibility = View.GONE
+        }
+        if(model.postInClub.isEmpty()){
+            holder.postinClub.visibility = View.GONE
+        }
+        if(model.placeOfWork.isEmpty()){
+            holder.placeofWork.visibility = View.GONE
+        }
+        if(model.description.isEmpty()){
+            holder.description.visibility = View.GONE
+        }
+        if(model.achievements.isEmpty()){
+            holder.achievement.visibility = View.GONE
+        }
+        if(model.purl.isEmpty()){
+            holder.profile.visibility = View.GONE
+        }
+        if(model.github.isEmpty()){
+            holder.github.visibility = View.GONE
+        }
+        if(model.instagram.isEmpty()){
+            holder.insta.visibility = View.GONE
+        }
+        if(model.linkedIn.isEmpty()){
+            holder.linkedin.visibility = View.GONE
+        }
+        if(model.twitter.isEmpty()){
+            holder.twitter.visibility = View.GONE
+        }
+        if(model.email.isEmpty()){
+            holder.email.visibility = View.GONE
+        }
+        if(model.discord.isEmpty()){
+            holder.descord.visibility = View.GONE
         }
     }
 
