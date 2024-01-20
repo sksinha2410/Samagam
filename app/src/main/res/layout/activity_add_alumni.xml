@@ -42,12 +42,7 @@
                     android:textSize="16sp"
                     android:layout_gravity="center"/>
 
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_20sdp"
-                    android:visibility="gone"
-                    android:layout_marginHorizontal="@dimen/_15sdp"/>
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -62,7 +57,7 @@
                         android:src="@drawable/add_pic"/>
 
                     <ProgressBar
-                        android:id="@+id/sale_progressBar"
+                        android:id="@+id/progress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -85,7 +80,7 @@
                     android:textColorHint="#555353"/>
 
 
-                <EditText
+                <Spinner
                     android:id="@+id/etBatch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
