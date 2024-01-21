@@ -38,7 +38,7 @@ class EventAdapterPast(options: FirebaseRecyclerOptions<Events?>) :
         val map = HashMap<String,Long>()
         map.put("hrsAgo",hoursDifference)
 
-        dbRef.child(model.event_name).updateChildren(map as Map<String, Any>)
+        dbRef.child(model.key).updateChildren(map as Map<String, Any>)
 
 
 

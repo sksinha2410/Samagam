@@ -26,17 +26,27 @@
             android:paddingEnd="23dp"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/feed_Recycler"
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="1000dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"/>
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="@dimen/_16sdp"
+            app:cardBackgroundColor="#303030"
+            android:layout_marginHorizontal="5dp">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/feed_Recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="2dp"
+                android:layout_marginTop="5dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"/>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
-
-    <!-- TODO: Update blank fragment layout -->
-
-
 </ScrollView>

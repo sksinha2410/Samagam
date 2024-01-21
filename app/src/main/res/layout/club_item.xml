@@ -56,6 +56,11 @@
             </androidx.cardview.widget.CardView>
             <TextView
                 android:id="@+id/tv_title"
+                android:singleLine="true"
+                android:focusable="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusableInTouchMode="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"

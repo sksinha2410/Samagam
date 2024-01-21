@@ -43,9 +43,9 @@ import java.io.ByteArrayOutputStream
 import java.io.IOException
 
 class ProfileFragment : Fragment() {
-    private lateinit var profileImage : CircleImageView
+    private lateinit var profileImage : ImageView
     private lateinit var profileName : TextView
-    private lateinit var addEvent:TextView
+    private lateinit var addEvent:LinearLayout
     var deRef = FirebaseDatabase.getInstance().getReference("Users")
     private lateinit var view :View
     private lateinit var recyclerPost: RecyclerView
@@ -57,7 +57,7 @@ class ProfileFragment : Fragment() {
     lateinit var purl:String
     lateinit var admin:String
     private lateinit var progress: ProgressBar
-    private lateinit var report:TextView
+    private lateinit var report:LinearLayout
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
