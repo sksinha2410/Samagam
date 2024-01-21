@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -30,57 +31,125 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_club_members_detail)
         val intent = intent
         val name =intent.getStringExtra("clubName")
-        val batch = intent.getStringExtra("batch")
+        val default = "0"
+        val batch = intent.getStringExtra("batch")?:default
+        val type = intent.getStringExtra("type")
         callbyId()
-        batchName.text = batch
+        if(!batch.equals("0")) {
+            batchName.text = batch
+        }else{
+            batchName.text = "Office Bearers"
+        }
         members.itemAnimator=null
 
-        FirebaseDatabase.getInstance().reference.child("Clubs").child(name!!)
-            .child("Alumni").child(batch!!).child("Members").addListenerForSingleValueEvent(object :ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if(snapshot.exists()) {
-                        for (snap in snapshot.children) {
-                            if (snap.child("purl").exists()) {
-                                arrList.add(snap.child("purl").value.toString())
+        try {
+            if (!batch.equals("0")){
+                FirebaseDatabase.getInstance().reference.child("Clubs").child(name!!)
+                    .child(type!!).child(batch!!).child("Members")
+                    .addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.exists()) {
+                                for (snap in snapshot.children) {
+                                    if (snap.child("purl").exists()) {
+                                        arrList.add(snap.child("purl").value.toString())
+                                    }
+                                }
+                                val random = Random()
+                                val randomIndex1 = random.nextInt(arrList.size)
+                                val randomIndex2 = random.nextInt(arrList.size)
+                                val randomIndex3 = random.nextInt(arrList.size)
+                                val randomIndex4 = random.nextInt(arrList.size)
+                                val map = HashMap<String, String>()
+                                map.put("profile1", arrList[randomIndex1])
+                                map.put("profile2", arrList[randomIndex2])
+                                map.put("profile3", arrList[randomIndex3])
+                                map.put("profile4", arrList[randomIndex4])
+                                FirebaseDatabase.getInstance().reference.child("Clubs").child(name)
+                                    .child(type).child(batch)
+                                    .updateChildren(map as Map<String, Any>)
                             }
                         }
-                        val random = Random()
-                        val randomIndex1 = random.nextInt(arrList.size)
-                        val randomIndex2 = random.nextInt(arrList.size)
-                        val randomIndex3 = random.nextInt(arrList.size)
-                        val randomIndex4 = random.nextInt(arrList.size)
-                        val map = HashMap<String,String>()
-                        map.put("profile1",arrList[randomIndex1])
-                        map.put("profile2",arrList[randomIndex2])
-                        map.put("profile3",arrList[randomIndex3])
-                        map.put("profile4",arrList[randomIndex4])
-                        FirebaseDatabase.getInstance().reference.child("Clubs").child(name)
-                            .child("Alumni").child(batch).updateChildren(map as Map<String, Any>)
-                    }
-                }
 
-                override fun onCancelled(error: DatabaseError) {
+                        override fun onCancelled(error: DatabaseError) {
 
-                }
-            })
+                        }
+                    })
+            }else{
+                FirebaseDatabase.getInstance().reference.child("Clubs").child(name!!)
+                    .child(type!!).child("Members")
+                    .addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.exists()) {
+                                for (snap in snapshot.children) {
+                                    if (snap.child("purl").exists()) {
+                                        arrList.add(snap.child("purl").value.toString())
+                                    }
+                                }
+                                val random = Random()
+                                val randomIndex1 = random.nextInt(arrList.size)
+                                val randomIndex2 = random.nextInt(arrList.size)
+                                val randomIndex3 = random.nextInt(arrList.size)
+                                val randomIndex4 = random.nextInt(arrList.size)
+                                val map = HashMap<String, String>()
+                                map.put("profile1", arrList[randomIndex1])
+                                map.put("profile2", arrList[randomIndex2])
+                                map.put("profile3", arrList[randomIndex3])
+                                map.put("profile4", arrList[randomIndex4])
+                                FirebaseDatabase.getInstance().reference.child("Clubs").child(name)
+                                    .child(type)
+                                    .updateChildren(map as Map<String, Any>)
+                            }
+                        }
 
-        val options: FirebaseRecyclerOptions<Alumni?> =
-            FirebaseRecyclerOptions.Builder<Alumni>()
-                .setQuery(
-                    FirebaseDatabase.getInstance().reference.child("Clubs").child(name)
-                        .child("Alumni").child(batch).child("Members"),
-                    Alumni::class.java
-                )
-                .build()
-        adapt = ClubMembersAdapter(options)
-        members.adapter = adapt
-        adapt.startListening()
+                        override fun onCancelled(error: DatabaseError) {
+
+                        }
+                    })
+            }
+        }catch (e:Exception){
+
+        }
+
+        try {
+            if(!batch.equals("0")) {
+
+                val options: FirebaseRecyclerOptions<Alumni?> =
+                    FirebaseRecyclerOptions.Builder<Alumni>()
+                        .setQuery(
+                            FirebaseDatabase.getInstance().reference.child("Clubs").child(name!!)
+                                .child(type!!).child(batch!!).child("Members"),
+                            Alumni::class.java
+                        )
+                        .build()
+                adapt = ClubMembersAdapter(options)
+                members.adapter = adapt
+                adapt.startListening()
+            }else{
+                val options: FirebaseRecyclerOptions<Alumni?> =
+                    FirebaseRecyclerOptions.Builder<Alumni>()
+                        .setQuery(
+                            FirebaseDatabase.getInstance().reference.child("Clubs").child(name!!)
+                                .child(type!!).child("Members"),
+                            Alumni::class.java
+                        )
+                        .build()
+                adapt = ClubMembersAdapter(options)
+                members.adapter = adapt
+                adapt.startListening()
+            }
+
+        }catch (e:Exception){
+            Toast.makeText(applicationContext,"Nothing there",Toast.LENGTH_SHORT).show()
+        }
+
+
 
 
         addAlumni.setOnClickListener{
             val intent = Intent(applicationContext,AddAlumniActivity::class.java)
             intent.putExtra("Clubname",name)
             intent.putExtra("batch",batch)
+            intent.putExtra("type",type)
             startActivity(intent)
 
         }

@@ -35,6 +35,7 @@ class AlumniBatchAdapter(options: FirebaseRecyclerOptions<MembersProfile?>, val 
              val intent=Intent(holder.cvAll.context,ClubMembersDetailActivity::class.java)
             intent.putExtra("clubName",clubName)
             intent.putExtra("batch",model.batch)
+            intent.putExtra("type","Alumni")
              view.context.startActivity(intent)
          }
 

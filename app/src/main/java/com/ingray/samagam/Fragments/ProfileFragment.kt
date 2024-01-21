@@ -135,6 +135,7 @@ class ProfileFragment : Fragment() {
                     startActivity(intent)
                     Toast.makeText(view.context,"Logged Out", Toast.LENGTH_LONG).show()
                     FirebaseAuth.getInstance().signOut()
+                    activity?.finish()
 
                 }
                 .setNegativeButton("No") { dialog, which ->
