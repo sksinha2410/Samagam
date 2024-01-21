@@ -64,7 +64,7 @@ class LiveEventsFragment : Fragment() {
 
                         val isChecked:Boolean = checkTimeandDate(ev.event_date,ev.event_starttime,ev.event_endtime)
                         if(isChecked){
-                            dataBaseRef.child("Live").child(ev.event_name).setValue(ev).addOnCompleteListener{
+                            dataBaseRef.child("Live").child(ev.key).setValue(ev).addOnCompleteListener{
                                 if (ev.notified == "1" ||ev.notified=="0") {
                                     sendNotification(
                                         ev.event_name,
@@ -105,12 +105,12 @@ class LiveEventsFragment : Fragment() {
                                 }
 
                             }
-                            dataBaseRef.child("Upcoming").child(ev.event_name).setValue(ev)
+                            dataBaseRef.child("Upcoming").child(ev.key).setValue(ev)
 
                         }
                         val isAfter:Boolean = isAfterGivenDateTime(ev.event_date,ev.event_endtime)
                         if(isAfter){
-                            dataBaseRef.child("PastEvents").child(ev.event_name).setValue(ev)
+                            dataBaseRef.child("PastEvents").child(ev.key).setValue(ev)
                         }
                     }
                 }
@@ -194,10 +194,6 @@ class LiveEventsFragment : Fragment() {
                 // Handle potential errors here
             }
         })
-
-
-
-
         return view
     }
 

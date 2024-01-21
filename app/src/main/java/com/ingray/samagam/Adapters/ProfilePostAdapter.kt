@@ -1,21 +1,26 @@
 package com.ingray.samagam.Adapters
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ingray.samagam.DataClass.Events
 import com.ingray.samagam.R
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.ingray.samagam.Activity.LoginActivity
 import com.ingray.samagam.DataClass.Posts
 
 class ProfilePostAdapter (options: FirebaseRecyclerOptions<Posts?>) :
@@ -29,7 +34,26 @@ class ProfilePostAdapter (options: FirebaseRecyclerOptions<Posts?>) :
     ) {
         Glide.with(holder.posterImage.context).load(model.postUrl).into(holder.posterImage)
         holder.likes.setText(model.likes)
+        holder.delete.setOnClickListener{
+            val builder: AlertDialog.Builder = AlertDialog.Builder(holder.delete.context)
+            builder
+                .setTitle("Do You surely want to delete?")
+                .setPositiveButton("Yes") { dialog, which ->
+                    FirebaseDatabase.getInstance().reference.child("Users").child(
+                        FirebaseAuth.getInstance().currentUser?.uid.toString()
+                    ).child("Posts").child(model.postId).removeValue()
 
+                    FirebaseDatabase.getInstance().reference.child("Posts").child(model.postId).removeValue()
+
+                    Toast.makeText(holder.delete.context,"Post Deleted", Toast.LENGTH_LONG).show()
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    // Do something else.
+                }
+
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+        }
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -42,11 +66,12 @@ class ProfilePostAdapter (options: FirebaseRecyclerOptions<Posts?>) :
     inner class userAdapterHolder(innerView:View):RecyclerView.ViewHolder(innerView) {
         var posterImage:ImageView
         var likes:TextView
-
+        var delete:CardView
 
         init {
             posterImage =innerView.findViewById(R.id.image_post)
             likes =innerView.findViewById(R.id.likes)
+            delete=innerView.findViewById(R.id.delete)
         }
     }
 }

@@ -38,13 +38,15 @@ class FramentFeed : Fragment() {
         searchEditText = view.findViewById(R.id.etSearch)
         feedRecycler.itemAnimator = null
 
-        val options: FirebaseRecyclerOptions<Posts?> = FirebaseRecyclerOptions.Builder<Posts>().
+        try{
+            val options: FirebaseRecyclerOptions<Posts?> = FirebaseRecyclerOptions.Builder<Posts>().
         setQuery(dataBaseRef.child("Posts").orderByChild("event_name"), Posts::class.java).build()
         feedAdapter = FeedAdapter(options)
         feedRecycler.adapter = feedAdapter
         feedAdapter.startListening()
+        }catch(e:Exception){
 
-
+        }
 
         try {
             searchEditText.addTextChangedListener(object : TextWatcher {
@@ -84,7 +86,6 @@ class FramentFeed : Fragment() {
             })
         } catch (e: Exception) {
         }
-
         return view
     }
 }

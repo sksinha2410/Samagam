@@ -9,7 +9,7 @@
     <item
         android:id="@id/liveEventsFragment"
         android:icon="@drawable/lives"
-        android:title="Live"/>
+        android:title="Events"/>
 
     <item
         android:id="@id/framentFeed"

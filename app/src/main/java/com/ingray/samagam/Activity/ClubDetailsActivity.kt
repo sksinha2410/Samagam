@@ -71,8 +71,6 @@ class ClubDetailsActivity : AppCompatActivity() {
                         }catch (e:Exception){
 
                         }
-
-
                     }
                 }
 

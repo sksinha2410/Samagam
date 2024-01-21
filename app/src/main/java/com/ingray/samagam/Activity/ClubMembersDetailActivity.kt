@@ -3,11 +3,13 @@ package com.ingray.samagam.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -32,9 +34,29 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
         val intent = intent
         val name =intent.getStringExtra("clubName")
         val default = "0"
+        val uID = FirebaseAuth.getInstance().currentUser?.uid
+
         val batch = intent.getStringExtra("batch")?:default
         val type = intent.getStringExtra("type")
         callbyId()
+        if (uID != null) {
+            FirebaseDatabase.getInstance().reference.child("Users").child(uID).addListenerForSingleValueEvent(
+                object :ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()){
+                            var check:String=snapshot.child("userType").value.toString()
+                            if (check == name || check == "1"){
+                                addAlumni.visibility=View.VISIBLE
+                            }
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                }
+            )
+        }
         if(!batch.equals("0")) {
             batchName.text = batch
         }else{

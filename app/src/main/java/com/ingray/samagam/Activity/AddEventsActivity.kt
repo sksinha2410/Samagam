@@ -70,7 +70,7 @@ class AddEventsActivity : AppCompatActivity() {
     val Pick_image=1
     private lateinit var userType:String
     var storageReference = FirebaseStorage.getInstance().reference
-    lateinit var purl:String
+    var purl:String=""
     private lateinit var progress:ProgressBar
 
     private var startTime: Calendar = Calendar.getInstance()

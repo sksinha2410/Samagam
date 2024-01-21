@@ -32,6 +32,7 @@ class ReportedPostAdapter(options: FirebaseRecyclerOptions<Posts?>) :
     private val userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
     private val repRef =FirebaseDatabase.getInstance().reference.child("ReportedPost")
     private val feedRef =FirebaseDatabase.getInstance().reference.child("Posts")
+    private val userRef =FirebaseDatabase.getInstance().reference.child("Users")
     override fun onBindViewHolder(
         holder: userAdapterHolder,
         position: Int,
@@ -78,6 +79,7 @@ class ReportedPostAdapter(options: FirebaseRecyclerOptions<Posts?>) :
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()){
                         snapshot.ref.removeValue()
+
                         Toast.makeText(holder.itemView.context,"Posts allowed",Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -99,7 +101,7 @@ class ReportedPostAdapter(options: FirebaseRecyclerOptions<Posts?>) :
                     TODO("Not yet implemented")
                 }
             })
-
+            userRef.child(model.userId).child("Posts").child(model.postId).removeValue()
         }
     }
     override fun onCreateViewHolder(
