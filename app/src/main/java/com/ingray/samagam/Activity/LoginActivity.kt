@@ -115,6 +115,7 @@ class LoginActivity : AppCompatActivity() {
         return true
     }
 
+
     private fun callVariablesById() {
         email = findViewById(R.id.etEmail)
         password = findViewById(R.id.etPass)

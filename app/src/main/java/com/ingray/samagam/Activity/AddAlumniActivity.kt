@@ -59,6 +59,8 @@ class AddAlumniActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_alumni)
         var clubName = intent.getStringExtra("Clubname")
+        var type = intent.getStringExtra("type")
+        var batches = intent.getStringExtra("batch")
 
 
         callById()
@@ -86,14 +88,27 @@ class AddAlumniActivity : AppCompatActivity() {
             ad.twitter=twitter.text.toString()
             ad.position=position.text.toString()
             if (clubName != null) {
-                deRef.child("Clubs").child(clubName).child("Alumni").child(selectedItem).child("Members").child(
-                    Calendar.getInstance().timeInMillis.toString()).setValue(ad)
-                var map = HashMap<String, String>()
-                map.put("batch",selectedItem)
-                deRef.child("Clubs").child(clubName).child("Alumni").child(selectedItem).updateChildren(
-                    map as Map<String, Any>)
-                Toast.makeText(this,"Member added",Toast.LENGTH_SHORT).show()
-                finish()
+                if(!batches.equals("0")) {
+                    deRef.child("Clubs").child(clubName).child(type!!).child(selectedItem)
+                        .child("Members").child(
+                        Calendar.getInstance().timeInMillis.toString()
+                    ).setValue(ad)
+                    var map = HashMap<String, String>()
+                    map.put("batch", selectedItem)
+                    deRef.child("Clubs").child(clubName).child(type).child(selectedItem)
+                        .updateChildren(
+                            map as Map<String, Any>
+                        )
+                    Toast.makeText(this, "Member added", Toast.LENGTH_SHORT).show()
+                    finish()
+                }else{
+                    deRef.child("Clubs").child(clubName).child(type!!)
+                        .child("Members").child(
+                            Calendar.getInstance().timeInMillis.toString()
+                        ).setValue(ad)
+                    Toast.makeText(this, "Member added", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
             }
         }
     }
