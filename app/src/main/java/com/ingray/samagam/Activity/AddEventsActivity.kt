@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.AsyncTask
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,11 +33,15 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.ingray.samagam.Constants
 import com.ingray.samagam.DataClass.Events
 import com.ingray.samagam.DataClass.Users
 import com.ingray.samagam.R
+import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.IOException
+import java.net.HttpURLConnection
+import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -119,9 +124,12 @@ class AddEventsActivity : AppCompatActivity() {
                 initEvents()
 
                 val time=Calendar.getInstance().timeInMillis.toString()
+
+                ev.key = time
                 deRef.child("Clubs").child(selectedItem).child("Events").child(time).setValue(ev)
                 deRef.child("Events").child(time).setValue(ev)
                 Toast.makeText(applicationContext,"Event added",Toast.LENGTH_LONG).show()
+                sendNotification()
                 val intent = Intent(applicationContext,MainActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -233,6 +241,7 @@ class AddEventsActivity : AppCompatActivity() {
         ev.event_date=date.text.toString()
         ev.event_venue=venue.text.toString()
         ev.description=description.text.toString()
+        ev.notified = "0"
 
         val resultInMillis = convertDateTimeToMillis(date.text.toString(), start_time.text.toString())
 
@@ -252,6 +261,96 @@ class AddEventsActivity : AppCompatActivity() {
         calendar.set(Calendar.MILLISECOND, 0)
 
         return calendar.timeInMillis
+    }
+    private fun sendNotification() {
+        val title = selectedItem+":"+event_name.text.toString()
+        val dateOrig = date.text.toString()
+        val dup = dateOrig.substring(8,10)+dateOrig.substring(4,8)+dateOrig.substring(0,4)
+        val message = "Event scheduled on: "+dup+"from "+start_time.text.toString()
+
+        // Check if title and message are not empty
+        if (title.isNotEmpty() && message.isNotEmpty()) {
+            // AsyncTask to send the notification in the background
+            sendNotificationWithImage(title, message, purl)
+        } else {
+            // Display an error message if title or message is empty
+            Toast.makeText(this, "Title and message cannot be empty", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun sendNotificationWithImage(title: String, message: String, imageUrl: String) {
+        val title = title
+        val message = message
+        val imageUrl = imageUrl
+
+        // AsyncTask to send the notification in the background
+        SendNotificationTask().execute(title, message, imageUrl)
+    }
+
+    private inner class SendNotificationTask : AsyncTask<String, Void, Boolean>() {
+
+        override fun doInBackground(vararg params: String): Boolean {
+            val title = params[0]
+            val message = params[1]
+            val imageUrl = params[2]
+
+            return try {
+                // FCM server URL
+                val url = URL("https://fcm.googleapis.com/fcm/send")
+
+                // Create a connection
+                val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+                conn.requestMethod = "POST"
+                conn.setRequestProperty("Content-Type", "application/json")
+                conn.setRequestProperty("Authorization", "key=${Constants.SERVER_KEY}")
+
+                // Enable input/output streams
+                conn.doOutput = true
+
+                // Create JSON payload
+                val jsonPayload = JSONObject().apply {
+                    put("to", "/topics/All")
+                    val data = JSONObject().apply {
+                        put("title", title)
+                        put("message", message)
+                        put("imageUrl", imageUrl)
+                    }
+                    put("data", data)
+                }
+
+                // Log statements for debugging
+                Log.d("SendNotificationTask", "Notification payload: $jsonPayload")
+
+                // Write JSON payload to the connection's output stream
+                val os = conn.outputStream
+                os.write(jsonPayload.toString().toByteArray(Charsets.UTF_8))
+                os.close()
+
+                // Get the response code
+                val responseCode: Int = conn.responseCode
+
+                // Log statements for debugging
+                Log.d("SendNotificationTask", "Response code: $responseCode")
+
+                // Close the connection
+                conn.disconnect()
+
+                // Check if the notification was sent successfully (HTTP status code 200)
+                responseCode == 200
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.e("SendNotificationTask", "Error sending notification: ${e.message}")
+                false
+            }
+        }
+
+        override fun onPostExecute(result: Boolean) {
+            if (result) {
+                Toast.makeText(applicationContext, "Notification sent successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(applicationContext, "Failed to send notification", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun getItemFromSpinner() {
