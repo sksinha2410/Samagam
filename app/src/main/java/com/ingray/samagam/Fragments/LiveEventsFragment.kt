@@ -2,6 +2,7 @@ package com.ingray.samagam.Fragments
 
 import android.content.Context
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -19,8 +20,12 @@ import com.google.firebase.database.ValueEventListener
 import com.ingray.samagam.Adapters.EventAdapter
 import com.ingray.samagam.Adapters.EventAdapterPast
 import com.ingray.samagam.Adapters.EventAdapterUpcoming
+import com.ingray.samagam.Constants
 import com.ingray.samagam.DataClass.Events
 import com.ingray.samagam.R
+import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -49,18 +54,59 @@ class LiveEventsFragment : Fragment() {
         contex=view.context
         callId(view)
         liveEventRecycler.itemAnimator = null
-        dRef.addValueEventListener(object : ValueEventListener {
+        dRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (childSnapshot in snapshot.children) {
                     val ev = childSnapshot.getValue(Events::class.java)
                     if (ev != null) {
+
+
+
                         val isChecked:Boolean = checkTimeandDate(ev.event_date,ev.event_starttime,ev.event_endtime)
                         if(isChecked){
-                            dataBaseRef.child("Live").child(ev.event_name).setValue(ev)
+                            dataBaseRef.child("Live").child(ev.event_name).setValue(ev).addOnCompleteListener{
+                                if (ev.notified == "1" ||ev.notified=="0") {
+                                    sendNotification(
+                                        ev.event_name,
+                                        ev.purl,
+                                        ev.club_name,
+                                        "Event is Live"
+                                    )
+                                    val map = HashMap<String,String>()
+                                    map.put("notified","2")
+                                    dataBaseRef.child("Events").child(ev.key).updateChildren(
+                                        map as Map<String, Any>
+                                    )
+                                }
+                            }
+
+
                         }
                         val isBefore:Boolean = isBeforeGivenDateTime(ev.event_date,ev.event_starttime)
                         if(isBefore){
+                            val dateCalendar:Calendar=Calendar.getInstance()
+                            dateCalendar.time= inputDateFormat.parse(ev.event_date)!!
+                            val isToday = isCurrentDate(dateCalendar)
+
+                            if(isToday){
+
+                                val map = HashMap<String,String>()
+                                if(ev.notified == "0") {
+                                    map.put("notified", "1")
+                                    dataBaseRef.child("Events").child(ev.key).updateChildren(
+                                        map as Map<String, Any>
+                                    )
+                                    sendNotification(
+                                        ev.event_name,
+                                        ev.purl,
+                                        ev.club_name,
+                                        "Event Scheduled: Today at ${ev.event_starttime}"
+                                    )
+                                }
+
+                            }
                             dataBaseRef.child("Upcoming").child(ev.event_name).setValue(ev)
+
                         }
                         val isAfter:Boolean = isAfterGivenDateTime(ev.event_date,ev.event_endtime)
                         if(isAfter){
@@ -153,6 +199,90 @@ class LiveEventsFragment : Fragment() {
 
 
         return view
+    }
+
+    private fun sendNotification(name:String,purl: String,clubName:String,message: String) {
+        val title = "$clubName:$name"
+        val message = message
+
+        // Check if title and message are not empty
+        if (title.isNotEmpty() && message.isNotEmpty()) {
+            // AsyncTask to send the notification in the background
+            sendNotificationWithImage(title, message, purl)
+        } else {
+            // Display an error message if title or message is empty
+        }
+    }
+
+    private fun sendNotificationWithImage(title: String, message: String, imageUrl: String) {
+        val title = title
+        val message = message
+        val imageUrl = imageUrl
+
+        // AsyncTask to send the notification in the background
+        SendNotificationTask().execute(title, message, imageUrl)
+    }
+
+    private inner class SendNotificationTask : AsyncTask<String, Void, Boolean>() {
+
+        override fun doInBackground(vararg params: String): Boolean {
+            val title = params[0]
+            val message = params[1]
+            val imageUrl = params[2]
+
+            return try {
+                // FCM server URL
+                val url = URL("https://fcm.googleapis.com/fcm/send")
+
+                // Create a connection
+                val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+                conn.requestMethod = "POST"
+                conn.setRequestProperty("Content-Type", "application/json")
+                conn.setRequestProperty("Authorization", "key=${Constants.SERVER_KEY}")
+
+                // Enable input/output streams
+                conn.doOutput = true
+
+                // Create JSON payload
+                val jsonPayload = JSONObject().apply {
+                    put("to", "/topics/All")
+                    val data = JSONObject().apply {
+                        put("title", title)
+                        put("message", message)
+                        put("imageUrl", imageUrl)
+                    }
+                    put("data", data)
+                }
+
+                // Log statements for debugging
+                Log.d("SendNotificationTask", "Notification payload: $jsonPayload")
+
+                // Write JSON payload to the connection's output stream
+                val os = conn.outputStream
+                os.write(jsonPayload.toString().toByteArray(Charsets.UTF_8))
+                os.close()
+
+                // Get the response code
+                val responseCode: Int = conn.responseCode
+
+                // Log statements for debugging
+                Log.d("SendNotificationTask", "Response code: $responseCode")
+
+                // Close the connection
+                conn.disconnect()
+
+                // Check if the notification was sent successfully (HTTP status code 200)
+                responseCode == 200
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.e("SendNotificationTask", "Error sending notification: ${e.message}")
+                false
+            }
+        }
+
+        override fun onPostExecute(result: Boolean) {
+
+        }
     }
 
     private fun checkTimeandDate(

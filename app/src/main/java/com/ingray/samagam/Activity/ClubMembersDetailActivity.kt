@@ -76,6 +76,7 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
         members.adapter = adapt
         adapt.startListening()
 
+
         addAlumni.setOnClickListener{
             val intent = Intent(applicationContext,AddAlumniActivity::class.java)
             intent.putExtra("Clubname",name)

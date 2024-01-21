@@ -15,6 +15,7 @@ data class Events(
     var event_date_time:Long = 0,
     var hrsAgo:Long =0,
     var key:String = "",
+    var notified:String = "0"
 
 
 )

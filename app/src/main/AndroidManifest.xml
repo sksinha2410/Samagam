@@ -20,13 +20,16 @@
         android:theme="@style/Theme.Samagam"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.NotificationActivity"
+            android:exported="true" >
+
+
+        </activity>
+        <activity
             android:name=".Activity.AddAlumniActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.ClubMembersDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainsActivity"
             android:exported="false" />
 
         <service
@@ -39,9 +42,6 @@
             </intent-filter>
         </service>
 
-        <activity
-            android:name=".FCMNotification"
-            android:exported="true" />
         <activity
             android:name=".Activity.ForgetPasswordActivity"
             android:exported="false" />

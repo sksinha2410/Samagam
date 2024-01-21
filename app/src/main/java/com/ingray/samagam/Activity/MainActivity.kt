@@ -25,6 +25,10 @@ import com.google.firebase.messaging.FirebaseMessaging
 import android.Manifest;
 import com.ingray.samagam.R
 import android.provider.Settings
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class MainActivity : AppCompatActivity() {
@@ -50,6 +54,8 @@ class MainActivity : AppCompatActivity() {
                     msg = "Failed"
                 }
             })
+
+
 
 
         toolbar = findViewById(R.id.toolbar)

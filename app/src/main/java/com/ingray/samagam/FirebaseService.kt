@@ -8,7 +8,10 @@ import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.os.AsyncTask
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
@@ -16,6 +19,11 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.ingray.samagam.Activity.MainActivity
+import com.ingray.samagam.Activity.NotificationActivity
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 import kotlin.random.Random
 
 private const val CHANNEL_ID = "my_channel"
@@ -25,12 +33,23 @@ private const val CHANNEL_DESCRIPTION = "My channel description"
 
 @SuppressLint("MissingFirebaseInstanceTokenRefresh")
 class FirebaseService:FirebaseMessagingService() {
-
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
-        val intent = Intent(this,FCMNotification::class.java)
+        val intent = Intent(this,MainActivity::class.java)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationID = Random.nextInt()
+//test image
+        val imageUrl = message.data["imageUrl"]
+
+        val url = URL(imageUrl)
+        val connection = url.openConnection() as HttpURLConnection
+        connection.doInput = true
+        connection.connect()
+
+        val input = connection.inputStream
+        val bitmap = BitmapFactory.decodeStream(input)
+//testing image
+
 
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             createNotificationChannel(notificationManager)
@@ -42,11 +61,14 @@ class FirebaseService:FirebaseMessagingService() {
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(message.data["title"])
             .setContentText(message.data["message"])
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setLargeIcon(bitmap)
+            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setSmallIcon(R.drawable.logo)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .build()
-        Toast.makeText(applicationContext,"here",Toast.LENGTH_LONG).show()
 
         notificationManager.notify(notificationID,notification)
     }
