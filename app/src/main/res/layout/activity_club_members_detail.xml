@@ -4,10 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/signup_background"
     tools:context=".Activity.ClubMembersDetailActivity"
     android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_weight="0.3"
+            android:background="@drawable/toolback">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:gravity="center_vertical"
+                android:shadowColor="@color/light_pink"
+                android:shadowRadius="5"
+                android:text="SAMAGAM"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_40sdp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="end"
+            android:layout_weight="1"
+
+            android:background="@drawable/toolbackr"
+            android:padding="@dimen/_13sdp"
+            android:src="@drawable/ghost" />
+
+    </LinearLayout>
+
 
     <LinearLayout
+        android:layout_below="@id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -16,7 +56,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="batch"
-            android:textSize="@dimen/_30sdp"
+            android:textSize="@dimen/_35sdp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/londrina_outline"
             android:layout_gravity="center_horizontal"/>
 
         <androidx.recyclerview.widget.RecyclerView
