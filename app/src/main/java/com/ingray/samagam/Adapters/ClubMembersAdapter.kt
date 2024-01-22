@@ -28,8 +28,8 @@ class ClubMembersAdapter(options: FirebaseRecyclerOptions<Alumni?>) :
         holder.position.text=model.position
         holder.company.text=model.company
         holder.batch.text=model.batch
+        holder.branch.text=model.branch
         holder.postinClub.text=model.postInClub
-        holder.placeofWork.text=model.placeOfWork
         holder.description.text=model.description
         holder.achievement.text=model.achievements
         Glide.with(holder.profile.context).load(model.purl).into(holder.profile)
@@ -138,9 +138,7 @@ class ClubMembersAdapter(options: FirebaseRecyclerOptions<Alumni?>) :
         if(model.postInClub.isEmpty()){
             holder.postinClub.visibility = View.GONE
         }
-        if(model.placeOfWork.isEmpty()){
-            holder.placeofWork.visibility = View.GONE
-        }
+
         if(model.description.isEmpty()){
             holder.description.visibility = View.GONE
         }
@@ -150,64 +148,47 @@ class ClubMembersAdapter(options: FirebaseRecyclerOptions<Alumni?>) :
         if(model.purl.isEmpty()){
             holder.profile.visibility = View.GONE
         }
-        if(model.github.isEmpty()){
-            holder.github.visibility = View.GONE
-        }
-        if(model.instagram.isEmpty()){
-            holder.insta.visibility = View.GONE
-        }
-        if(model.linkedIn.isEmpty()){
-            holder.linkedin.visibility = View.GONE
-        }
-        if(model.twitter.isEmpty()){
-            holder.twitter.visibility = View.GONE
-        }
-        if(model.email.isEmpty()){
-            holder.email.visibility = View.GONE
-        }
-        if(model.discord.isEmpty()){
-            holder.descord.visibility = View.GONE
-        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): userAdapterHolder {
-        view =LayoutInflater.from(parent.context).inflate(R.layout.alumni_item, parent, false)
+        view =LayoutInflater.from(parent.context).inflate(R.layout.club_member_item, parent, false)
         return userAdapterHolder(view)
     }
 
     inner class userAdapterHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var profile: CircleImageView
-        var github: TextView
-        var insta: TextView
-        var twitter: TextView
-        var descord: TextView
-        var email: TextView
-        var linkedin: TextView
+        var github: ImageView
+        var insta: ImageView
+        var twitter: ImageView
+        var descord: ImageView
+        var email: ImageView
+        var linkedin: ImageView
         var name: TextView
         var position: TextView
         var company: TextView
         var batch: TextView
+        var branch: TextView
         var postinClub: TextView
-        var placeofWork: TextView
         var description: TextView
         var achievement: TextView
         
         init {
             profile= itemView.findViewById<CircleImageView>(R.id.profile)
-           github= itemView.findViewById<TextView>(R.id.git)
-            insta= itemView.findViewById<TextView>(R.id.insta)
-            twitter= itemView.findViewById<TextView>(R.id.twitter)
-            descord= itemView.findViewById<TextView>(R.id.descord)
-            email= itemView.findViewById<TextView>(R.id.email)
-            linkedin= itemView.findViewById<TextView>(R.id.linkedin)
-            name = itemView.findViewById<TextView>(R.id.name)
-            position = itemView.findViewById<TextView>(R.id.position)
-            company = itemView.findViewById<TextView>(R.id.company)
-            batch = itemView.findViewById<TextView>(R.id.batch)
-            postinClub= itemView.findViewById<TextView>(R.id.postinClub)
-            placeofWork = itemView.findViewById<TextView>(R.id.placeofWork)
-            description= itemView.findViewById<TextView>(R.id.description)
-            achievement= itemView.findViewById<TextView>(R.id.achievement)
+           github= itemView.findViewById(R.id.git)
+            insta= itemView.findViewById(R.id.insta)
+            twitter= itemView.findViewById(R.id.twitter)
+            descord= itemView.findViewById(R.id.descord)
+            email= itemView.findViewById(R.id.email)
+            linkedin= itemView.findViewById(R.id.linkedin)
+            name = itemView.findViewById(R.id.name)
+            position = itemView.findViewById(R.id.position)
+            company = itemView.findViewById(R.id.company)
+            batch = itemView.findViewById(R.id.batch)
+            branch = itemView.findViewById(R.id.branch)
+            postinClub= itemView.findViewById(R.id.postinClub)
+            description= itemView.findViewById(R.id.description)
+            achievement= itemView.findViewById(R.id.achievement)
           
         }
     }
