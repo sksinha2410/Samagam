@@ -14,10 +14,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.ingray.samagam.Adapters.AlumniBatchAdapter
 import com.ingray.samagam.Adapters.ClubMembersAdapter
 import com.ingray.samagam.DataClass.Alumni
-import com.ingray.samagam.DataClass.MembersProfile
 import com.ingray.samagam.R
 import java.util.*
 import kotlin.collections.ArrayList
@@ -73,7 +71,9 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
                             if (snapshot.exists()) {
                                 for (snap in snapshot.children) {
                                     if (snap.child("purl").exists()) {
-                                        arrList.add(snap.child("purl").value.toString())
+                                        if(snap.child("purl").value.toString().isNotEmpty()) {
+                                            arrList.add(snap.child("purl").value.toString())
+                                        }
                                     }
                                 }
                                 val random = Random()
@@ -104,7 +104,9 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
                             if (snapshot.exists()) {
                                 for (snap in snapshot.children) {
                                     if (snap.child("purl").exists()) {
-                                        arrList.add(snap.child("purl").value.toString())
+                                        if(snap.child("purl").value.toString().isNotEmpty()) {
+                                            arrList.add(snap.child("purl").value.toString())
+                                        }
                                     }
                                 }
                                 val random = Random()
