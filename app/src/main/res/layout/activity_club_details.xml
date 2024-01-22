@@ -345,7 +345,15 @@
 
 
             </androidx.cardview.widget.CardView>
+            <TextView
 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_35sdp"
+                android:layout_gravity="center"
+                android:text="Alumni"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/londrina_outline"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/alumni_batch_recycler"
                 android:layout_width="match_parent"
