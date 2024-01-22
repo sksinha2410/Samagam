@@ -30,7 +30,7 @@ class AlumniBatchAdapter(options: FirebaseRecyclerOptions<MembersProfile?>, val 
         Glide.with(holder.profile2.context).load(model.profile2).into(holder.profile2)
         Glide.with(holder.profile3.context).load(model.profile3).into(holder.profile3)
         Glide.with(holder.profile4.context).load(model.profile4).into(holder.profile4)
-        holder.batchName.text=model.batch
+        holder.batchName.text="Alumni: ${model.batch}"
         holder.cvAll.setOnClickListener{
              val intent=Intent(holder.cvAll.context,ClubMembersDetailActivity::class.java)
             intent.putExtra("clubName",clubName)

@@ -28,7 +28,13 @@ class ClubsAdapter(options: FirebaseRecyclerOptions<Clubs?>) :
             Glide.with(holder.profileImage.context).load(model.imageUrl).into(holder.profileImage)
             holder.clubCard.setOnClickListener{
                 val intent = Intent(view.context,ClubDetailsActivity::class.java)
-                intent.putExtra("clubName", model.club_name) // Pass any necessary data to the new activity
+                intent.putExtra("clubName", model.club_name)
+                try {
+                    intent.putExtra("eventpic1",model.eventpic1)
+                    intent.putExtra("eventpic2",model.eventpic2)
+                }catch (e:Exception){}
+
+                // Pass any necessary data to the new activity
                 holder.itemView.context.startActivity(intent)
 
             }

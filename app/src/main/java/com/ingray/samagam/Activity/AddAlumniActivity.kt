@@ -52,6 +52,7 @@ class AddAlumniActivity : AppCompatActivity() {
     private lateinit var btnSubmit:Button
     private lateinit var selectedItem:String
     private var purl:String =""
+    private var type = ""
     private lateinit var progress:ProgressBar
     private var deRef : DatabaseReference = FirebaseDatabase.getInstance().reference
     private var storageRef = FirebaseStorage.getInstance().reference
@@ -59,7 +60,7 @@ class AddAlumniActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_alumni)
         var clubName = intent.getStringExtra("Clubname")
-        var type = intent.getStringExtra("type")
+        type = intent.getStringExtra("type").toString()
         var batches = intent.getStringExtra("batch")
 
 
@@ -99,7 +100,7 @@ class AddAlumniActivity : AppCompatActivity() {
                         .updateChildren(
                             map as Map<String, Any>
                         )
-                    Toast.makeText(this, "Member added", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Alumni added", Toast.LENGTH_SHORT).show()
                     finish()
                 }else{
                     deRef.child("Clubs").child(clubName).child(type!!)
@@ -197,10 +198,35 @@ class AddAlumniActivity : AppCompatActivity() {
         }
     }
     private fun getItemFromSpinner() {
-        val data= arrayOf("2021-2025","2020-2024","2019-2023","2018-2022","2017-2021","2016-2020","2015-2019","2014-2018","2013-2017","2012-2016",)
-        val adapt= ArrayAdapter(this,android.R.layout.simple_spinner_item,data)
-        adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        batchyear.adapter=adapt
+        if (type == "Alumni") {
+            val data = arrayOf(
+                "2021-2025",
+                "2020-2024",
+                "2019-2023",
+                "2018-2022",
+                "2017-2021",
+                "2016-2020",
+                "2015-2019",
+                "2014-2018",
+                "2013-2017",
+                "2012-2016",
+            )
+            val adapt = ArrayAdapter(this, android.R.layout.simple_spinner_item, data)
+            adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            batchyear.adapter = adapt
+        }else{
+            val data = arrayOf(
+                "2023-2027",
+                "2022-2026",
+                "2021-2025",
+                "2020-2024"
+
+            )
+            val adapt = ArrayAdapter(this, android.R.layout.simple_spinner_item, data)
+            adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            batchyear.adapter = adapt
+
+        }
         batchyear.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 selectedItem = parent.getItemAtPosition(position).toString()

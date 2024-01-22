@@ -40,58 +40,59 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
         position: Int,
         model: Posts
     ) {
+        try {
+            holder.username.setText(model.username)
+            val previousTimeMillis = model.time.toLong()
+
+            val currentTimeMillis = Calendar.getInstance().timeInMillis
+
+            val timeDifferenceMillis = currentTimeMillis - previousTimeMillis
+            val hoursDifference = TimeUnit.MILLISECONDS.toHours(timeDifferenceMillis)
+
+            var map = HashMap<String, Long>()
+            map.put("hrsAgo",hoursDifference)
+            dbRef.child(model.postId).updateChildren(map as Map<String, Any>)
 
 
-        holder.username.setText(model.username)
-        val previousTimeMillis = model.time.toLong()
+            if (hoursDifference/24 >= 1){
+                holder.time.text = (hoursDifference/24).toString() + " days ago"
+            }
+            else{
+                holder.time.text = hoursDifference.toString() + " hours ago"
+            }
 
-        val currentTimeMillis = Calendar.getInstance().timeInMillis
+            holder.likes.setText(model.likes)
+            Glide.with(holder.postImage.context).load(model.postUrl).into(holder.postImage)
+            Glide.with(holder.profileImage.context).load(model.purl).into(holder.profileImage)
+            val likedByRef= dbRef.child(model.postId).child("LikedBy")
 
-        val timeDifferenceMillis = currentTimeMillis - previousTimeMillis
-        val hoursDifference = TimeUnit.MILLISECONDS.toHours(timeDifferenceMillis)
-
-        var map = HashMap<String, Long>()
-        map.put("hrsAgo",hoursDifference)
-        dbRef.child(model.postId).updateChildren(map as Map<String, Any>)
-
-
-        if (hoursDifference/24 >= 1){
-            holder.time.text = (hoursDifference/24).toString() + " days ago"
-        }
-        else{
-            holder.time.text = hoursDifference.toString() + " hours ago"
-        }
-
-        holder.likes.setText(model.likes)
-        Glide.with(holder.postImage.context).load(model.postUrl).into(holder.postImage)
-        Glide.with(holder.profileImage.context).load(model.purl).into(holder.profileImage)
-        val likedByRef= dbRef.child(model.postId).child("LikedBy")
-
-        likedByRef!!.addValueEventListener(object :ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    if (snapshot.child(userId).exists()){
-                        var b = snapshot.child(userId).getValue(Boolean::class.java)
-                        if (snapshot.hasChild(userId) && b == true){
-                            holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_heart,0,0,0)
-                        }else{
-                            holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.white_heart,0,0,0)
+            likedByRef!!.addValueEventListener(object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()){
+                        if (snapshot.child(userId).exists()){
+                            var b = snapshot.child(userId).getValue(Boolean::class.java)
+                            if (snapshot.hasChild(userId) && b == true){
+                                holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.red_heart,0,0,0)
+                            }else{
+                                holder.likes.setCompoundDrawablesWithIntrinsicBounds(R.drawable.white_heart,0,0,0)
+                            }
                         }
+
                     }
-
                 }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+            holder.likes.setOnClickListener {
+                handleLikeButtonClick(holder,model,likedByRef)
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
+        }catch (e:Exception){
 
-        })
-
-        holder.likes.setOnClickListener {
-            handleLikeButtonClick(holder,model,likedByRef)
         }
-
         holder.report.setOnClickListener{
 
             val builder: AlertDialog.Builder = AlertDialog.Builder(holder.report.context)

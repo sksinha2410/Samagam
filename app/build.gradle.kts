@@ -12,8 +12,8 @@ android {
         applicationId = "com.ingray.samagam"
         minSdk = 24
         targetSdk = 34
-        versionCode = 7
-        versionName = "1.2"
+        versionCode = 9
+        versionName = "1.9"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

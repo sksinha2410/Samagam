@@ -14,10 +14,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.ingray.samagam.Adapters.AlumniBatchAdapter
 import com.ingray.samagam.Adapters.ClubMembersAdapter
 import com.ingray.samagam.DataClass.Alumni
-import com.ingray.samagam.DataClass.MembersProfile
 import com.ingray.samagam.R
 import java.util.*
 import kotlin.collections.ArrayList
@@ -73,22 +71,27 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
                             if (snapshot.exists()) {
                                 for (snap in snapshot.children) {
                                     if (snap.child("purl").exists()) {
-                                        arrList.add(snap.child("purl").value.toString())
+                                        if(snap.child("purl").value.toString().isNotEmpty()) {
+                                            arrList.add(snap.child("purl").value.toString())
+                                        }
                                     }
                                 }
-                                val random = Random()
-                                val randomIndex1 = random.nextInt(arrList.size)
-                                val randomIndex2 = random.nextInt(arrList.size)
-                                val randomIndex3 = random.nextInt(arrList.size)
-                                val randomIndex4 = random.nextInt(arrList.size)
-                                val map = HashMap<String, String>()
-                                map.put("profile1", arrList[randomIndex1])
-                                map.put("profile2", arrList[randomIndex2])
-                                map.put("profile3", arrList[randomIndex3])
-                                map.put("profile4", arrList[randomIndex4])
-                                FirebaseDatabase.getInstance().reference.child("Clubs").child(name)
-                                    .child(type).child(batch)
-                                    .updateChildren(map as Map<String, Any>)
+                                if (arrList.size>0) {
+                                    val random = Random()
+                                    val randomIndex1 = random.nextInt(arrList.size)
+                                    val randomIndex2 = random.nextInt(arrList.size)
+                                    val randomIndex3 = random.nextInt(arrList.size)
+                                    val randomIndex4 = random.nextInt(arrList.size)
+                                    val map = HashMap<String, String>()
+                                    map.put("profile1", arrList[randomIndex1])
+                                    map.put("profile2", arrList[randomIndex2])
+                                    map.put("profile3", arrList[randomIndex3])
+                                    map.put("profile4", arrList[randomIndex4])
+                                    FirebaseDatabase.getInstance().reference.child("Clubs")
+                                        .child(name)
+                                        .child(type).child(batch)
+                                        .updateChildren(map as Map<String, Any>)
+                                }
                             }
                         }
 
@@ -104,7 +107,9 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
                             if (snapshot.exists()) {
                                 for (snap in snapshot.children) {
                                     if (snap.child("purl").exists()) {
-                                        arrList.add(snap.child("purl").value.toString())
+                                        if(snap.child("purl").value.toString().isNotEmpty()) {
+                                            arrList.add(snap.child("purl").value.toString())
+                                        }
                                     }
                                 }
                                 val random = Random()

@@ -32,16 +32,38 @@
 
         </RelativeLayout>
 
-
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="@dimen/_80sdp"
             android:layout_gravity="end"
             android:layout_weight="1"
-
             android:background="@drawable/toolbackr"
             android:padding="@dimen/_13sdp"
-            android:src="@drawable/ghost" />
+
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+
+                android:background="@drawable/toolbackr"
+                android:src="@drawable/ghost" />
+            <ImageView
+                android:id="@+id/add"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_weight="1.6"
+                android:layout_marginEnd="2dp"
+                android:background="@drawable/circle_back"
+                android:padding="@dimen/_14sdp"
+                android:src="@drawable/plus" />
+
+        </RelativeLayout>
+
+
+
 
     </LinearLayout>
     <TextView
@@ -65,7 +87,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:layout_marginVertical="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_180sdp"
                 android:layout_marginHorizontal="15dp"
@@ -121,6 +143,7 @@
                                         android:layout_marginBottom="10dp"
                                         android:layout_weight="1">
                                         <ImageView
+                                            android:id="@+id/eventpic1"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:scaleType="fitXY"
@@ -138,6 +161,7 @@
                                         android:background="@drawable/outdent"
                                         android:layout_weight="1">
                                         <ImageView
+                                            android:id="@+id/eventpic2"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:scaleType="fitXY"
@@ -321,7 +345,15 @@
 
 
             </androidx.cardview.widget.CardView>
+            <TextView
 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_35sdp"
+                android:layout_gravity="center"
+                android:text="Alumni"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/londrina_outline"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/alumni_batch_recycler"
                 android:layout_width="match_parent"

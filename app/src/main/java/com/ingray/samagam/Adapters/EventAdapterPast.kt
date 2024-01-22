@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit
 class EventAdapterPast(options: FirebaseRecyclerOptions<Events?>) :
     FirebaseRecyclerAdapter<Events?, EventAdapterPast.userAdapterHolder?>(options) {
         val dbRef = FirebaseDatabase.getInstance().reference.child("PastEvents")
+        val dbRefev = FirebaseDatabase.getInstance().reference.child("Events")
 
     override fun onBindViewHolder(
         holder: userAdapterHolder,
@@ -38,7 +39,10 @@ class EventAdapterPast(options: FirebaseRecyclerOptions<Events?>) :
         val map = HashMap<String,Long>()
         map.put("hrsAgo",hoursDifference)
 
-        dbRef.child(model.key).updateChildren(map as Map<String, Any>)
+
+            dbRef.child(model.key).updateChildren(map as Map<String, Any>)
+            dbRefev.child(model.key).updateChildren(map as Map<String, Any>)
+
 
 
 
