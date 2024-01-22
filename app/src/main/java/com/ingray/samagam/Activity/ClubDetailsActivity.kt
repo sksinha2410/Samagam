@@ -37,6 +37,8 @@ class ClubDetailsActivity : AppCompatActivity() {
     private lateinit var profile2:ImageView
     private lateinit var profile3:ImageView
     private lateinit var profile4:ImageView
+    private lateinit var eventPic1:ImageView
+    private lateinit var eventPic2:ImageView
     private lateinit var add:ImageView
     private var userType:String=""
     private var uid:String=FirebaseAuth.getInstance().currentUser?.uid.toString()
@@ -46,13 +48,6 @@ class ClubDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_club_details)
-
-        val itnt = intent
-        var name = itnt.getStringExtra("clubName")!!
-        var names = "$name Events"
-
-
-
         cvEvents = findViewById(R.id.clubEvent)
         clubName = findViewById(R.id.clubName)
         clubNames = findViewById(R.id.clubNames)
@@ -61,7 +56,22 @@ class ClubDetailsActivity : AppCompatActivity() {
         profile2 = findViewById(R.id.profile2)
         profile3 = findViewById(R.id.profile3)
         profile4 = findViewById(R.id.profile4)
+        eventPic1 = findViewById(R.id.eventpic1)
+        eventPic2 = findViewById(R.id.eventpic2)
         add = findViewById(R.id.add)
+
+        val itnt = intent
+        var name = itnt.getStringExtra("clubName")!!
+        try {
+            var eventpic1 = itnt.getStringExtra("eventpic1")!!
+            var eventpic2 = itnt.getStringExtra("eventpic2")!!
+
+            Glide.with(applicationContext).load(eventpic1).into(eventPic1)
+            Glide.with(applicationContext).load(eventpic2).into(eventPic2)
+        }catch (e:Exception){}
+
+        var names = "$name Events"
+
 
         FirebaseDatabase.getInstance().reference.child("Users").child(uid).addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
