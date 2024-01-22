@@ -20,12 +20,14 @@ import com.ingray.samagam.Adapters.ClubsEventAdapter
 import com.ingray.samagam.DataClass.Clubs
 import com.ingray.samagam.DataClass.Events
 import com.ingray.samagam.R
+import java.util.*
 
 class EventsOfClubsActivity : AppCompatActivity() {
     private lateinit var club_event_recycler:RecyclerView
     private lateinit var clubsEventAdapter: ClubsEventAdapter
     private lateinit var clubName:TextView
     private lateinit var nothing: ImageView
+    private  var arrList:ArrayList<String> = ArrayList<String>()
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,35 @@ class EventsOfClubsActivity : AppCompatActivity() {
        nothing = findViewById(R.id.nothing)
         clubName.text = name
         club_event_recycler.itemAnimator = null
+
+        FirebaseDatabase.getInstance().reference.child("Clubs").child(name).child("Events")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        for (snap in snapshot.children) {
+                            if (snap.child("purl").exists()) {
+                                if(snap.child("purl").value.toString().isNotEmpty()) {
+                                    arrList.add(snap.child("purl").value.toString())
+                                }
+                            }
+                        }
+                        if (arrList.size>0) {
+                            val random = Random()
+                            val randomIndex1 = random.nextInt(arrList.size)
+                            val randomIndex2 = random.nextInt(arrList.size)
+                            val map = HashMap<String, String>()
+                            map.put("eventpic1", arrList[randomIndex1])
+                            map.put("eventpic2", arrList[randomIndex2])
+                            FirebaseDatabase.getInstance().reference.child("Clubs").child(name)
+                                .updateChildren(map as Map<String, Any>)
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
         FirebaseDatabase.getInstance().reference.child("Clubs").child(name).child("Events").addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 var count = snapshot.childrenCount
