@@ -354,7 +354,7 @@ class AddEventsActivity : AppCompatActivity() {
     }
 
     private fun getItemFromSpinner() {
-        val data= arrayOf("SAC","Expresso","IEEE","Natvansh","ASME","Saptak","Think India","Vista","Total Chaos","E-Cell","GDSC","Hackslash","Tesla","DesCo","ASCE","Robotics","GYB","Incubation Centre","Others","Chess")
+        val data= arrayOf("SAC","Expresso","IEEE","Natvansh","ASME","Saptak","Think India","Vista","Total Chaos","E-Cell","GDSC","Hackslash","Tesla","DesCo","ASCE","Robotics","GYB","Incubation Centre","Others","Chess","NSS","Sankalp")
         val adapt=ArrayAdapter(this,android.R.layout.simple_spinner_item,data)
         adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter=adapt
