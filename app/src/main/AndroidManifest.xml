@@ -20,11 +20,11 @@
         android:theme="@style/Theme.Samagam"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.MembersDetailsEditActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.NotificationActivity"
-            android:exported="true" >
-
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Activity.AddAlumniActivity"
             android:exported="false" />
