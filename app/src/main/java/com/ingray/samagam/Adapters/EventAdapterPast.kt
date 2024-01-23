@@ -38,14 +38,14 @@ class EventAdapterPast(options: FirebaseRecyclerOptions<Events?>) :
 
         val map = HashMap<String,Long>()
         map.put("hrsAgo",hoursDifference)
-
-
-            dbRef.child(model.key).updateChildren(map as Map<String, Any>)
-            dbRefev.child(model.key).updateChildren(map as Map<String, Any>)
-
-
-
-
+        dbRef.child(model.key).updateChildren(map as Map<String, Any>)
+        dbRefev.child(model.key).updateChildren(map as Map<String, Any>)
+        val date = model.event_date
+        val dateup = date.substring(8,10)+date.substring(4,8)+date.substring(0,4)
+        holder.date.setText(dateup)
+        holder.time.setText(model.event_starttime)
+        holder.venue.setText(model.event_venue)
+        holder.club_name.setText(model.club_name)
         holder.posterImage.setOnClickListener{
             val customDialog = CustomDialog(holder.itemView.context, model)
             customDialog.showDialog()
@@ -62,10 +62,18 @@ class EventAdapterPast(options: FirebaseRecyclerOptions<Events?>) :
     inner class userAdapterHolder(innerView:View):RecyclerView.ViewHolder(innerView) {
         var posterImage:ImageView
         var event_name:TextView
+        var club_name:TextView
+        var date:TextView
+        var time:TextView
+        var venue:TextView
 
         init {
-            posterImage =innerView.findViewById(R.id.ivLiveEvents)
-            event_name = innerView.findViewById(R.id.tv_title)
+            posterImage =innerView.findViewById(R.id.postImage)
+            event_name = innerView.findViewById(R.id.event_name)
+            club_name = innerView.findViewById(R.id.club_name)
+            date = innerView.findViewById(R.id.date)
+            time = innerView.findViewById(R.id.time)
+            venue = itemView.findViewById(R.id.venue)
         }
     }
 
