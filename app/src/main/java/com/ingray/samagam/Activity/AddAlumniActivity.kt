@@ -103,6 +103,7 @@ class AddAlumniActivity : AppCompatActivity() {
                     Toast.makeText(this, "Alumni added", Toast.LENGTH_SHORT).show()
                     finish()
                 }else{
+                    ad.userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
                     deRef.child("Clubs").child(clubName).child(type!!)
                         .child("Members").child(
                             Calendar.getInstance().timeInMillis.toString()
