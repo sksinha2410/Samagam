@@ -148,7 +148,7 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
                             Alumni::class.java
                         )
                         .build()
-                adapt = ClubMembersAdapter(options)
+                adapt = ClubMembersAdapter(options,name)
                 members.adapter = adapt
                 adapt.startListening()
             }else{
@@ -160,7 +160,7 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
                             Alumni::class.java
                         )
                         .build()
-                adapt = ClubMembersAdapter(options)
+                adapt = ClubMembersAdapter(options,name)
                 members.adapter = adapt
                 adapt.startListening()
             }

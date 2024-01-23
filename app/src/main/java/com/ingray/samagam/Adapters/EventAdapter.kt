@@ -22,6 +22,10 @@ class EventAdapter(options: FirebaseRecyclerOptions<Events?>) :
     ) {
         holder.event_name.setText(model.event_name)
         Glide.with(holder.posterImage.context).load(model.purl).into(holder.posterImage)
+        holder.date.setText("Today")
+        holder.time.setText(model.event_endtime)
+        holder.venue.setText(model.event_venue)
+        holder.club_name.setText(model.club_name)
 
         holder.posterImage.setOnClickListener{
             val customDialog = CustomDialog(holder.itemView.context, model)
@@ -39,10 +43,18 @@ class EventAdapter(options: FirebaseRecyclerOptions<Events?>) :
     inner class userAdapterHolder(innerView:View):RecyclerView.ViewHolder(innerView) {
         var posterImage:ImageView
         var event_name:TextView
+        var club_name:TextView
+        var date:TextView
+        var time:TextView
+        var venue:TextView
 
         init {
-            posterImage =innerView.findViewById(R.id.ivLiveEvents)
-            event_name = innerView.findViewById(R.id.tv_title)
+            posterImage =innerView.findViewById(R.id.postImage)
+            event_name = innerView.findViewById(R.id.event_name)
+            club_name = innerView.findViewById(R.id.club_name)
+            date = innerView.findViewById(R.id.date)
+            time = innerView.findViewById(R.id.time)
+            venue = itemView.findViewById(R.id.venue)
         }
     }
 }
