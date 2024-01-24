@@ -52,6 +52,7 @@
                     <ImageView
                         android:id="@+id/profile"
                         android:layout_width="match_parent"
+                        android:background="@drawable/black_stroke"
                         android:scaleType="centerCrop"
                         android:layout_height="@dimen/_200sdp"
                         android:src="@drawable/add_pic"/>
