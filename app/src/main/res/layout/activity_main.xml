@@ -36,8 +36,8 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/londrina_solid"
-                android:letterSpacing="0.1"
                 android:gravity="center_vertical"
+                android:layout_centerInParent="true"
                 android:textSize="@dimen/_55sdp" />
             <TextView
                 android:layout_width="wrap_content"
@@ -46,10 +46,10 @@
                 android:shadowColor="#9F8FED"
                 android:shadowRadius="5"
                 android:textStyle="bold"
+                android:layout_centerInParent="true"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/londrina_outline"
-                android:letterSpacing="0.1"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/_55sdp" />
 
