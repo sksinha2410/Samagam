@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.LiveEventsFragment">
 
@@ -27,6 +27,7 @@
                 android:text="@string/live"
                 android:textColor="@color/red"
                 android:paddingStart="7dp"
+                android:fontFamily="@font/londrina_solid"
                 android:paddingBottom="3dp"
                 android:textSize="30sp"
                 android:textStyle="bold"
@@ -42,6 +43,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/black"
             android:layout_marginHorizontal="@dimen/_10sdp"
             app:cardCornerRadius="@dimen/_8sdp"
             android:minHeight="@dimen/_150sdp">
@@ -67,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="7dp"
                 android:paddingBottom="3dp"
+                android:fontFamily="@font/londrina_solid"
                 android:textSize="30sp"
                 android:text="@string/upcoming"
                 android:textColor="#4F16B4"
@@ -87,6 +90,7 @@
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            app:cardBackgroundColor="@color/black"
             app:cardCornerRadius="@dimen/_8sdp"
             android:minHeight="@dimen/_300sdp">
             <androidx.recyclerview.widget.RecyclerView
@@ -113,6 +117,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="7dp"
                 android:paddingBottom="3dp"
+                android:fontFamily="@font/londrina_solid"
                 android:textSize="30sp"
                 android:text="Past"
                 android:textColor="#572B0A"
@@ -132,6 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            app:cardBackgroundColor="@color/black"
             app:cardCornerRadius="@dimen/_8sdp"
             android:minHeight="@dimen/_150sdp">
             <androidx.recyclerview.widget.RecyclerView
