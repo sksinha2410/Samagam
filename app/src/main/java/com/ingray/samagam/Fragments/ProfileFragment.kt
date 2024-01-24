@@ -66,39 +66,42 @@ class ProfileFragment : Fragment() {
        view = inflater.inflate(R.layout.fragment_profile, container, false)
         callById()
         progress.visibility = View.INVISIBLE
+        try {
+            deRef.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    var us : Users
+                    if(snapshot.exists()){
+                        us = snapshot.getValue(Users::class.java)!!
+                        profileName.setText(us.name)
+                        admin = us.userType
+                        if (admin == "0"){
+                            addEvent.visibility = View.GONE
+                            report.visibility =View.GONE
+                        }else if(admin =="1"){
+                            addEvent.visibility = View.VISIBLE
+                            report.visibility = View.VISIBLE
+                        }
+                        else{
+                            addEvent.visibility = View.VISIBLE
+                            report.visibility = View.GONE
+                        }
 
-        deRef.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-             var us : Users
-             if(snapshot.exists()){
-                    us = snapshot.getValue(Users::class.java)!!
-                    profileName.setText(us.name)
-                    admin = us.userType
-                    if (admin == "0"){
-                        addEvent.visibility = View.GONE
-                        report.visibility =View.GONE
-                    }else if(admin =="1"){
-                        addEvent.visibility = View.VISIBLE
-                        report.visibility = View.VISIBLE
+                        if (us.purl.isEmpty()){
+                            profileImage.setImageResource(R.drawable.add_photo)
+                        }else{
+                            Glide.with(view.context).load(us.purl).into(profileImage)
+                        }
                     }
-                    else{
-                        addEvent.visibility = View.VISIBLE
-                        report.visibility = View.GONE
-                    }
-
-                    if (us.purl.isEmpty()){
-                        profileImage.setImageResource(R.drawable.add_photo)
-                    }else{
-                        Glide.with(view.context).load(us.purl).into(profileImage)
-                    }
-             }
-            }
+                }
 
                 override fun onCancelled(error: DatabaseError) {
-            // Handle errors here
-            Log.e("Firebase", "Error fetching events: ${error.message}")
-        }
-    })
+                    // Handle errors here
+                    Log.e("Firebase", "Error fetching events: ${error.message}")
+                }
+            })
+
+        }catch (e:Exception){}
+
         recyclerPost.itemAnimator = null
         val options: FirebaseRecyclerOptions<Posts?> = FirebaseRecyclerOptions.Builder<Posts>().
         setQuery(deRef.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("Posts"), Posts::class.java).build()
