@@ -73,7 +73,8 @@ class ClubMembersAdapter(options: FirebaseRecyclerOptions<Alumni?>,val clubName:
             intent.putExtra("discord",model.discord)
             intent.putExtra("postinclub",model.postInClub)
             intent.putExtra("phone",model.phoneNo)
-            intent.putExtra("purl",model.position)
+            intent.putExtra("purl",model.purl)
+            intent.putExtra("userId",model.userId)
             intent.putExtra("description",model.description)
             holder.itemView.context.startActivity(intent)
         }
