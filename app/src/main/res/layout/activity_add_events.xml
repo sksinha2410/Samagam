@@ -45,8 +45,9 @@
                 <Spinner
                     android:id="@+id/spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_20sdp"
-                    android:visibility="gone"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/inner_gradienr_edit"
+                    android:visibility="visible"
                     android:layout_marginHorizontal="@dimen/_15sdp"/>
 
                 <RelativeLayout
@@ -58,6 +59,7 @@
                         android:id="@+id/event_poster"
                         android:layout_width="match_parent"
                         android:scaleType="centerCrop"
+                        android:background="@drawable/black_stroke"
                         android:layout_height="@dimen/_200sdp"
                         android:src="@drawable/add_pic"/>
 
