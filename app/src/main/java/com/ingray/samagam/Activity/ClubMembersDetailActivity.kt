@@ -144,7 +144,7 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
                     FirebaseRecyclerOptions.Builder<Alumni>()
                         .setQuery(
                             FirebaseDatabase.getInstance().reference.child("Clubs").child(name!!)
-                                .child(type!!).child(batch!!).child("Members"),
+                                .child(type!!).child(batch!!).child("Members").orderByChild("weightage"),
                             Alumni::class.java
                         )
                         .build()
@@ -156,7 +156,7 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
                     FirebaseRecyclerOptions.Builder<Alumni>()
                         .setQuery(
                             FirebaseDatabase.getInstance().reference.child("Clubs").child(name!!)
-                                .child(type!!).child("Members"),
+                                .child(type!!).child("Members").orderByChild("weightage"),
                             Alumni::class.java
                         )
                         .build()
