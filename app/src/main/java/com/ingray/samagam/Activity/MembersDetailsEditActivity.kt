@@ -132,7 +132,7 @@ class MembersDetailsEditActivity : AppCompatActivity() {
                         for (snapshot in snapshots.children) {
                             if (snapshot.child("userId")
                                     .exists() && snapshot.child("userId").value.toString().equals(
-                                    FirebaseAuth.getInstance().currentUser?.uid.toString()
+                                    intent.getStringExtra("userId")
                                 )
                             ) {
                                 val key = snapshot.key.toString()

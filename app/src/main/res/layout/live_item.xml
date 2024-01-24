@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
     android:layout_margin="@dimen/_10sdp"
-    app:cardBackgroundColor="@color/black"
+    app:cardBackgroundColor="@color/extra_light_pink"
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
@@ -68,7 +68,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
-            app:cardBackgroundColor="#797C7A"
+            app:cardBackgroundColor="@color/red"
             app:cardCornerRadius="5dp">
 
             <LinearLayout
@@ -142,6 +142,13 @@
                         android:textSize="10sp"
                         android:textStyle="bold"
                         android:textAlignment="center"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:fontFamily="@font/londrina_solid"
+                        android:focusableInTouchMode="true"
+                        android:maxWidth="@dimen/_40sdp"
                         android:textColor="#FFFFFF"
                         android:text=""/>
 

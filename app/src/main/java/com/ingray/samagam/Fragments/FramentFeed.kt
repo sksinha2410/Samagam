@@ -39,8 +39,8 @@ class FramentFeed : Fragment() {
         feedRecycler.itemAnimator = null
 
         try{
-            val options: FirebaseRecyclerOptions<Posts?> = FirebaseRecyclerOptions.Builder<Posts>().
-        setQuery(dataBaseRef.child("Posts").orderByChild("event_name"), Posts::class.java).build()
+        val options: FirebaseRecyclerOptions<Posts?> = FirebaseRecyclerOptions.Builder<Posts>().
+        setQuery(dataBaseRef.child("Posts").orderByChild("hrsAgo"), Posts::class.java).build()
         feedAdapter = FeedAdapter(options)
         feedRecycler.adapter = feedAdapter
         feedAdapter.startListening()
