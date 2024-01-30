@@ -20,52 +20,62 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_80sdp"
             android:layout_weight="0.3"
             android:background="@drawable/toolback">
 
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_80sdp"
                 android:text="SAMAGAM"
-                android:shadowColor="#9F8FED"
-                android:shadowRadius="5"
+                android:shadowColor="#A4000000"
+                android:shadowRadius="1"
                 android:textStyle="bold"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:textColor="@color/black"
+                android:layout_marginStart="30dp"
                 android:fontFamily="@font/londrina_solid"
                 android:gravity="center_vertical"
-                android:layout_centerInParent="true"
-                android:textSize="@dimen/_55sdp" />
+                android:textSize="@dimen/_50sdp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_80sdp"
                 android:text="SAMAGAM"
-                android:shadowColor="#9F8FED"
-                android:shadowRadius="5"
+                android:shadowColor="#B9903DC5"
+                android:shadowRadius="1"
                 android:textStyle="bold"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:textColor="@color/black"
+                android:layout_marginStart="30dp"
                 android:fontFamily="@font/londrina_outline"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/_55sdp" />
+                android:textSize="@dimen/_50sdp" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_gravity="end"
+            android:layout_weight="1"
+            android:background="@drawable/toolbackr">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="end"
+                android:background="@drawable/circle_back"
+                android:padding="10dp"
+                android:src="@drawable/notif" />
+
 
         </RelativeLayout>
 
 
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_gravity="end"
-            android:layout_weight="1"
 
-            android:background="@drawable/toolbackr"
-            android:padding="@dimen/_13sdp"
-            android:src="@drawable/ghost" />
 
     </LinearLayout>
 
@@ -89,7 +99,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="#303030"
+        android:background="#46303030"
         app:menu="@menu/bottom_nav_menu"
         app:itemIconTint="@color/bottom_nav_icon_color"
         app:itemTextColor="@color/bottom_nav_text_color"

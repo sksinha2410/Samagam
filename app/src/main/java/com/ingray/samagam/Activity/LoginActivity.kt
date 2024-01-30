@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
                             }else{
                                 Toast.makeText(
                                     applicationContext,
-                                    "Email not Verified",
+                                    "Check your email for verification link",
                                     Toast.LENGTH_LONG
                                 ).show()
                             }

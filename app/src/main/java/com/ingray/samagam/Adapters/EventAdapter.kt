@@ -22,7 +22,7 @@ class EventAdapter(options: FirebaseRecyclerOptions<Events?>) :
     ) {
         holder.event_name.setText(model.event_name)
         Glide.with(holder.posterImage.context).load(model.purl).into(holder.posterImage)
-        holder.date.setText("Today")
+        holder.date.setText("Live")
         holder.time.setText(model.event_endtime)
         holder.venue.setText(model.event_venue)
         holder.club_name.setText(model.club_name)

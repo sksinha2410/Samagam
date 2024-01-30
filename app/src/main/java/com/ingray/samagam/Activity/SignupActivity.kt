@@ -81,7 +81,7 @@ class SignupActivity : AppCompatActivity() {
 
                                     Toast.makeText(
                                         applicationContext,
-                                        "Registration successful! Please verify your Email id",
+                                        "Registration successful! Check your email for verification link",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                     val intent: Intent = Intent(
@@ -104,7 +104,7 @@ class SignupActivity : AppCompatActivity() {
                         Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
                         Toast.makeText(
                             baseContext,
-                            "Authentication failed.",
+                            "User Already Registered",
                             Toast.LENGTH_SHORT,
                         ).show()
                     }

@@ -9,7 +9,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DataSnapshot
@@ -23,6 +27,7 @@ import com.ingray.samagam.Adapters.EventAdapterUpcoming
 import com.ingray.samagam.Constants
 import com.ingray.samagam.DataClass.Events
 import com.ingray.samagam.R
+import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
@@ -30,6 +35,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import android.content.SharedPreferences
 
 class LiveEventsFragment : Fragment() {
     private lateinit var database:FirebaseDatabase
@@ -37,6 +43,29 @@ class LiveEventsFragment : Fragment() {
     val inputDateFormat= SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     val inputTimeFormat= SimpleDateFormat("HH:mm", Locale.getDefault())
     lateinit var contex: Context
+    private lateinit var liveDropdown:LinearLayout
+    private lateinit var rlLive:RelativeLayout
+    private lateinit var rlUpcoming:RelativeLayout
+    private lateinit var upcomingDropdown:LinearLayout
+    private lateinit var llUpcoming:LinearLayout
+    private lateinit var llPast:LinearLayout
+    private lateinit var llLive:LinearLayout
+    private lateinit var pastDropdown:LinearLayout
+    private lateinit var liveCard:CardView
+    private lateinit var upcomingCard:CardView
+    private lateinit var pastCard:CardView
+    private lateinit var civLive:CircleImageView
+    private lateinit var civUpc:CircleImageView
+    private lateinit var civPast:CircleImageView
+    private var liveCheck= false
+    private var pastCheck= true
+    private var upcomingCheck= true
+    private var liveCount= 0
+
+    private val PREFS_NAME = "MyPrefs"
+    private val KEY_FIRST_RUN = "firstRun"
+
+
     private lateinit var liveEventRecycler:RecyclerView
     private lateinit var upcomingEventRecycler:RecyclerView
     private lateinit var pastEventRecycler:RecyclerView
@@ -53,7 +82,183 @@ class LiveEventsFragment : Fragment() {
         val view:View= inflater.inflate(R.layout.fragment_live_events, container, false)
         contex=view.context
         callId(view)
+        startAnimation(llUpcoming)
+        startAnimation(llLive)
+        startAnimation(llPast)
+        startAnimation(liveCard)
+
+        // Mark that the animation has been shown
+        markFirstRunDone()
+
+        try {
+            FirebaseDatabase.getInstance().reference.child("Live").addListenerForSingleValueEvent(object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        liveCount = snapshot.childrenCount.toInt()
+
+                    }else{
+                        Toast.makeText(view.context,"No live events",Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+            FirebaseDatabase.getInstance().reference.child("Upcoming").addListenerForSingleValueEvent(object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+
+                        if (liveCount>0){
+                            liveDropdown.visibility = View.VISIBLE
+                            rlLive.visibility = View.VISIBLE
+                            liveCard.visibility = View.VISIBLE
+                            val currentRotation = civLive.rotation
+                            // Add 90 degrees to the current rotation
+                            val newRotation = currentRotation - 90f
+                            // Set the new rotation to the ImageView
+                            civLive.rotation = newRotation
+                            if (snapshot.childrenCount.toInt()>0){
+                                upcomingDropdown.visibility = View.VISIBLE
+                                rlUpcoming.visibility = View.VISIBLE
+
+                            }else{
+                                Toast.makeText(view.context,"No Upcoming events",Toast.LENGTH_SHORT).show()
+                                upcomingDropdown.visibility = View.GONE
+                                rlUpcoming.visibility = View.GONE
+                            }
+                        }else{
+                            liveDropdown.visibility = View.GONE
+                            rlLive.visibility = View.GONE
+                            Toast.makeText(view.context,"No live events",Toast.LENGTH_SHORT).show()
+                            if (snapshot.childrenCount.toInt()>0){
+                                upcomingDropdown.visibility = View.VISIBLE
+                                rlUpcoming.visibility = View.VISIBLE
+                                upcomingCheck =!upcomingCheck
+                                val currentRotation = civUpc.rotation
+
+                                // Add 90 degrees to the current rotation
+                                val newRotation = currentRotation - 90f
+
+                                // Set the new rotation to the ImageView
+                                civUpc.rotation = newRotation
+                                upcomingCard.visibility = View.VISIBLE
+
+
+                            }else{
+                                upcomingDropdown.visibility = View.GONE
+                                rlUpcoming.visibility = View.GONE
+                                Toast.makeText(view.context,"No Upcoming events",Toast.LENGTH_SHORT).show()
+                                pastCard.visibility = View.VISIBLE
+                                pastCheck =!pastCheck
+                                val currentRotation = civPast.rotation
+
+                                // Add 90 degrees to the current rotation
+                                val newRotation = currentRotation - 90f
+
+                                // Set the new rotation to the ImageView
+                                civPast.rotation = newRotation
+
+                            }
+                        }
+                    }else{
+                        Toast.makeText(view.context,"No live events",Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+
+        }catch (e:Exception){
+            rlLive.visibility = View.VISIBLE
+            rlUpcoming.visibility = View.VISIBLE
+            liveDropdown.visibility = View.VISIBLE
+            upcomingCard.visibility = View.VISIBLE
+        }
+
+
+
+        liveDropdown.setOnClickListener{
+            if (liveCheck){
+                liveCard.visibility = View.VISIBLE
+                liveCheck =!liveCheck
+                val currentRotation = civLive.rotation
+
+                // Add 90 degrees to the current rotation
+                val newRotation = currentRotation - 90f
+
+                // Set the new rotation to the ImageView
+                civLive.rotation = newRotation
+            }else{
+                liveCard.visibility = View.GONE
+                liveCheck = !liveCheck
+                val currentRotation = civLive.rotation
+
+                // Add 90 degrees to the current rotation
+                val newRotation = currentRotation + 90f
+
+                // Set the new rotation to the ImageView
+                civLive.rotation = newRotation
+
+            }
+
+        }
+        upcomingDropdown.setOnClickListener{
+            if (upcomingCheck){
+                upcomingCard.visibility = View.VISIBLE
+                upcomingCheck =!upcomingCheck
+                val currentRotation = civUpc.rotation
+
+                // Add 90 degrees to the current rotation
+                val newRotation = currentRotation - 90f
+
+                // Set the new rotation to the ImageView
+                civUpc.rotation = newRotation
+            }else{
+                upcomingCard.visibility = View.GONE
+                upcomingCheck = !upcomingCheck
+                val currentRotation = civUpc.rotation
+
+                // Add 90 degrees to the current rotation
+                val newRotation = currentRotation + 90f
+
+                // Set the new rotation to the ImageView
+                civUpc.rotation = newRotation
+
+            }
+
+        }
+        pastDropdown.setOnClickListener{
+            if (pastCheck){
+                pastCard.visibility = View.VISIBLE
+                pastCheck =!pastCheck
+                val currentRotation = civPast.rotation
+
+                // Add 90 degrees to the current rotation
+                val newRotation = currentRotation - 90f
+
+                // Set the new rotation to the ImageView
+                civPast.rotation = newRotation
+            }else{
+                pastCard.visibility = View.GONE
+                pastCheck = !pastCheck
+                val currentRotation = civPast.rotation
+
+                // Add 90 degrees to the current rotation
+                val newRotation = currentRotation + 90f
+
+                // Set the new rotation to the ImageView
+                civPast.rotation = newRotation
+
+            }
+
+        }
         liveEventRecycler.itemAnimator = null
+        pastEventRecycler.itemAnimator = null
+        pastEventRecycler.hasFixedSize()
+        pastEventRecycler.setItemViewCacheSize(20)
         dRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (childSnapshot in snapshot.children) {
@@ -359,5 +564,42 @@ class LiveEventsFragment : Fragment() {
         liveEventRecycler= view.findViewById(R.id.liveEvent_Recycler)
         upcomingEventRecycler= view.findViewById(R.id.upcoming_Recycler)
         pastEventRecycler= view.findViewById(R.id.past_Recycler)
+        liveDropdown = view.findViewById(R.id.liveDropdown)
+        pastDropdown = view.findViewById(R.id.pastDropdown)
+        upcomingDropdown = view.findViewById(R.id.upcomingDropdown)
+
+        liveCard = view.findViewById(R.id.liveCard)
+        pastCard = view.findViewById(R.id.pastCard)
+        upcomingCard = view.findViewById(R.id.upcomingCard)
+
+        civLive = view.findViewById(R.id.civLive)
+        civUpc = view.findViewById(R.id.civUpc)
+        civPast = view.findViewById(R.id.civPast)
+        rlLive = view.findViewById(R.id.rlLive)
+        rlUpcoming = view.findViewById(R.id.rlUpcoming)
+        llUpcoming = view.findViewById(R.id.llUpcoming)
+        llPast = view.findViewById(R.id.llpast)
+        llLive = view.findViewById(R.id.llLive)
+    }
+
+    private fun startAnimation(view: LinearLayout) {
+        val animation = AnimationUtils.loadAnimation(view.context, R.anim.anim_l_to_r)
+        view.startAnimation(animation)
+    }
+    private fun startAnimation(view:CardView) {
+        val animation = AnimationUtils.loadAnimation(view.context, R.anim.anim_fade)
+        view.startAnimation(animation)
+    }
+
+    private fun isFirstRun(): Boolean {
+        val sharedPreferences: SharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean(KEY_FIRST_RUN, true)
+    }
+
+    private fun markFirstRunDone() {
+        val sharedPreferences: SharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_FIRST_RUN, false)
+        editor.apply()
     }
 }
