@@ -19,14 +19,30 @@
             android:layout_weight="1"
             android:orientation="vertical"
             >
-            
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/ghost"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/editDetails"
+                    android:layout_width="40dp"
+                    android:visibility="gone"
+                    android:layout_height="40dp"
+                    android:src="@drawable/editevent"
+                    android:layout_margin="8dp"/>
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ghost"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"/>
+
+            </RelativeLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -36,11 +52,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/londrina_solid"
                     android:layout_marginStart="5dp"
                     android:text="Name:"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="15sp"
+                     />
 
                 <TextView
                     android:id="@+id/name"
@@ -53,9 +70,9 @@
                     android:marqueeRepeatLimit="marquee_forever"
                     android:focusableInTouchMode="true"
                     android:text=""
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                     />
 
             </LinearLayout>
             <LinearLayout
@@ -66,10 +83,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:fontFamily="@font/londrina_solid"
                     android:text="Department:"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="15sp"
+                     />
 
                 <TextView
                     android:id="@+id/branch"
@@ -82,9 +100,9 @@
                     android:marqueeRepeatLimit="marquee_forever"
                     android:focusableInTouchMode="true"
                     android:text=""
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                     />
 
             </LinearLayout>
             <LinearLayout
@@ -96,9 +114,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:text="Batch:"
+                    android:fontFamily="@font/londrina_solid"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="15sp"
+                     />
 
                 <TextView
                     android:id="@+id/batch"
@@ -111,9 +130,9 @@
                     android:marqueeRepeatLimit="marquee_forever"
                     android:focusableInTouchMode="true"
                     android:text=""
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                     />
 
             </LinearLayout>
             <LinearLayout
@@ -124,10 +143,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+
+                    android:fontFamily="@font/londrina_solid"
                     android:text="Current Comp.:"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="15sp"
+                     />
 
                 <TextView
                     android:id="@+id/company"
@@ -140,9 +161,9 @@
                     android:marqueeRepeatLimit="marquee_forever"
                     android:focusableInTouchMode="true"
                     android:text=""
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                     />
 
             </LinearLayout>
             <LinearLayout
@@ -154,9 +175,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:text="Post in Club:"
+                    android:fontFamily="@font/londrina_solid"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="15sp"
+                     />
 
                 <TextView
                     android:id="@+id/postinClub"
@@ -169,9 +191,9 @@
                     android:marqueeRepeatLimit="marquee_forever"
                     android:focusableInTouchMode="true"
                     android:text=""
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                     />
 
             </LinearLayout>
             <LinearLayout
@@ -182,10 +204,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:fontFamily="@font/londrina_solid"
                     android:text="Job Position:"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="15sp"
+                     />
 
                 <TextView
                     android:id="@+id/position"
@@ -198,9 +221,9 @@
                     android:marqueeRepeatLimit="marquee_forever"
                     android:focusableInTouchMode="true"
                     android:text=""
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                     />
 
             </LinearLayout>
             <LinearLayout
@@ -211,24 +234,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Achievements:"
+                    android:fontFamily="@font/londrina_solid"
+                    android:paddingStart="5dp"
                     android:textColor="@color/black"
                     android:layout_marginTop="10dp"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     />
 
                 <TextView
                     android:id="@+id/achievement"                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:singleLine="true"
-                    android:focusable="true"
-                    android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="marquee_forever"
-                    android:focusableInTouchMode="true"
                     android:text="ssadaadsfafa"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                     />
 
             </LinearLayout>
             <LinearLayout
@@ -239,9 +259,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Description:"
+                    android:paddingStart="5dp"
+                    android:fontFamily="@font/londrina_solid"
                     android:textColor="@color/black"
                     android:layout_marginTop="10dp"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     />
 
                 <TextView
@@ -249,16 +271,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:singleLine="true"
-                    android:focusable="true"
-                    android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="marquee_forever"
-                    android:focusableInTouchMode="true"
                     android:text="ssadaadsfafa"
                     android:layout_marginBottom="@dimen/_20sdp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                     />
 
             </LinearLayout>
 

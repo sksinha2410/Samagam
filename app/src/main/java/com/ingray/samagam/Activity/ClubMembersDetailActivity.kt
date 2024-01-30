@@ -77,20 +77,23 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
                                     }
                                 }
                                 if (arrList.size>0) {
-                                    val random = Random()
-                                    val randomIndex1 = random.nextInt(arrList.size)
-                                    val randomIndex2 = random.nextInt(arrList.size)
-                                    val randomIndex3 = random.nextInt(arrList.size)
-                                    val randomIndex4 = random.nextInt(arrList.size)
-                                    val map = HashMap<String, String>()
-                                    map.put("profile1", arrList[randomIndex1])
-                                    map.put("profile2", arrList[randomIndex2])
-                                    map.put("profile3", arrList[randomIndex3])
-                                    map.put("profile4", arrList[randomIndex4])
-                                    FirebaseDatabase.getInstance().reference.child("Clubs")
-                                        .child(name)
-                                        .child(type).child(batch)
-                                        .updateChildren(map as Map<String, Any>)
+                                    try {
+                                        val random = Random()
+                                        val randomIndex1 = random.nextInt(arrList.size)
+                                        val randomIndex2 = random.nextInt(arrList.size)
+                                        val randomIndex3 = random.nextInt(arrList.size)
+                                        val randomIndex4 = random.nextInt(arrList.size)
+                                        val map = HashMap<String, String>()
+                                        map.put("profile1", arrList[randomIndex1])
+                                        map.put("profile2", arrList[randomIndex2])
+                                        map.put("profile3", arrList[randomIndex3])
+                                        map.put("profile4", arrList[randomIndex4])
+                                        FirebaseDatabase.getInstance().reference.child("Clubs")
+                                            .child(name)
+                                            .child(type).child(batch)
+                                            .updateChildren(map as Map<String, Any>)
+                                    }catch (e:Exception){}
+
                                 }
                             }
                         }
@@ -112,19 +115,22 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
                                         }
                                     }
                                 }
-                                val random = Random()
-                                val randomIndex1 = random.nextInt(arrList.size)
-                                val randomIndex2 = random.nextInt(arrList.size)
-                                val randomIndex3 = random.nextInt(arrList.size)
-                                val randomIndex4 = random.nextInt(arrList.size)
-                                val map = HashMap<String, String>()
-                                map.put("profile1", arrList[randomIndex1])
-                                map.put("profile2", arrList[randomIndex2])
-                                map.put("profile3", arrList[randomIndex3])
-                                map.put("profile4", arrList[randomIndex4])
-                                FirebaseDatabase.getInstance().reference.child("Clubs").child(name)
-                                    .child(type)
-                                    .updateChildren(map as Map<String, Any>)
+                                try {
+                                    val random = Random()
+                                    val randomIndex1 = random.nextInt(arrList.size)
+                                    val randomIndex2 = random.nextInt(arrList.size)
+                                    val randomIndex3 = random.nextInt(arrList.size)
+                                    val randomIndex4 = random.nextInt(arrList.size)
+                                    val map = HashMap<String, String>()
+                                    map.put("profile1", arrList[randomIndex1])
+                                    map.put("profile2", arrList[randomIndex2])
+                                    map.put("profile3", arrList[randomIndex3])
+                                    map.put("profile4", arrList[randomIndex4])
+                                    FirebaseDatabase.getInstance().reference.child("Clubs").child(name)
+                                        .child(type)
+                                        .updateChildren(map as Map<String, Any>)
+                                }catch (e:Exception){}
+
                             }
                         }
 
@@ -144,11 +150,11 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
                     FirebaseRecyclerOptions.Builder<Alumni>()
                         .setQuery(
                             FirebaseDatabase.getInstance().reference.child("Clubs").child(name!!)
-                                .child(type!!).child(batch!!).child("Members"),
+                                .child(type!!).child(batch!!).child("Members").orderByChild("weightage"),
                             Alumni::class.java
                         )
                         .build()
-                adapt = ClubMembersAdapter(options)
+                adapt = ClubMembersAdapter(options,name)
                 members.adapter = adapt
                 adapt.startListening()
             }else{
@@ -156,11 +162,11 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
                     FirebaseRecyclerOptions.Builder<Alumni>()
                         .setQuery(
                             FirebaseDatabase.getInstance().reference.child("Clubs").child(name!!)
-                                .child(type!!).child("Members"),
+                                .child(type!!).child("Members").orderByChild("weightage"),
                             Alumni::class.java
                         )
                         .build()
-                adapt = ClubMembersAdapter(options)
+                adapt = ClubMembersAdapter(options,name)
                 members.adapter = adapt
                 adapt.startListening()
             }

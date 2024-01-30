@@ -53,14 +53,17 @@ class EventsOfClubsActivity : AppCompatActivity() {
                             }
                         }
                         if (arrList.size>0) {
-                            val random = Random()
-                            val randomIndex1 = random.nextInt(arrList.size)
-                            val randomIndex2 = random.nextInt(arrList.size)
-                            val map = HashMap<String, String>()
-                            map.put("eventpic1", arrList[randomIndex1])
-                            map.put("eventpic2", arrList[randomIndex2])
-                            FirebaseDatabase.getInstance().reference.child("Clubs").child(name)
-                                .updateChildren(map as Map<String, Any>)
+                            try {
+                                val random = Random()
+                                val randomIndex1 = random.nextInt(arrList.size)
+                                val randomIndex2 = random.nextInt(arrList.size)
+                                val map = HashMap<String, String>()
+                                map.put("eventpic1", arrList[randomIndex1])
+                                map.put("eventpic2", arrList[randomIndex2])
+                                FirebaseDatabase.getInstance().reference.child("Clubs").child(name)
+                                    .updateChildren(map as Map<String, Any>)
+                            }catch (e:Exception){}
+
                         }
                     }
                 }

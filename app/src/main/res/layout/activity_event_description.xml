@@ -24,6 +24,7 @@
                     android:orientation="vertical"
                     android:layout_marginEnd="@dimen/_3sdp"
                     android:layout_marginBottom="@dimen/_3sdp"
+                    android:backgroundTint="@color/black"
                     android:background="@drawable/event_black_background"
                     >
                     <TextView
@@ -33,9 +34,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_marginStart="15dp"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:textStyle="bold"
-                        android:textColor="#A735D3"
+                        android:textColor="#FA03A9F4"
                         android:text="TESLA: Innovational"/>
                     <TextView
                         android:id="@+id/event_type"
@@ -45,7 +46,7 @@
                         android:layout_marginStart="15dp"
                         android:textStyle="bold"
                         android:textSize="15dp"
-                        android:textColor="#DC8DFA"
+                        android:textColor="#C903A9F4"
                         android:text="Hackathon"/>
                     <TextView
                         android:id="@+id/time"
@@ -55,7 +56,7 @@
                         android:layout_marginStart="15dp"
                         android:textSize="15dp"
                         android:textStyle="bold"
-                        android:textColor="#DC8DFA"
+                        android:textColor="#CE03A9F4"
                         android:text="12-01-2023"/>
 
                     <ImageView

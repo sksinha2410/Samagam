@@ -18,7 +18,8 @@ data class Alumni(
     var purl:String="",
     var description:String="",
     var weightage:Long=0,
-    var github:String=""
+    var github:String="",
+    var userId:String =""
 
 
 )

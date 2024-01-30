@@ -31,10 +31,11 @@ class CustomDialog(private val context: Context, private val model: Events) {
         // Set model data to the views
         eventName.text = model.event_name
         eventType.text = model.event_type
-        val timed = model.event_date
+        val date = model.event_date
         val times = model.event_starttime
         val timee = model.event_endtime
-        time.text = "$timed $times - $timee"
+        val dateup = date.substring(8,10)+date.substring(4,8)+date.substring(0,4)
+        time.text = "$dateup ($times - $timee)"
         description.text = model.description
         regLink.text = model.reg_link
         brochureLink.text = model.brochure_link

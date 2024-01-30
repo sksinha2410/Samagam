@@ -32,6 +32,7 @@
                         android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/white_right_40dp"
+                        android:backgroundTint="@color/black"
                         android:layout_marginTop="10dp"
                         >
 
@@ -42,7 +43,7 @@
                             android:textSize="30sp"
                             android:textStyle="bold"
                             android:layout_marginStart="@dimen/_20sdp"
-                            android:textColor="#F0740F9F"/>
+                            android:textColor="@color/white"/>
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/logout"
@@ -50,6 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/addPost"
                         android:background="@drawable/white_right_40dp"
+                        android:backgroundTint="@color/black"
                         android:layout_marginTop="10dp"
                         >
 
@@ -61,7 +63,7 @@
                             android:textStyle="bold"
                             android:gravity="end"
                             android:layout_marginEnd="@dimen/_20sdp"
-                            android:textColor="#F0740F9F"
+                            android:textColor="@color/white"
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -70,6 +72,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/logout"
                         android:visibility="gone"
+                        android:backgroundTint="@color/black"
                         android:background="@drawable/white_right_40dp"
                         android:layout_marginTop="10dp"
                         >
@@ -82,15 +85,14 @@
                             android:textStyle="bold"
                             android:gravity="end"
                             android:layout_marginEnd="@dimen/_20sdp"
-                            android:textColor="#F0740F9F"
+                            android:textColor="@color/white"
                             />
                     </LinearLayout>
                     <LinearLayout
-                        android:id="@+id/allReports"
                         android:layout_width="match_parent"
-                        android:visibility="gone"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/addEvent"
+                        android:backgroundTint="@color/black"
+                        android:layout_below="@+id/profilepic"
                         android:background="@drawable/white_right_40dp"
                         android:layout_marginTop="10dp"
                         >
@@ -98,14 +100,44 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Reported"
+                            android:text=""
                             android:textSize="27sp"
                             android:textStyle="bold"
                             android:gravity="center"
                             android:layout_marginEnd="@dimen/_20sdp"
-                            android:textColor="#F0740F9F"
+                            android:textColor="@color/white"
                             />
                     </LinearLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/addEvent">
+                        <LinearLayout
+                            android:id="@+id/allReports"
+                            android:layout_width="match_parent"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/black"
+                            android:background="@drawable/white_right_40dp"
+                            android:layout_marginTop="10dp"
+                            >
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Reported"
+                                android:textSize="27sp"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:textColor="@color/white"
+                                />
+                        </LinearLayout>
+
+
+
+                    </RelativeLayout>
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/profilepic"
                         android:layout_width="match_parent"
@@ -121,7 +153,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:cardCornerRadius="@dimen/_16sdp"
-                            app:cardBackgroundColor="@color/white"
+                            app:cardBackgroundColor="@color/black"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -174,9 +206,9 @@
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintTop_toBottomOf="@id/cvLogo"
-                                    tools:text="Club-Name"
+                                    tools:text=""
                                     android:textSize="16sp"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/white"
                                     android:textStyle="bold"
                                     android:layout_marginTop="@dimen/_4sdp"/>
                             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -192,6 +224,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="8dp"
+                    app:cardBackgroundColor="@color/black"
+                    android:minHeight="2000dp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     app:cardCornerRadius="@dimen/_16sdp"
                     android:layout_marginHorizontal="3dp">
 
@@ -199,6 +234,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/profile_recycler"
+                        android:nestedScrollingEnabled="false"
                         app:spanCount="3"
                         android:paddingHorizontal="2dp"
                         android:paddingVertical="5dp"

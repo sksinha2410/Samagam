@@ -14,11 +14,17 @@ import com.ingray.samagam.DataClass.Clubs
 import com.ingray.samagam.R
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.ingray.samagam.Activity.ClubDetailsActivity
+import com.ingray.samagam.Activity.MembersDetailsEditActivity
 import com.ingray.samagam.DataClass.Alumni
 import de.hdodenhof.circleimageview.CircleImageView
 
-class ClubMembersAdapter(options: FirebaseRecyclerOptions<Alumni?>) :
+class ClubMembersAdapter(options: FirebaseRecyclerOptions<Alumni?>,val clubName:String) :
     FirebaseRecyclerAdapter<Alumni?, ClubMembersAdapter.userAdapterHolder?>(options) {
     lateinit var view: View
     override fun onBindViewHolder(holder: userAdapterHolder,
@@ -33,6 +39,45 @@ class ClubMembersAdapter(options: FirebaseRecyclerOptions<Alumni?>) :
         holder.description.text=model.description
         holder.achievement.text=model.achievements
         Glide.with(holder.profile.context).load(model.purl).into(holder.profile)
+        if (!model.userId.equals(null)&&!model.userId.equals("")&&FirebaseAuth.getInstance().currentUser?.uid.toString().equals(model.userId)){
+            holder.edit.visibility = View.VISIBLE
+        }
+        FirebaseDatabase.getInstance().reference.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString())
+            .addListenerForSingleValueEvent(object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()){
+                        if(snapshot.child("userType").value.toString() == "1"){
+                            holder.edit.visibility = View.VISIBLE
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+
+        holder.edit.setOnClickListener{
+            val intent = Intent(holder.itemView.context,MembersDetailsEditActivity::class.java)
+            intent.putExtra("clubname",clubName)
+            intent.putExtra("name",model.name)
+            intent.putExtra("branch",model.branch)
+            intent.putExtra("position",model.position)
+            intent.putExtra("company",model.company)
+            intent.putExtra("achievements",model.achievements)
+            intent.putExtra("email",model.email)
+            intent.putExtra("linkedin",model.linkedIn)
+            intent.putExtra("twitter",model.twitter)
+            intent.putExtra("git",model.github)
+            intent.putExtra("insta",model.instagram)
+            intent.putExtra("discord",model.discord)
+            intent.putExtra("postinclub",model.postInClub)
+            intent.putExtra("phone",model.phoneNo)
+            intent.putExtra("purl",model.purl)
+            intent.putExtra("userId",model.userId)
+            intent.putExtra("description",model.description)
+            holder.itemView.context.startActivity(intent)
+        }
 
         checkCondition(holder,model)
 
@@ -172,7 +217,8 @@ class ClubMembersAdapter(options: FirebaseRecyclerOptions<Alumni?>) :
         var postinClub: TextView
         var description: TextView
         var achievement: TextView
-        
+        var edit: ImageView
+
         init {
             profile= itemView.findViewById<CircleImageView>(R.id.profile)
            github= itemView.findViewById(R.id.git)
@@ -189,6 +235,7 @@ class ClubMembersAdapter(options: FirebaseRecyclerOptions<Alumni?>) :
             postinClub= itemView.findViewById(R.id.postinClub)
             description= itemView.findViewById(R.id.description)
             achievement= itemView.findViewById(R.id.achievement)
+            edit = itemView.findViewById(R.id.editDetails)
           
         }
     }

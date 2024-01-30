@@ -20,8 +20,11 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.ingray.samagam.DataClass.Alumni
@@ -30,90 +33,128 @@ import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.util.Calendar
 
-class AddAlumniActivity : AppCompatActivity() {
-    private lateinit var  name:EditText
-    private lateinit var batchyear:Spinner
-    private lateinit var branch:EditText
-    private lateinit var postinclub:EditText
-    private lateinit var phoneno:EditText
-    private lateinit var email:EditText
-    private lateinit var linkedin:EditText
-    private lateinit var github:EditText
-    private lateinit var discord:EditText
-    private lateinit var insta:EditText
-    private lateinit var twitter:EditText
-    private lateinit var position:EditText
-    private lateinit var location:EditText
-    private lateinit var discreption:EditText
-    private lateinit var achievement:EditText
-    private lateinit var company:EditText
+class MembersDetailsEditActivity : AppCompatActivity() {
+    private lateinit var  name: EditText
+    private lateinit var batchyear: Spinner
+    private lateinit var branch: EditText
+    private lateinit var postinclub: EditText
+    private lateinit var phoneno: EditText
+    private lateinit var email: EditText
+    private lateinit var linkedin: EditText
+    private lateinit var github: EditText
+    private lateinit var discord: EditText
+    private lateinit var insta: EditText
+    private lateinit var twitter: EditText
+    private lateinit var position: EditText
+    private lateinit var location: EditText
+    private lateinit var discreption: EditText
+    private lateinit var achievement: EditText
+    private lateinit var company: EditText
     val Pick_image=1
-    private lateinit var profile:ImageView
-    private lateinit var btnSubmit:Button
+    private lateinit var profile: ImageView
+    private lateinit var btnSubmit: Button
     private lateinit var selectedItem:String
     private var purl:String =""
     private var type = ""
-    private lateinit var progress:ProgressBar
+    private lateinit var progress: ProgressBar
     private var deRef : DatabaseReference = FirebaseDatabase.getInstance().reference
     private var storageRef = FirebaseStorage.getInstance().reference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_alumni)
-        var clubName = intent.getStringExtra("Clubname")
-        type = intent.getStringExtra("type").toString()
-        var batches = intent.getStringExtra("batch")
+        setContentView(R.layout.activity_members_details_edit)
 
+
+        val intent = intent
+        val clubname = intent.getStringExtra("clubname")
+        val name = intent.getStringExtra("name")
+        val branch =intent.getStringExtra("branch")
+        val position =intent.getStringExtra("position")
+        val company =intent.getStringExtra("company")
+        val achievement =intent.getStringExtra("achievements")
+        val email =intent.getStringExtra("email")
+        val linkedin =intent.getStringExtra("linkedin")
+        val twitter =intent.getStringExtra("twitter")
+        val git = intent.getStringExtra("git")
+        val insta =intent.getStringExtra("insta")
+        val discord =intent.getStringExtra("discord")
+        val postInClub =intent.getStringExtra("postinclub")
+        val phone =intent.getStringExtra("phone")
+        purl =intent.getStringExtra("purl")!!
+        val description=intent.getStringExtra("description")
 
         callById()
+        getItemFromSpinner()
+
+        this.email.setText(email)
+        this.name.setText(name)
+        this.branch.setText(branch)
+        this.position.setText(position)
+        this.company.setText(company)
+        this.achievement.setText(achievement)
+        this.linkedin.setText(linkedin)
+        this.twitter.setText(twitter)
+        this.github.setText(git)
+        this.insta.setText(insta)
+        this.discord.setText(discord)
+        this.postinclub.setText(postInClub)
+        this.phoneno.setText(phone)
+        this.discreption.setText(description)
+
+        Glide.with(applicationContext).load(intent.getStringExtra("purl")!!).into(profile)
+
         profile.setOnClickListener{
             openGallery()
         }
-        getItemFromSpinner()
+
         btnSubmit.setOnClickListener{
-            val ad = Alumni()
-            ad.batch = selectedItem
-            ad.branch = branch.text.toString()
-            ad.company = company.text.toString()
-            ad.description = discreption.text.toString()
-            ad.discord = discord.text.toString()
-            ad.email = email.text.toString()
-            ad.github = github.text.toString()
-            ad.instagram = insta.text.toString()
-            ad.linkedIn = linkedin.text.toString()
-            ad.name = name.text.toString()
-            ad.postInClub = postinclub.text.toString()
-            ad.phoneNo = phoneno.text.toString()
-            ad.purl = purl
-            ad.achievements=achievement.text.toString()
-            ad.placeOfWork=location.text.toString()
-            ad.twitter=twitter.text.toString()
-            ad.position=position.text.toString()
-            if (clubName != null) {
-                if(!batches.equals("0")) {
-                    deRef.child("Clubs").child(clubName).child(type!!).child(selectedItem)
-                        .child("Members").child(
-                        Calendar.getInstance().timeInMillis.toString()
-                    ).setValue(ad)
-                    var map = HashMap<String, String>()
-                    map.put("batch", selectedItem)
-                    deRef.child("Clubs").child(clubName).child(type).child(selectedItem)
-                        .updateChildren(
-                            map as Map<String, Any>
-                        )
-                    Toast.makeText(this, "Alumni added", Toast.LENGTH_SHORT).show()
-                    finish()
-                }else{
-                    ad.userId = FirebaseAuth.getInstance().currentUser?.uid.toString()
-                    deRef.child("Clubs").child(clubName).child(type!!)
-                        .child("Members").child(
-                            Calendar.getInstance().timeInMillis.toString()
-                        ).setValue(ad)
-                    Toast.makeText(this, "Member added", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-            }
+
+            val map = HashMap<String,String>()
+            map.put("batch",selectedItem)
+            map.put("branch",this.branch.text.toString())
+            map.put("company",this.company.text.toString())
+            map.put("description",discreption.text.toString())
+            map.put("discord",this.discord.text.toString())
+            map.put("email",this.email.text.toString())
+            map.put("github",github.text.toString())
+            map.put("instagram",this.insta.text.toString())
+            map.put("linkedIn",this.linkedin.text.toString())
+            map.put("name",this.name.text.toString())
+            map.put("postInClub",postinclub.text.toString())
+            map.put("phoneNo",phoneno.text.toString())
+            map.put("purl",purl)
+            map.put("twitter",this.twitter.text.toString())
+            map.put("position",this.position.text.toString())
+            map.put("achievements",this.achievement.text.toString())
+            map.put("placeOfWork",this.location.text.toString())
+            deRef.child("Clubs").child(clubname!!).child("OfficeBearer")
+                .child("Members").addListenerForSingleValueEvent(object :ValueEventListener{
+                    override fun onDataChange(snapshots: DataSnapshot) {
+                        for (snapshot in snapshots.children) {
+                            if (snapshot.child("userId")
+                                    .exists() && snapshot.child("userId").value.toString().equals(
+                                    intent.getStringExtra("userId")
+                                )
+                            ) {
+                                val key = snapshot.key.toString()
+                                deRef.child("Clubs").child(clubname!!).child("OfficeBearer")
+                                    .child("Members").child(key).updateChildren(map as Map<String, Any>)
+                                Toast.makeText(applicationContext,"Updated",Toast.LENGTH_SHORT).show()
+                                finish()
+                            }
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
+            Toast.makeText(this, "Member added", Toast.LENGTH_SHORT).show()
+            finish()
         }
+
+
     }
+
 
     private fun callById() {
         email = findViewById(R.id.etEmail)
@@ -137,8 +178,6 @@ class AddAlumniActivity : AppCompatActivity() {
         btnSubmit = findViewById(R.id.btn_submit)
 
     }
-
-
     private fun openGallery() {
         val gallery= Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(gallery,Pick_image)
@@ -199,35 +238,16 @@ class AddAlumniActivity : AppCompatActivity() {
         }
     }
     private fun getItemFromSpinner() {
-        if (type == "Alumni") {
-            val data = arrayOf(
-                "2021-2025",
-                "2020-2024",
-                "2019-2023",
-                "2018-2022",
-                "2017-2021",
-                "2016-2020",
-                "2015-2019",
-                "2014-2018",
-                "2013-2017",
-                "2012-2016",
-            )
-            val adapt = ArrayAdapter(this, android.R.layout.simple_spinner_item, data)
-            adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            batchyear.adapter = adapt
-        }else{
-            val data = arrayOf(
-                "2023-2027",
-                "2022-2026",
-                "2021-2025",
-                "2020-2024"
+        val data = arrayOf(
+            "2023-2027",
+            "2022-2026",
+            "2021-2025",
+            "2020-2024"
 
-            )
-            val adapt = ArrayAdapter(this, android.R.layout.simple_spinner_item, data)
-            adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            batchyear.adapter = adapt
-
-        }
+        )
+        val adapt = ArrayAdapter(this, android.R.layout.simple_spinner_item, data)
+        adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        batchyear.adapter = adapt
         batchyear.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 selectedItem = parent.getItemAtPosition(position).toString()
