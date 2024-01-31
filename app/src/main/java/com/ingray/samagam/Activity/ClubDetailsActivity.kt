@@ -129,7 +129,13 @@ class ClubDetailsActivity : AppCompatActivity() {
                         val intent = Intent(applicationContext,AddEventsActivity::class.java)
                         intent.putExtra("userType",userType)
                         startActivity(intent)
-                    }else{
+                    }else if (selectedItemAtPosition=="Notification"){
+                        val intent = Intent(applicationContext,AddNotificationActivity::class.java)
+                        intent.putExtra("userType",userType)
+                        startActivity(intent)
+                    }
+
+                    else{
                         if (selectedItemAtPosition == "OfficeBearer") {
                             val intent = Intent(applicationContext, AddAlumniActivity::class.java)
                             intent.putExtra("Clubname",name)

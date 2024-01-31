@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:layout_toRightOf="@id/image">
+        android:layout_toRightOf="@id/image"
+        android:layout_toLeftOf="@+id/notifImage">
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -29,6 +30,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"/>
         <TextView
+
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,8 +45,14 @@
             android:layout_below="@+id/title"
             android:textSize="16dp"
             android:textColor="#CE000000"/>
-
     </RelativeLayout>
+    <ImageView
+        android:id="@+id/notifImage"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@color/black"
+        android:layout_alignParentEnd="true"
+        android:padding="3dp"/>
 
 
 
