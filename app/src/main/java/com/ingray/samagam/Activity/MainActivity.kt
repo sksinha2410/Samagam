@@ -23,12 +23,19 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 import android.Manifest;
+import android.annotation.SuppressLint
 import com.ingray.samagam.R
 import android.provider.Settings
+import android.widget.ImageView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.ingray.samagam.Fragments.NotificationFragment
+import com.ingray.samagam.Fragments.ProfileFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,11 +45,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toolbar:Toolbar
     var permission_notif = false
     lateinit var permissions: Array<String>
+    lateinit var notification:ImageView
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        notification = findViewById(R.id.notification)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             permissions = arrayOf<String>(android.Manifest.permission.POST_NOTIFICATIONS)
         }
@@ -54,11 +64,8 @@ class MainActivity : AppCompatActivity() {
                     msg = "Failed"
                 }
             })
-
-
-
-
         toolbar = findViewById(R.id.toolbar)
+
 
         setSupportActionBar(toolbar)
         bottomNav = findViewById(R.id.bottom_nav_view)
@@ -69,7 +76,13 @@ class MainActivity : AppCompatActivity() {
         if(!permission_notif){
             requestPermission();
         }
+        notification.setOnClickListener{
+            val intent  = Intent(this,NotificationActivity::class.java)
+            startActivity(intent)
+        }
+
     }
+
 
     private fun requestPermission() {
         try {
