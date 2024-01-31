@@ -40,7 +40,7 @@ class FCMNotification : AppCompatActivity() {
 
         editTextTitle = findViewById(R.id.title)
         editTextMessage = findViewById(R.id.message)
-        buttonSendNotification = findViewById(R.id.button)
+//        buttonSendNotification = findViewById(R.id.button)
 
         // Subscribe to the topic only once
         FirebaseMessaging.getInstance().subscribeToTopic("All")

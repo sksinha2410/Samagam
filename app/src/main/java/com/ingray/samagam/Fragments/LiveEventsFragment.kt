@@ -95,6 +95,22 @@ class LiveEventsFragment : Fragment() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         liveCount = snapshot.childrenCount.toInt()
+                        if (liveCount>0){
+                            liveDropdown.visibility = View.VISIBLE
+                            rlLive.visibility = View.VISIBLE
+                            liveCard.visibility = View.VISIBLE
+                            val currentRotation = civLive.rotation
+                            // Add 90 degrees to the current rotation
+                            val newRotation = currentRotation - 90f
+                            // Set the new rotation to the ImageView
+                            civLive.rotation = newRotation
+
+                        }else{
+                            liveDropdown.visibility = View.GONE
+                            rlLive.visibility = View.GONE
+                            Toast.makeText(view.context,"No live events",Toast.LENGTH_SHORT).show()
+
+                        }
 
                     }else{
                         Toast.makeText(view.context,"No live events",Toast.LENGTH_SHORT).show()
@@ -105,65 +121,57 @@ class LiveEventsFragment : Fragment() {
                     TODO("Not yet implemented")
                 }
             })
+
+
             FirebaseDatabase.getInstance().reference.child("Upcoming").addListenerForSingleValueEvent(object :ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
+                    if (liveCount>0) {
 
-                        if (liveCount>0){
-                            liveDropdown.visibility = View.VISIBLE
-                            rlLive.visibility = View.VISIBLE
-                            liveCard.visibility = View.VISIBLE
-                            val currentRotation = civLive.rotation
+                        if (snapshot.childrenCount.toInt() > 0) {
+                            upcomingDropdown.visibility = View.VISIBLE
+                            rlUpcoming.visibility = View.VISIBLE
+
+                        } else {
+                            Toast.makeText(view.context, "No Upcoming events", Toast.LENGTH_SHORT)
+                                .show()
+                            upcomingDropdown.visibility = View.GONE
+                            rlUpcoming.visibility = View.GONE
+                        }
+                    }else {
+
+                        if (snapshot.childrenCount.toInt() > 0) {
+                            upcomingDropdown.visibility = View.VISIBLE
+                            rlUpcoming.visibility = View.VISIBLE
+                            upcomingCheck = !upcomingCheck
+                            val currentRotation = civUpc.rotation
+
                             // Add 90 degrees to the current rotation
                             val newRotation = currentRotation - 90f
+
                             // Set the new rotation to the ImageView
-                            civLive.rotation = newRotation
-                            if (snapshot.childrenCount.toInt()>0){
-                                upcomingDropdown.visibility = View.VISIBLE
-                                rlUpcoming.visibility = View.VISIBLE
-
-                            }else{
-                                Toast.makeText(view.context,"No Upcoming events",Toast.LENGTH_SHORT).show()
-                                upcomingDropdown.visibility = View.GONE
-                                rlUpcoming.visibility = View.GONE
-                            }
-                        }else{
-                            liveDropdown.visibility = View.GONE
-                            rlLive.visibility = View.GONE
-                            Toast.makeText(view.context,"No live events",Toast.LENGTH_SHORT).show()
-                            if (snapshot.childrenCount.toInt()>0){
-                                upcomingDropdown.visibility = View.VISIBLE
-                                rlUpcoming.visibility = View.VISIBLE
-                                upcomingCheck =!upcomingCheck
-                                val currentRotation = civUpc.rotation
-
-                                // Add 90 degrees to the current rotation
-                                val newRotation = currentRotation - 90f
-
-                                // Set the new rotation to the ImageView
-                                civUpc.rotation = newRotation
-                                upcomingCard.visibility = View.VISIBLE
+                            civUpc.rotation = newRotation
+                            upcomingCard.visibility = View.VISIBLE
 
 
-                            }else{
-                                upcomingDropdown.visibility = View.GONE
-                                rlUpcoming.visibility = View.GONE
-                                Toast.makeText(view.context,"No Upcoming events",Toast.LENGTH_SHORT).show()
-                                pastCard.visibility = View.VISIBLE
-                                pastCheck =!pastCheck
-                                val currentRotation = civPast.rotation
+                        } else {
+                            upcomingDropdown.visibility = View.GONE
+                            rlUpcoming.visibility = View.GONE
+                            Toast.makeText(view.context, "No Upcoming events", Toast.LENGTH_SHORT)
+                                .show()
+                            pastCard.visibility = View.VISIBLE
+                            pastCheck = !pastCheck
+                            val currentRotation = civPast.rotation
 
-                                // Add 90 degrees to the current rotation
-                                val newRotation = currentRotation - 90f
+                            // Add 90 degrees to the current rotation
+                            val newRotation = currentRotation - 90f
 
-                                // Set the new rotation to the ImageView
-                                civPast.rotation = newRotation
+                            // Set the new rotation to the ImageView
+                            civPast.rotation = newRotation
 
-                            }
                         }
-                    }else{
-                        Toast.makeText(view.context,"No live events",Toast.LENGTH_SHORT).show()
                     }
+
+
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -258,7 +266,7 @@ class LiveEventsFragment : Fragment() {
         liveEventRecycler.itemAnimator = null
         pastEventRecycler.itemAnimator = null
         pastEventRecycler.hasFixedSize()
-        pastEventRecycler.setItemViewCacheSize(20)
+        pastEventRecycler.setItemViewCacheSize(8)
         dRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (childSnapshot in snapshot.children) {
