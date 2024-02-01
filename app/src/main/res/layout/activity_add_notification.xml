@@ -8,38 +8,52 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
+        android:hint="Title"
         tools:layout_editor_absoluteX="61dp"
         tools:layout_editor_absoluteY="54dp" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
+        android:hint="Message"
         tools:layout_editor_absoluteX="60dp"
         tools:layout_editor_absoluteY="120dp" />
-
-    <ImageView
-        android:id="@+id/imageView"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="202dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageUrl"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            tools:layout_editor_absoluteX="103dp"
+            tools:layout_editor_absoluteY="202dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ProgressBar
+            android:id="@+id/sale_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:theme="@style/progressBar"
+            tools:visibility="visible" />
+
+    </RelativeLayout>
+
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="submit"
         tools:layout_editor_absoluteX="121dp"
         tools:layout_editor_absoluteY="371dp" />
 </LinearLayout>

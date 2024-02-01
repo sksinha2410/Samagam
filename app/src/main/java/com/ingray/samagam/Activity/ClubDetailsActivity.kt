@@ -62,6 +62,7 @@ class ClubDetailsActivity : AppCompatActivity() {
 
         val itnt = intent
         var name = itnt.getStringExtra("clubName")!!
+        var url = itnt.getStringExtra("clubUrl")!!
         try {
             var eventpic1 = itnt.getStringExtra("eventpic1")!!
             var eventpic2 = itnt.getStringExtra("eventpic2")!!
@@ -131,7 +132,8 @@ class ClubDetailsActivity : AppCompatActivity() {
                         startActivity(intent)
                     }else if (selectedItemAtPosition=="Notification"){
                         val intent = Intent(applicationContext,AddNotificationActivity::class.java)
-                        intent.putExtra("userType",userType)
+                        intent.putExtra("clubName",name)
+                        intent.putExtra("clubUrl",url)
                         startActivity(intent)
                     }
 

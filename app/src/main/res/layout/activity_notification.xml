@@ -64,7 +64,7 @@
                 android:layout_gravity="center_horizontal"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/members_recycler"
+                android:id="@+id/notificationRecycler"
                 android:layout_width="match_parent"
                 android:nestedScrollingEnabled="false"
                 android:layout_height="wrap_content"
@@ -73,12 +73,6 @@
 
         </LinearLayout>
 
-
-
     </ScrollView>
-
-
-
-
 
 </RelativeLayout>

@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+
             android:singleLine="true"
             android:focusable="true"
             android:ellipsize="marquee"
@@ -28,7 +29,7 @@
             android:maxLines="1"
             android:textSize="18dp"
             android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"/>
         <TextView
 
             android:id="@+id/message"
@@ -44,12 +45,13 @@
             android:layout_marginBottom="4dp"
             android:layout_below="@+id/title"
             android:textSize="16dp"
-            android:textColor="#CE000000"/>
+            android:textColor="@color/white"/>
     </RelativeLayout>
     <ImageView
         android:id="@+id/notifImage"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:scaleType="fitXY"
         android:src="@color/black"
         android:layout_alignParentEnd="true"
         android:padding="3dp"/>
