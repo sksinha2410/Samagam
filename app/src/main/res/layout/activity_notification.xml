@@ -51,7 +51,7 @@
         android:layout_below="@+id/linearLayout">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/batchName"
@@ -68,8 +68,8 @@
                 android:layout_width="match_parent"
                 android:nestedScrollingEnabled="false"
                 android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:minHeight="@dimen/_160sdp"/>
+                android:minHeight="@dimen/_150sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         </LinearLayout>
 

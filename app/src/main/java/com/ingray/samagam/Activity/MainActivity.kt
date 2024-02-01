@@ -64,6 +64,8 @@ class MainActivity : AppCompatActivity() {
                     msg = "Failed"
                 }
             })
+        FirebaseMessaging.getInstance().subscribeToTopic("/topics/All")
+        FirebaseMessaging.getInstance().subscribeToTopic("topics/All")
         toolbar = findViewById(R.id.toolbar)
 
 

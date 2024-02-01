@@ -61,16 +61,22 @@ class AddNotificationActivity : AppCompatActivity() {
             var cTime = Calendar.getInstance().timeInMillis.toString()
             val title = title.text.toString()
             val message = message.text.toString()
-            sendNotification()
-            val notification = Notification(title,message,purl,clubUrl,cTime,"",0)
-            dbRef?.child(cTime)?.setValue(notification)?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(this, "Notification Added", Toast.LENGTH_SHORT).show()
-                    finish()
-                } else {
-                    Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+
+            if(title =="" || message ==""){
+                Toast.makeText(applicationContext,"Title or message can't be empty",Toast.LENGTH_SHORT).show()
+            }else{
+                sendNotification()
+                val notification = Notification(title,message,purl,clubUrl,cTime,"",0)
+                dbRef?.child(cTime)?.setValue(notification)?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this, "Notification Added", Toast.LENGTH_SHORT).show()
+                        finish()
+                    } else {
+                        Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
+
         }
     }
     private fun sendNotification() {
