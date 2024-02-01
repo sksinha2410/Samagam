@@ -72,7 +72,6 @@ class AddEventsActivity : AppCompatActivity() {
     var storageReference = FirebaseStorage.getInstance().reference
     var purl:String=""
     private lateinit var progress:ProgressBar
-
     private var startTime: Calendar = Calendar.getInstance()
     private var endTime: Calendar = Calendar.getInstance()
 

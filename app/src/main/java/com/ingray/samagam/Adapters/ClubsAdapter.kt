@@ -29,6 +29,7 @@ class ClubsAdapter(options: FirebaseRecyclerOptions<Clubs?>) :
             holder.clubCard.setOnClickListener{
                 val intent = Intent(view.context,ClubDetailsActivity::class.java)
                 intent.putExtra("clubName", model.club_name)
+                intent.putExtra("clubUrl", model.imageUrl)
                 try {
                     intent.putExtra("eventpic1",model.eventpic1)
                     intent.putExtra("eventpic2",model.eventpic2)
