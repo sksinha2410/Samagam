@@ -40,12 +40,6 @@ class NotificationAdapter (options: FirebaseRecyclerOptions<Notification?>) :
         val currentTimeMillis = Calendar.getInstance().timeInMillis
         val timeDifferenceMillis = currentTimeMillis - previousTimeMillis
         val hoursDifference = TimeUnit.MILLISECONDS.toMinutes(timeDifferenceMillis)/10
-
-        val deleteTime = TimeUnit.MILLISECONDS.toHours(timeDifferenceMillis)*24*15
-        if (hoursDifference>deleteTime){
-            FirebaseDatabase.getInstance().reference.child("Notification").child(model.time).removeValue()
-        }
-
         Glide.with(holder.image.context).load(model.imageUrl).into(holder.image)
         Glide.with(holder.notifImage.context).load(model.clubUrl).into(holder.notifImage)
         holder.title.setText(model.title)
@@ -53,7 +47,14 @@ class NotificationAdapter (options: FirebaseRecyclerOptions<Notification?>) :
 
         var map = HashMap<String,Any>()
         map.put("timeDifference",hoursDifference)
-        FirebaseDatabase.getInstance().reference.child("Notification").child(model.time).updateChildren(map)
+        FirebaseDatabase.getInstance().reference.child("Notification").child(model.time).updateChildren(map).addOnCompleteListener{
+            if (it.isSuccessful){
+                val deleteTime = 6*24*15
+                if (model.timeDifference>deleteTime){
+                    FirebaseDatabase.getInstance().reference.child("Notification").child(model.time).removeValue()
+                }
+            }
+        }
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,
