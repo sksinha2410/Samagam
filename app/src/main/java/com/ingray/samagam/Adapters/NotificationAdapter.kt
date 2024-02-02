@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -22,8 +23,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.ingray.samagam.Activity.LoginActivity
+import com.ingray.samagam.CustomDialog
 import com.ingray.samagam.DataClass.Notification
 import com.ingray.samagam.DataClass.Posts
+import com.ingray.samagam.NotifCustomDialog
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
@@ -44,6 +47,11 @@ class NotificationAdapter (options: FirebaseRecyclerOptions<Notification?>) :
         Glide.with(holder.notifImage.context).load(model.clubUrl).into(holder.notifImage)
         holder.title.setText(model.title)
         holder.message.setText(model.message)
+        holder.rel_notif.setOnClickListener{
+            val notifCustomDialog = NotifCustomDialog(holder.itemView.context, model)
+            notifCustomDialog.showDialog()
+
+        }
 
         var map = HashMap<String,Any>()
         map.put("timeDifference",hoursDifference)
@@ -66,6 +74,7 @@ class NotificationAdapter (options: FirebaseRecyclerOptions<Notification?>) :
 
     inner class userAdapterHolder(innerView:View):RecyclerView.ViewHolder(innerView) {
         var title: TextView = innerView.findViewById(R.id.title)
+        var rel_notif: RelativeLayout = innerView.findViewById(R.id.rel_notif)
         var message: TextView = innerView.findViewById(R.id.message)
         var image: ImageView = innerView.findViewById(R.id.notifImage)
         var notifImage: CircleImageView = innerView.findViewById(R.id.image)

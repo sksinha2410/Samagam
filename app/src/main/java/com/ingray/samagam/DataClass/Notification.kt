@@ -7,5 +7,7 @@ data class Notification(
     var clubUrl: String="",
     var time: String="",
     var token: String="",
-    var timeDifference: Long=0
+    var timeDifference: Long=0,
+    var pdfLink:String="",
+    var description:String=""
 )
