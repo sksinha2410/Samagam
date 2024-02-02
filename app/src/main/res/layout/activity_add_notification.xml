@@ -44,9 +44,45 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:theme="@style/progressBar"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/pdfUrl"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            tools:layout_editor_absoluteX="103dp"
+            tools:layout_editor_absoluteY="202dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+
+        <ProgressBar
+            android:id="@+id/sale_progressBars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:theme="@style/progressBar"
+            tools:visibility="gone" />
+
+    </RelativeLayout>
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/description_box"
+        android:hint="Description"
+        android:minLines="5"
+        android:paddingVertical="@dimen/_5sdp"
+        android:paddingStart="@dimen/_20sdp"
+        android:textColorHint="#555353"
+        android:paddingBottom="@dimen/_410sdp" />
+
 
 
     <Button
