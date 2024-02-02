@@ -17,7 +17,7 @@ class CustomDialog(private val context: Context, private val model: Events) {
     fun showDialog() {
         val dialogBuilder = AlertDialog.Builder(context)
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val dialogView: View = inflater.inflate(R.layout.activity_event_description, null)
+        val dialogView: View = inflater.inflate(R.layout.event_descr_dialog, null)
 
         // Access dialog views and set model data
         val eventName = dialogView.findViewById<TextView>(R.id.event_name)
