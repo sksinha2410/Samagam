@@ -16,8 +16,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -31,48 +33,115 @@ import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.Calendar
+import java.util.UUID
 
 class AddNotificationActivity : AppCompatActivity() {
     private lateinit var title:EditText
     private lateinit var message:EditText
+    private lateinit var description:EditText
     private lateinit var submit:Button
     private lateinit var imageUrl:ImageView
+    private lateinit var pdfUrl:ImageView
     private lateinit var progress: ProgressBar
+    private lateinit var progresspdf: ProgressBar
     private lateinit var clubName:String
     private lateinit var clubUrl:String
     val Pick_image=1
     var purl:String=""
+    var pdfurl:String=""
     var storageReference = FirebaseStorage.getInstance().reference
     private var dbRef: DatabaseReference? = FirebaseDatabase.getInstance().reference.child("Notification")
+    val storage = FirebaseStorage.getInstance()
+    val storageRef: StorageReference = storage.reference.child("pdfs")
+
+    private val openPdfChooser =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val selectedPdfUri = result.data?.data
+                if (selectedPdfUri != null) {
+                    progresspdf.visibility = View.VISIBLE
+                    uploadPdf(selectedPdfUri)
+                } else {
+                    progresspdf.visibility = View.GONE
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Failed to get PDF file.",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_notification)
         callByID()
+        progress.visibility = View.GONE
+        progresspdf.visibility = View.GONE
         val itnt = intent
         clubName = itnt.getStringExtra("clubName")!!
         clubUrl = itnt.getStringExtra("clubUrl")!!
 
         imageUrl.setOnClickListener{
             openGallery()
+
         }
+        pdfUrl.setOnClickListener{
+            val pdfPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
+            pdfPickerIntent.type = "application/pdf"
+            openPdfChooser.launch(pdfPickerIntent)
+
+        }
+
+
 
         submit.setOnClickListener {
             var cTime = Calendar.getInstance().timeInMillis.toString()
             val title = title.text.toString()
             val message = message.text.toString()
-            sendNotification()
-            val notification = Notification(title,message,purl,clubUrl,cTime,"",0)
-            dbRef?.child(cTime)?.setValue(notification)?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(this, "Notification Added", Toast.LENGTH_SHORT).show()
-                    finish()
-                } else {
-                    Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+            val description = description.text.toString()
+
+            if(title =="" || message ==""){
+                Toast.makeText(applicationContext,"Title or message can't be empty",Toast.LENGTH_SHORT).show()
+            }else{
+                sendNotification()
+                val notification = Notification(title,message,purl,clubUrl,cTime,"",0,pdfurl,description)
+                dbRef?.child(cTime)?.setValue(notification)?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this, "Notification Added", Toast.LENGTH_SHORT).show()
+                        finish()
+                    } else {
+                        Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
+
         }
     }
+    private fun uploadPdf(pdfUri: Uri) {
+        // Generate a unique filename for the PDF
+        val pdfFileName = "${UUID.randomUUID()}.pdf"
+
+        // Create a reference to the file in Firebase Storage
+        val pdfRef = storageReference.child("pdfs/$pdfFileName")
+
+        // Upload the PDF file
+        pdfRef.putFile(pdfUri)
+            .addOnSuccessListener {
+                // Handle successful upload
+                Toast.makeText(this, "File uploaded successfully!", Toast.LENGTH_SHORT).show()
+                progresspdf.visibility = View.GONE
+                pdfRef.downloadUrl.addOnSuccessListener { uri ->
+                    pdfurl = uri.toString()
+                }
+            }
+            .addOnFailureListener { exception ->
+                progresspdf.visibility = View.GONE
+                // Handle unsuccessful upload
+                Toast.makeText(this, "Error uploading file: $exception", Toast.LENGTH_SHORT).show()
+            }
+    }
+
     private fun sendNotification() {
         val title = clubName+" : "+title.text.toString()
         val message = message.text.toString()
@@ -227,8 +296,11 @@ class AddNotificationActivity : AppCompatActivity() {
     private fun callByID() {
         title=findViewById(R.id.title)
         message=findViewById(R.id.message)
+        description=findViewById(R.id.description)
         submit=findViewById(R.id.submit)
         imageUrl=findViewById(R.id.imageUrl)
+        pdfUrl=findViewById(R.id.pdfUrl)
         progress = findViewById(R.id.sale_progressBar)
+        progresspdf = findViewById(R.id.sale_progressBars)
     }
 }

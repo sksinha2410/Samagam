@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -22,8 +23,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.ingray.samagam.Activity.LoginActivity
+import com.ingray.samagam.CustomDialog
 import com.ingray.samagam.DataClass.Notification
 import com.ingray.samagam.DataClass.Posts
+import com.ingray.samagam.NotifCustomDialog
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
@@ -40,20 +43,26 @@ class NotificationAdapter (options: FirebaseRecyclerOptions<Notification?>) :
         val currentTimeMillis = Calendar.getInstance().timeInMillis
         val timeDifferenceMillis = currentTimeMillis - previousTimeMillis
         val hoursDifference = TimeUnit.MILLISECONDS.toMinutes(timeDifferenceMillis)/10
-
-        val deleteTime = TimeUnit.MILLISECONDS.toHours(timeDifferenceMillis)*24*15
-        if (hoursDifference>deleteTime){
-            FirebaseDatabase.getInstance().reference.child("Notification").child(model.time).removeValue()
-        }
-
         Glide.with(holder.image.context).load(model.imageUrl).into(holder.image)
         Glide.with(holder.notifImage.context).load(model.clubUrl).into(holder.notifImage)
         holder.title.setText(model.title)
         holder.message.setText(model.message)
+        holder.rel_notif.setOnClickListener{
+            val notifCustomDialog = NotifCustomDialog(holder.itemView.context, model)
+            notifCustomDialog.showDialog()
+
+        }
 
         var map = HashMap<String,Any>()
         map.put("timeDifference",hoursDifference)
-        FirebaseDatabase.getInstance().reference.child("Notification").child(model.time).updateChildren(map)
+        FirebaseDatabase.getInstance().reference.child("Notification").child(model.time).updateChildren(map).addOnCompleteListener{
+            if (it.isSuccessful){
+                val deleteTime = 6*24*15
+                if (model.timeDifference>deleteTime){
+                    FirebaseDatabase.getInstance().reference.child("Notification").child(model.time).removeValue()
+                }
+            }
+        }
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -65,6 +74,7 @@ class NotificationAdapter (options: FirebaseRecyclerOptions<Notification?>) :
 
     inner class userAdapterHolder(innerView:View):RecyclerView.ViewHolder(innerView) {
         var title: TextView = innerView.findViewById(R.id.title)
+        var rel_notif: RelativeLayout = innerView.findViewById(R.id.rel_notif)
         var message: TextView = innerView.findViewById(R.id.message)
         var image: ImageView = innerView.findViewById(R.id.notifImage)
         var notifImage: CircleImageView = innerView.findViewById(R.id.image)
