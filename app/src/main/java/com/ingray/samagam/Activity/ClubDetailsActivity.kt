@@ -40,6 +40,7 @@ class ClubDetailsActivity : AppCompatActivity() {
     private lateinit var eventPic1:ImageView
     private lateinit var eventPic2:ImageView
     private lateinit var add:ImageView
+    private lateinit var ghost:ImageView
     private var userType:String=""
     private var uid:String=FirebaseAuth.getInstance().currentUser?.uid.toString()
 
@@ -59,6 +60,7 @@ class ClubDetailsActivity : AppCompatActivity() {
         eventPic1 = findViewById(R.id.eventpic1)
         eventPic2 = findViewById(R.id.eventpic2)
         add = findViewById(R.id.add)
+        ghost = findViewById(R.id.ghost)
 
         val itnt = intent
         var name = itnt.getStringExtra("clubName")!!
@@ -80,6 +82,7 @@ class ClubDetailsActivity : AppCompatActivity() {
                     userType = snapshot.child("userType").value.toString()
                     if(!userType.equals("0")){
                         add.visibility = View.VISIBLE
+                        ghost.visibility = View.GONE
                     }else{
                         add.visibility = View.GONE
                     }

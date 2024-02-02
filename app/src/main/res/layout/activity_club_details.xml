@@ -42,6 +42,7 @@
 
             >
             <ImageView
+                android:id="@+id/ghost"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_gravity="end"
@@ -59,7 +60,8 @@
                 android:visibility="gone"
                 android:background="@drawable/circle_back"
                 android:padding="@dimen/_14sdp"
-                android:src="@drawable/plus" />
+                android:src="@drawable/plus"
+                app:tint="#CD58FE" />
 
         </RelativeLayout>
 
