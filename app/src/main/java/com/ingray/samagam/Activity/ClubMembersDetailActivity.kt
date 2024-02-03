@@ -23,7 +23,6 @@ import kotlin.collections.ArrayList
 class  ClubMembersDetailActivity : AppCompatActivity() {
     private lateinit var batchName: TextView
     private lateinit var members: RecyclerView
-    private lateinit var addAlumni: FloatingActionButton
     private lateinit var adapt:ClubMembersAdapter
     private  var arrList:ArrayList<String> = ArrayList<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,28 +36,15 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
         val batch = intent.getStringExtra("batch")?:default
         val type = intent.getStringExtra("type")
         callbyId()
-        if (uID != null) {
-            FirebaseDatabase.getInstance().reference.child("Users").child(uID).addListenerForSingleValueEvent(
-                object :ValueEventListener{
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if (snapshot.exists()){
-                            var check:String=snapshot.child("userType").value.toString()
-                            if (check == name || check == "1"){
-                                addAlumni.visibility=View.VISIBLE
-                            }
-                        }
-                    }
 
-                    override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
-                    }
-                }
-            )
-        }
         if(!batch.equals("0")) {
             batchName.text = batch
         }else{
-            batchName.text = "Office Bearers"
+            if (type=="OfficeBearer"){
+                batchName.text = "Office Bearer"
+            }else if (type=="ClubMembers"){
+                batchName.text = "$name Members"
+            }
         }
         members.itemAnimator=null
 
@@ -175,23 +161,10 @@ class  ClubMembersDetailActivity : AppCompatActivity() {
             Toast.makeText(applicationContext,"Nothing there",Toast.LENGTH_SHORT).show()
         }
 
-
-
-
-        addAlumni.setOnClickListener{
-            val intent = Intent(applicationContext,AddAlumniActivity::class.java)
-            intent.putExtra("Clubname",name)
-            intent.putExtra("batch",batch)
-            intent.putExtra("type",type)
-            startActivity(intent)
-
-        }
-
     }
 
     private fun callbyId() {
         batchName=findViewById(R.id.batchName)
         members=findViewById(R.id.members_recycler)
-        addAlumni = findViewById(R.id.addAlumni)
     }
 }
