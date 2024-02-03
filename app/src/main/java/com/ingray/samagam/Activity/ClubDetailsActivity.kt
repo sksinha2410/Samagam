@@ -21,22 +21,29 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.ingray.samagam.Adapters.AlumniBatchAdapter
 import com.ingray.samagam.Adapters.ClubsEventAdapter
+import com.ingray.samagam.AddAlumniBatchDialog
+import com.ingray.samagam.CustomDialog
 import com.ingray.samagam.DataClass.Events
 import com.ingray.samagam.DataClass.MembersProfile
+import com.ingray.samagam.EditEventsDialog
 import com.ingray.samagam.R
 
 class ClubDetailsActivity : AppCompatActivity() {
     private lateinit var cvEvents:CardView
-
     private lateinit var clubName: TextView
     private lateinit var clubNames: TextView
     private lateinit var alumni_batch_recycler: RecyclerView
     private lateinit var adapt: AlumniBatchAdapter
     private lateinit var cvOffice:CardView
+    private lateinit var cvMember:CardView
     private lateinit var profile1:ImageView
     private lateinit var profile2:ImageView
     private lateinit var profile3:ImageView
     private lateinit var profile4:ImageView
+    private lateinit var memberProfile1:ImageView
+    private lateinit var memberProfile2:ImageView
+    private lateinit var memberProfile3:ImageView
+    private lateinit var memberProfile4:ImageView
     private lateinit var eventPic1:ImageView
     private lateinit var eventPic2:ImageView
     private lateinit var add:ImageView
@@ -49,18 +56,7 @@ class ClubDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_club_details)
-        cvEvents = findViewById(R.id.clubEvent)
-        clubName = findViewById(R.id.clubName)
-        clubNames = findViewById(R.id.clubNames)
-        cvOffice = findViewById(R.id.cvOffice)
-        profile1 = findViewById(R.id.profile1)
-        profile2 = findViewById(R.id.profile2)
-        profile3 = findViewById(R.id.profile3)
-        profile4 = findViewById(R.id.profile4)
-        eventPic1 = findViewById(R.id.eventpic1)
-        eventPic2 = findViewById(R.id.eventpic2)
-        add = findViewById(R.id.add)
-        ghost = findViewById(R.id.ghost)
+        callByID()
 
         val itnt = intent
         var name = itnt.getStringExtra("clubName")!!
@@ -75,14 +71,18 @@ class ClubDetailsActivity : AppCompatActivity() {
 
         var names = "$name Events"
 
-
         FirebaseDatabase.getInstance().reference.child("Users").child(uid).addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.child("userType").exists()) {
                     userType = snapshot.child("userType").value.toString()
                     if(!userType.equals("0")){
-                        add.visibility = View.VISIBLE
-                        ghost.visibility = View.GONE
+                        if (name==userType){
+                            add.visibility = View.VISIBLE
+                            ghost.visibility = View.GONE
+                        }else if (userType=="1") {
+                            add.visibility = View.VISIBLE
+                            ghost.visibility = View.GONE
+                        }
                     }else{
                         add.visibility = View.GONE
                     }
@@ -121,6 +121,29 @@ class ClubDetailsActivity : AppCompatActivity() {
                 }
             }
         )
+
+        FirebaseDatabase.getInstance().reference.child("Clubs").child(name).child("ClubMembers").addListenerForSingleValueEvent(
+            object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        val d = snapshot.getValue(MembersProfile::class.java)
+
+                        try {
+                            Glide.with(applicationContext).load(d?.profile1).into(memberProfile1)
+                            Glide.with(applicationContext).load(d?.profile2).into(memberProfile2)
+                            Glide.with(applicationContext).load(d?.profile3).into(memberProfile3)
+                            Glide.with(applicationContext).load(d?.profile4).into(memberProfile4)
+                        }catch (e:Exception){
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            }
+        )
+
         add.setOnClickListener{
             var selectedItemAtPosition: String = "Events"
 
@@ -138,23 +161,27 @@ class ClubDetailsActivity : AppCompatActivity() {
                         intent.putExtra("clubName",name)
                         intent.putExtra("clubUrl",url)
                         startActivity(intent)
-                    }
-
-                    else{
-                        if (selectedItemAtPosition == "OfficeBearer") {
-                            val intent = Intent(applicationContext, AddAlumniActivity::class.java)
-                            intent.putExtra("Clubname",name)
-                            intent.putExtra("batch","0")
-                            intent.putExtra("type",selectedItemAtPosition)
-                            startActivity(intent)
-                        }else{
-                            val intent = Intent(applicationContext, AddAlumniActivity::class.java)
-                            intent.putExtra("Clubname",name)
-                            intent.putExtra("batch","2021-2025")
-                            intent.putExtra("type",selectedItemAtPosition)
-                            startActivity(intent)
-
-                        }
+                    }else if (selectedItemAtPosition == "OfficeBearer") {
+                        val intent = Intent(applicationContext, AddAlumniActivity::class.java)
+                        intent.putExtra("Clubname",name)
+                        intent.putExtra("batch","0")
+                        intent.putExtra("type",selectedItemAtPosition)
+                        startActivity(intent)
+                    }else if(selectedItemAtPosition == "ClubMembers") {
+                        val intent = Intent(applicationContext, AddAlumniActivity::class.java)
+                        intent.putExtra("Clubname",name)
+                        intent.putExtra("batch","0")
+                        intent.putExtra("type",selectedItemAtPosition)
+                        startActivity(intent)
+                    }else if(selectedItemAtPosition == "Make this batch alumni"){
+                        val customDialog = AddAlumniBatchDialog(this,name)
+                        customDialog.showDialog()
+                    }else{
+                        val intent = Intent(applicationContext, AddAlumniActivity::class.java)
+                        intent.putExtra("Clubname",name)
+                        intent.putExtra("batch","2021-2025")
+                        intent.putExtra("type",selectedItemAtPosition)
+                        startActivity(intent)
                     }
 
                     // Do something.
@@ -176,10 +203,19 @@ class ClubDetailsActivity : AppCompatActivity() {
 
 
         }
+
         cvOffice.setOnClickListener{
             val intent= Intent(this,ClubMembersDetailActivity::class.java)
             intent.putExtra("clubName",name)
             intent.putExtra("type","OfficeBearer")
+            intent.putExtra("batch","0")
+            startActivity(intent)
+        }
+
+        cvMember.setOnClickListener{
+            val intent= Intent(this,ClubMembersDetailActivity::class.java)
+            intent.putExtra("clubName",name)
+            intent.putExtra("type","ClubMembers")
             intent.putExtra("batch","0")
             startActivity(intent)
         }
@@ -201,5 +237,25 @@ class ClubDetailsActivity : AppCompatActivity() {
 
         alumni_batch_recycler.adapter = adapt
        adapt.startListening()
+    }
+
+    private fun callByID() {
+        cvEvents = findViewById(R.id.clubEvent)
+        clubName = findViewById(R.id.clubName)
+        clubNames = findViewById(R.id.clubNames)
+        cvOffice = findViewById(R.id.cvOffice)
+        cvMember = findViewById(R.id.cvMember)
+        profile1 = findViewById(R.id.profile1)
+        profile2 = findViewById(R.id.profile2)
+        profile3 = findViewById(R.id.profile3)
+        profile4 = findViewById(R.id.profile4)
+        memberProfile1 = findViewById(R.id.memberProfile1)
+        memberProfile2 = findViewById(R.id.memberProfile2)
+        memberProfile3 = findViewById(R.id.memberProfile3)
+        memberProfile4 = findViewById(R.id.memberProfile4)
+        eventPic1 = findViewById(R.id.eventpic1)
+        eventPic2 = findViewById(R.id.eventpic2)
+        add = findViewById(R.id.add)
+        ghost = findViewById(R.id.ghost)
     }
 }

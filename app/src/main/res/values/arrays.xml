@@ -3,7 +3,9 @@
     <string-array name="item_array">
         <item>Events</item>
         <item>Alumni</item>
+        <item>ClubMembers</item>
         <item>OfficeBearer</item>
         <item>Notification</item>
+        <item>Make this batch alumni</item>
     </string-array>
 </resources>

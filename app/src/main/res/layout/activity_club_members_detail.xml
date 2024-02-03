@@ -69,17 +69,4 @@
             android:minHeight="@dimen/_160sdp"/>
 
     </LinearLayout>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addAlumni"
-        android:layout_width="@dimen/_52sdp"
-        android:layout_height="@dimen/_52sdp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="20dp"
-        android:visibility="gone"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:layout_alignParentBottom="true"
-        android:src="@drawable/plus"
-        android:contentDescription="TODO" />
-
-
 </RelativeLayout>
