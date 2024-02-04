@@ -140,7 +140,7 @@ class AddNotificationActivity : AppCompatActivity() {
                 // Handle unsuccessful upload
                 Toast.makeText(this, "Error uploading file: $exception", Toast.LENGTH_SHORT).show()
             }
-    }
+        }
 
     private fun sendNotification() {
         val title = clubName+" : "+title.text.toString()
