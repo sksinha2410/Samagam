@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activity.MainActivity"
     android:background="@drawable/signup_background"
-    >
+    tools:ignore="MissingClass">
 
 
     <androidx.appcompat.widget.Toolbar
