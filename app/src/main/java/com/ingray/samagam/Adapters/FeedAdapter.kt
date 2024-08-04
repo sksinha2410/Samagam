@@ -44,22 +44,29 @@ class FeedAdapter(options: FirebaseRecyclerOptions<Posts?>) :
             holder.username.setText(model.username)
             val previousTimeMillis = model.time.toLong()
 
-            val currentTimeMillis = Calendar.getInstance().timeInMillis
-
-            val timeDifferenceMillis = currentTimeMillis - previousTimeMillis
+            val timeDifferenceMillis = System.currentTimeMillis() - previousTimeMillis
+            val minutesDifference = TimeUnit.MILLISECONDS.toMinutes(timeDifferenceMillis)
             val hoursDifference = TimeUnit.MILLISECONDS.toHours(timeDifferenceMillis)
+            val daysDifference = TimeUnit.MILLISECONDS.toDays(timeDifferenceMillis)
+            val weeksDifference = daysDifference / 7
+            val monthsDifference = daysDifference / 30
+            val yearsDifference = daysDifference / 365
+
+            val timeAgo = when {
+                yearsDifference >= 1 -> "$yearsDifference year${if (yearsDifference > 1) "s" else ""} ago"
+                monthsDifference >= 1 -> "$monthsDifference month${if (monthsDifference > 1) "s" else ""} ago"
+                weeksDifference >= 1 -> "$weeksDifference week${if (weeksDifference > 1) "s" else ""} ago"
+                daysDifference >= 1 -> "$daysDifference day${if (daysDifference > 1) "s" else ""} ago"
+                hoursDifference >= 1 -> "$hoursDifference hour${if (hoursDifference > 1) "s" else ""} ago"
+                else -> "$minutesDifference minute${if (minutesDifference > 1) "s" else ""} ago"
+            }
+
+            holder.time.text    = timeAgo
 
             var map = HashMap<String, Long>()
             map.put("hrsAgo",hoursDifference)
+
             dbRef.child(model.postId).updateChildren(map as Map<String, Any>)
-
-
-            if (hoursDifference/24 >= 1){
-                holder.time.text = (hoursDifference/24).toString() + " days ago"
-            }
-            else{
-                holder.time.text = hoursDifference.toString() + " hours ago"
-            }
 
             holder.likes.setText(model.likes)
             Glide.with(holder.postImage.context).load(model.postUrl).into(holder.postImage)
