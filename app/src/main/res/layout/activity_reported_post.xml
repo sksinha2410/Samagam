@@ -53,7 +53,7 @@
         android:layout_gravity="center"
         android:text="Reported Posts"
         android:textColor="#FFFFFF"
-        android:fontFamily="@font/londrina_outline"/>
+        android:fontFamily="@font/londrina_solid"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rep_Recycler"
         android:layout_width="match_parent"

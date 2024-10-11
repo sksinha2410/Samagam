@@ -58,7 +58,7 @@
             android:text="batch"
             android:textSize="@dimen/_35sdp"
             android:textColor="#FFFFFF"
-            android:fontFamily="@font/londrina_outline"
+            android:fontFamily="@font/londrina_solid"
             android:layout_gravity="center_horizontal"/>
 
         <androidx.recyclerview.widget.RecyclerView

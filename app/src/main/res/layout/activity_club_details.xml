@@ -77,7 +77,7 @@
         android:layout_gravity="center"
         android:text="ClubName"
         android:textColor="#FFFFFF"
-        android:fontFamily="@font/londrina_outline"/>
+        android:fontFamily="@font/londrina_solid"/>
 
 
     <androidx.core.widget.NestedScrollView
