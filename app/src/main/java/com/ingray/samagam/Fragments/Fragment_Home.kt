@@ -18,7 +18,6 @@ import com.ingray.samagam.Adapters.ClubsShimmerAdapter
 import com.ingray.samagam.AutoScrollManager
 import com.ingray.samagam.DataClass.Clubs
 import com.ingray.samagam.R
-import java.util.logging.Handler
 
 class Fragment_Home : Fragment() {
 
