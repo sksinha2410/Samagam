@@ -1,21 +1,19 @@
 package com.ingray.samagam.Fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.RelativeLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 import com.ingray.samagam.Adapters.ClubsAdapter
 import com.ingray.samagam.Adapters.ClubsShimmerAdapter
-import com.ingray.samagam.AutoScrollManager
 import com.ingray.samagam.DataClass.Clubs
 import com.ingray.samagam.R
 
@@ -23,43 +21,31 @@ class Fragment_Home : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private val handler = android.os.Handler(Looper.getMainLooper())
-    private lateinit var shimmerRecyclerView: RecyclerView
+    private lateinit var shimmerFrameLayout: ShimmerFrameLayout
     private lateinit var clubsAdapter: ClubsAdapter
-    private lateinit var shimmerRelativeLayout: RelativeLayout
     private lateinit var clubsShimmerAdapter: ClubsShimmerAdapter
     private lateinit var progress: ProgressBar
-    private lateinit var autoScrollManager: AutoScrollManager
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment__home, container, false)
+
         recyclerView = view.findViewById(R.id.clubs_Recycler)
-        shimmerRecyclerView = view.findViewById(R.id.clubs_Recycler_Shimmer)
         progress = view.findViewById(R.id.sale_progressBar)
-        shimmerRelativeLayout = view.findViewById(R.id.shimmerRelativeLayout)
-        recyclerView.itemAnimator = null
-        shimmerRelativeLayout.visibility = View.VISIBLE
+        shimmerFrameLayout = view.findViewById(R.id.shimmerRelativeLayout)
 
-        val itemList = mutableListOf<String>()
-        // Add your data to the itemList (e.g., 20 items)
-        for (i in 1..20) {
-            itemList.add("Item $i")
-        }
+        // Start the shimmer effect and show the progress bar
+        shimmerFrameLayout.startShimmer()
+        progress.visibility = View.GONE
 
+        // Setup the placeholder adapter for shimmer effect
+        val itemList = MutableList(20) { "Item ${it + 1}" }
         clubsShimmerAdapter = ClubsShimmerAdapter(itemList)
         recyclerView.adapter = clubsShimmerAdapter
 
-
-        handler.postDelayed({
-            // Hide the shimmer and show the real data
-            shimmerRelativeLayout.visibility = View.GONE
-            recyclerView.visibility = View.VISIBLE
-        }, 30000)
-
-
+        // Set up clubsAdapter for Firebase data
         val options: FirebaseRecyclerOptions<Clubs?> =
             FirebaseRecyclerOptions.Builder<Clubs>()
                 .setQuery(
@@ -68,34 +54,39 @@ class Fragment_Home : Fragment() {
                 )
                 .build()
         clubsAdapter = ClubsAdapter(options)
-        recyclerView.adapter = clubsAdapter
         clubsAdapter.startListening()
 
-
+        // Hide shimmer, progress, and show real data when adapter data is loaded
         clubsAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
 
-                // Now you can reliably get the total item count
-                val itemCount = clubsAdapter.itemCount
-                println("ItemCount: Total items = $itemCount")
+                Log.d("Fragment_Home", "Data loaded in adapter")
 
-                // Display the item count in a Toast
-                Toast.makeText(view.context.applicationContext, itemCount.toString(), Toast.LENGTH_SHORT).show()
+                // Stop shimmer effect
+                shimmerFrameLayout.stopShimmer()
+                shimmerFrameLayout.visibility = View.GONE
+
+                // Hide progress bar
+                progress.visibility = View.GONE
+                // Show real data
+                recyclerView.visibility = View.VISIBLE
+
+                Log.d("Fragment_Home", "ProgressBar hidden")
             }
         })
 
-        // Initialize AutoScrollManager and start auto-scrolling
-//        autoScrollManager = AutoScrollManager(recyclerView)
-//        autoScrollManager.startAutoScroll()
+        // Set the real adapter for recyclerView after shimmer delay
+        handler.postDelayed({
+            recyclerView.adapter = clubsAdapter
+        }, 3000)
 
-        progress.visibility = View.INVISIBLE
         return view
     }
 
-//    override fun onDestroyView() {
-//        // Stop auto-scrolling when the fragment is destroyed
-//        autoScrollManager.stopAutoScroll()
-//        super.onDestroyView()
-//    }
+    override fun onDestroyView() {
+        shimmerFrameLayout.stopShimmer()
+        progress.visibility = View.GONE
+        super.onDestroyView()
+    }
 }

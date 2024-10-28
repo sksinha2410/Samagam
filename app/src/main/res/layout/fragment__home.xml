@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.Fragment_Home">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,12 +26,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
-                <RelativeLayout
+                <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/shimmerRelativeLayout"
                     android:layout_width="match_parent"
-                    android:visibility="visible"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:visibility="visible">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/clubs_Recycler_Shimmer"
                         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                         android:orientation="vertical"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:spanCount="2" />
-                </RelativeLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -53,21 +53,19 @@
                         android:orientation="vertical"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:spanCount="2" />
-
                 </RelativeLayout>
+
                 <ProgressBar
                     android:id="@+id/sale_progressBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:visibility="visible"
                     android:theme="@style/progressBar"
-                    android:layout_gravity="center"
-                    />
+                    android:visibility="visible"
+                    android:layout_gravity="center" />
 
             </RelativeLayout>
 
-
         </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -509,16 +509,16 @@ class LiveEventsFragment : Fragment() {
             val isBetweentime=currenttime.after(starttime)&&currenttime.before(endtime)
             if(isBetweentime){
                 return true
-                }
+            }
         }
         return false
 
     }
 
     private fun isCurrentDate(dateCalendar: Calendar) : Boolean {
-      val currentdate=Calendar.getInstance()
+        val currentdate=Calendar.getInstance()
 
-      return (dateCalendar.get(Calendar.YEAR)==currentdate.get(Calendar.YEAR)&&dateCalendar.get(Calendar.MONTH)==currentdate.get(Calendar.MONTH)
+        return (dateCalendar.get(Calendar.YEAR)==currentdate.get(Calendar.YEAR)&&dateCalendar.get(Calendar.MONTH)==currentdate.get(Calendar.MONTH)
                 &&dateCalendar.get(Calendar.DATE)==currentdate.get(Calendar.DATE))
     }
 
