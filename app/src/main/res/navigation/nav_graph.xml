@@ -9,7 +9,7 @@
         android:id="@+id/fragment_Home"
         android:name="com.ingray.samagam.Fragments.Fragment_Home"
         android:label="fragment__home"
-        tools:layout="@layout/fragment__home" />
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/liveEventsFragment"
         android:name="com.ingray.samagam.Fragments.LiveEventsFragment"

@@ -30,7 +30,7 @@ class Fragment_Home : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment__home, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_home, container, false)
 
         recyclerView = view.findViewById(R.id.clubs_Recycler)
         progress = view.findViewById(R.id.sale_progressBar)
